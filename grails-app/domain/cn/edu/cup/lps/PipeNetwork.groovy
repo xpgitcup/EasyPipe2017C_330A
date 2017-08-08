@@ -78,64 +78,117 @@ class PipeNetwork {
             if (excelFile) {
                 Workbook book = Workbook.getWorkbook(excelFile)
                 Sheet sheet = book.getSheet(0)
-                //------------------------------------------------------------------------------------------------------
-                def m = sheet.rows
-                def hvs = []
-                def minx = 0
-                def maxx = 0
-                def miny = 0
-                def maxy = 0
-                //------------------------------------------------------------------------------------------------------
-                Cell[] cells = new Cell[3]
-                for (int ii = 1; ii < m; ii++) {
-                    for (int j=0; j<3; j++) {
-                        cells[j] = sheet.getCell(j, ii)
-                    }
-                    def n = cells[0].getContents()
-                    def mi = Double.parseDouble(cells[1].getContents())
-                    def ev = Double.parseDouble(cells[2].getContents())
-                    def v = new HydraulicVertex(name: n, mileage: mi, elevation: ev, pipeNetwork: this)
-                    //v.save(true)
-                    hvs.add(v)
-                    //--------------------------------------------------------------------------------------------------
-                    if (minx > v.mileage) {
-                        minx = v.mileage
-                    }
-                    if (maxx < v.mileage) {
-                        maxx = v.mileage
-                    }
-                    if (miny > v.elevation) {
-                        miny = v.elevation
-                    }
-                    if (maxy < v.elevation) {
-                        maxy = v.elevation
-                    }
-                }
-                //------------------------------------------------------------------------------------------------------
-                def xl = (maxx - minx) * 1.1
-                def yl = (maxy - miny) * 1.1
-                if (xl>0) {
-                    hvs.each { e->
-                        e.xLocation = (e.mileage - minx) / xl;
-                    }
-                }
-                if (yl>0) {
-                    hvs.each { e->
-                        e.yLocation = (e.elevation - miny) / yl;
-                    }
-                }
-                hvs.each {e-> e.save(true)}
-                //------------------------------------------------------------------------------------------------------
-                for (int i=1; i<hvs.size(); i++) {
-                    def e = new HydraulicEdge(start: hvs[i-1], end: hvs[i])
-                    e.save(true)
-                }
-                //------------------------------------------------------------------------------------------------------
+
+                //importSingleBranchPipelineME(sheet)
+                importOneBranch(sheet)
+
                 book.close()
             }
         } catch (Exception e) {
             println "importExcelFile error: ${e}";
         }
+    }
+
+    /*
+    * 导入一系列节点
+    * */
+
+    def void importOneBranch(Sheet sheet) {
+        def nRows = sheet.rows
+        for (int i=1; i<nRows; i++) {
+            def v = importHydraulicVertex(sheet, i)
+            if (v) {
+                v.save(true)
+            }
+        }
+    }
+
+    /*
+    * 导入节点。。。
+    * */
+
+    def HydraulicVertex importHydraulicVertex(Sheet sheet, int rowIndex) {
+        def nCols = sheet.columns
+        def v = null
+        Cell[] cells = new Cell[nCols]
+        for (int i = 0; i < nCols; i++) {
+            cells[i] = sheet.getCell(i, rowIndex)
+        }
+        println("本行： ${nCols}")
+        switch (nCols) {
+            case 2:
+                def n = cells[0].getContents()
+                def mi = Double.parseDouble(cells[1].getContents())
+                v = new HydraulicVertex(name: n, mileage: mi, pipeNetwork: this)
+                break
+            case 3:
+                def n = cells[0].getContents()
+                def mi = Double.parseDouble(cells[1].getContents())
+                def ev = Double.parseDouble(cells[2].getContents())
+                v = new HydraulicVertex(name: n, mileage: mi, elevation: ev, pipeNetwork: this)
+                break
+        }
+        return v
+    }
+
+    /*
+    * 导入单支管线的高程、里程
+    * */
+
+    private void importSingleBranchPipelineME(Sheet sheet) {
+        //------------------------------------------------------------------------------------------------------
+        def m = sheet.rows
+        def hvs = []
+        def minx = 0
+        def maxx = 0
+        def miny = 0
+        def maxy = 0
+        //------------------------------------------------------------------------------------------------------
+        Cell[] cells = new Cell[3]
+        for (int ii = 1; ii < m; ii++) {
+            for (int j = 0; j < 3; j++) {
+                cells[j] = sheet.getCell(j, ii)
+            }
+            def n = cells[0].getContents()
+            def mi = Double.parseDouble(cells[1].getContents())
+            def ev = Double.parseDouble(cells[2].getContents())
+            def v = new HydraulicVertex(name: n, mileage: mi, elevation: ev, pipeNetwork: this)
+            //v.save(true)
+            hvs.add(v)
+            //--------------------------------------------------------------------------------------------------
+            if (minx > v.mileage) {
+                minx = v.mileage
+            }
+            if (maxx < v.mileage) {
+                maxx = v.mileage
+            }
+            if (miny > v.elevation) {
+                miny = v.elevation
+            }
+            if (maxy < v.elevation) {
+                maxy = v.elevation
+            }
+        }
+        //------------------------------------------------------------------------------------------------------
+        def xl = (maxx - minx) * 1.1
+        def yl = (maxy - miny) * 1.1
+        if (xl > 0) {
+            hvs.each { e ->
+                e.xLocation = (e.mileage - minx) / xl;
+            }
+        }
+        if (yl > 0) {
+            hvs.each { e ->
+                e.yLocation = (e.elevation - miny) / yl;
+            }
+        }
+        hvs.each { e -> e.save(true) }
+        //------------------------------------------------------------------------------------------------------
+        for (int i = 1; i < hvs.size(); i++) {
+            def e = new HydraulicEdge(start: hvs[i - 1], end: hvs[i])
+            e.save(true)
+        }
+        //------------------------------------------------------------------------------------------------------
     }
 
     def importFromExcel(String fileName) {
@@ -150,6 +203,7 @@ class PipeNetwork {
     /*
     * Excel文件模板
     * */
+
     def static createTemplate(rootPath) {
         def fileName = rootPath + "pipeNetworks/pipeNetwork.xls"
         try {

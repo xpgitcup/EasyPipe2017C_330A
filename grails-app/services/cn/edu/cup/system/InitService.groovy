@@ -373,7 +373,7 @@ class InitService {
         //用户类库
         fillSampleUserLibrary()
         //水力学模拟
-        fillSampleHydraulicSimulation()
+        //fillSampleHydraulicSimulation()
     }
 
     /*

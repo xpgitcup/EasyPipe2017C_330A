@@ -4,8 +4,9 @@ import cn.edu.cup.lps.HydraulicProject
 import cn.edu.cup.lps.PipeNetwork
 import cn.edu.cup.lps.hydraulic.HydraulicVertex
 import grails.converters.JSON
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 
+@Transactional(readOnly = true)
 class Operation4PipeSimulationController {
 
     def commonService
@@ -112,6 +113,7 @@ class Operation4PipeSimulationController {
         }
     }
 
+    @Transactional
     def importFromExcel(PipeNetwork pipeNetwork) {
         def destDir = servletContext.getRealPath("/") + "uploads"
         params.destDir = destDir

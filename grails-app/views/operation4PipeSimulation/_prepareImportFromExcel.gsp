@@ -28,7 +28,7 @@
             <table>
                 <tr>
                     <td>
-                        <label>请上传数据文件(*.xls)</label>
+                        <label>请为-${pipeNetwork}-选择上传数据文件(*.xls)</label>
                     </td>
                     <td>
                         <input type="file" name="uploadedFile">
