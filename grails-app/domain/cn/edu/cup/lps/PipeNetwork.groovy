@@ -2,6 +2,7 @@ package cn.edu.cup.lps
 
 import cn.edu.cup.lps.hydraulic.HydraulicEdge
 import cn.edu.cup.lps.hydraulic.HydraulicVertex
+import cn.edu.cup.lps.hydraulic.MileageAndElevation
 import jxl.Cell
 import jxl.Sheet
 import jxl.Workbook
@@ -13,7 +14,7 @@ class PipeNetwork {
 
     String name
 
-    static hasMany = [hydraulicVertexes: HydraulicVertex]
+    static hasMany = [hydraulicVertexes: HydraulicVertex, mileageAndElevations: MileageAndElevation]
 
     static constraints = {
         name(unique: true)

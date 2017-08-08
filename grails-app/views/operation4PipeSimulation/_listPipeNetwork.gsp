@@ -40,6 +40,14 @@
                         <a href="javascript: prepareImportFromExcel(${item.id})">导入</a>
                     </g:else>
                 </td>
+                <td>
+                    <g:if test="${item.mileageAndElevations?.size()>0}">
+                        <a href="#">纵断面图</a>
+                    </g:if>
+                    <g:else>
+                        <a href="javascript: prepareImportMileageAndElevation(${item.id})">导入高程里程</a>
+                    </g:else>
+                </td>
                 <td>${item.edgesCount()}</td>
                 <td>${item.edges()}</td>
             </tr>

@@ -22,9 +22,14 @@ $(function () {
     operation4PipeSimulationDiv.tabs({
         onSelect: function (title, index) {
             console.info("选择标签：" + title + "---" + index);
-            if (title !== "编辑") {
-                $.cookie("currentTabPipeSimulationDiv", title, {path: '/'});
-                //$.cookie("currentTabPhysicalDiv", title);
+            switch (title) {
+                case "编辑":
+                case "导入管道":
+                case "拓扑结构":
+                    break;
+                default:
+                    $.cookie("currentTabPipeSimulationDiv", title, {path: '/'});
+                    break;
             }
         }
     })
@@ -156,6 +161,15 @@ function editHydraulicProject(id) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
+
+/*
+* 准备导入高程里程
+* */
+function prepareImportMileageAndElevation(id) {
+    operation4PipeSimulationDiv.tabs("select", "导入管道");
+    ajaxRun("operation4PipeSimulation/prepareImportMileageAndElevation", id, "prepareImportMileageAndElevationDiv");
+}
+
 /*
  * 统计记录总数
  * */

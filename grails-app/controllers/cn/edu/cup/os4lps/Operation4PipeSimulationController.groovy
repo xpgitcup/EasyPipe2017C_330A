@@ -101,6 +101,28 @@ class Operation4PipeSimulationController {
     }
 
     /*
+    * 准备导入高程里程
+    * */
+
+    def prepareImportMileageAndElevation(PipeNetwork pipeNetwork) {
+        if (request.xhr) {
+            render(template: "prepareImportMileageAndElevation", model: [pipeNetwork: pipeNetwork])
+        } else {
+            model:
+            [pipeNetwork: pipeNetwork]
+        }
+    }
+
+    def importMileageAndElevation(PipeNetwork pipeNetwork) {
+        def destDir = servletContext.getRealPath("/") + "uploads"
+        params.destDir = destDir
+        def sf = commonService.upload(params)
+        println("上传${sf}成功...")
+        pipeNetwork.importFromExcel(sf)
+        redirect(action: 'index')
+    }
+
+    /*
     * 导入管道
     * */
 

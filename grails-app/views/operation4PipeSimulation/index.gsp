@@ -105,6 +105,7 @@
 
     <div title="导入管道">
         <div id="prepareImportFromExcelDiv"></div>
+        <div id="prepareImportMileageAndElevationDiv"></div>
     </div>
 
     <div title="编辑">
