@@ -18,8 +18,6 @@ class PipeNetwork {
 
     static constraints = {
         name(unique: true)
-        //hydraulicVertexes(nullable: true)
-        //hydraulicEdges(nullable: true)
         hydraulicVertexes sort: "id"
     }
 
@@ -44,8 +42,6 @@ class PipeNetwork {
     def edges() {
         def es = []
         hydraulicVertexes.each { e ->
-            //es.addAll(HydraulicEdge.findAllByStart(e))
-            //es.addAll(HydraulicEdge.findAllByEnd(e))
             def fes = HydraulicEdge.findAllByStart(e)
             fes.each { ee ->
                 addUp(es, ee)
@@ -95,6 +91,13 @@ class PipeNetwork {
     * */
 
     def void importOneBranch(Sheet sheet) {
+
+        //清理之前的顶点
+        hydraulicVertexes.each { e->
+            e.delete(true)
+        }
+
+        //开始导入新的顶点
         def nRows = sheet.rows
         for (int i=1; i<nRows; i++) {
             def v = importHydraulicVertex(sheet, i)

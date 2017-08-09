@@ -87,7 +87,10 @@
                 <div id="paginationListHydraulicVertexDiv"></div>
             </div>
 
-            <div title="高程-里程"></div>
+            <div title="高程-里程">
+                <div id="listMileageAndElevationDiv"></div>
+                <div id="paginationListMileageAndElevationDiv"></div>
+            </div>
 
             <div title="地温"></div>
 

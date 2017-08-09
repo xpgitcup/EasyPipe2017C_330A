@@ -9,7 +9,7 @@ class MileageAndElevation {
     String name
 
     static belongsTo = [pipeNetwork: PipeNetwork]
-    static hasMany = [elevationPoint: ElevationPoint]
+    static hasMany = [elevationPoints: ElevationPoint]
 
     static constraints = {
         name(unique: true)
@@ -18,7 +18,7 @@ class MileageAndElevation {
     }
 
     String toString() {
-        return "${name}"
+        return "${name}/${pipeNetwork}(${elevationPoints?.size()})"
     }
 
 }

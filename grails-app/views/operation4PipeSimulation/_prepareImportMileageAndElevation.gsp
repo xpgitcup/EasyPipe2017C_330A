@@ -20,15 +20,29 @@
             <tr>
                 <td>数据格式模板可以下载：</td>
                 <td>
-                    <a href="operation4PipeSimulation/downLoadTemplate">数据模板</a>
+                    <a href="#">数据模板</a>
                 </td>
             </tr>
         </table>
-        <g:uploadForm controller="operation4PipeSimulation" action="importFromExcel">
+        <g:uploadForm controller="operation4PipeSimulation" action="importMileageAndElevation">
             <table>
                 <tr>
                     <td>
-                        <label>请为-${pipeNetwork}-选择上传数据文件(*.xls)</label>
+                        <label>请指定名称</label>
+                        <g:textField name="name" value="${pipeNetwork.name}-高程-里程"/>
+                    </td>
+                    <td>
+                        <label>请选择对应的管段起点</label>
+                        <g:select name="start" from="${pipeNetwork.hydraulicVertexes}"/>
+                    </td>
+                    <td>
+                        <label>请选择对应的管段起点</label>
+                        <g:select name="end" from="${pipeNetwork.hydraulicVertexes}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>请为-${pipeNetwork}-选择(里程-高程)数据文件(*.xls)</label>
                     </td>
                     <td>
                         <input type="file" name="uploadedFile">

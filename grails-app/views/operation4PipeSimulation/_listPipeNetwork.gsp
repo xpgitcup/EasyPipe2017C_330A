@@ -18,7 +18,7 @@
     <table>
         <thead>
         <th>管道名称</th>
-        <th>节点数</th>
+        <th colspan="2">节点&里程-高程数</th>
         <th>操作</th>
         <th>连接关系数</th>
         <th>连接关系</th>
@@ -32,6 +32,7 @@
                     </a>
                 </td>
                 <td>${item.hydraulicVertexes?.size()}</td>
+                <td>${item.mileageAndElevations?.size()}</td>
                 <td>
                     <g:if test="${item.edges().size()>0}">
                         <a href="operation4PipeSimulation/exportToExcel/${item.id}">导出</a>

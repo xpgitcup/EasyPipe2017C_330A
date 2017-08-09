@@ -3,6 +3,7 @@ package cn.edu.cup.os4lps
 import cn.edu.cup.lps.HydraulicProject
 import cn.edu.cup.lps.PipeNetwork
 import cn.edu.cup.lps.hydraulic.HydraulicVertex
+import cn.edu.cup.lps.hydraulic.MileageAndElevation
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
 
@@ -10,6 +11,79 @@ import grails.gorm.transactions.Transactional
 class Operation4PipeSimulationController {
 
     def commonService
+
+    //MileageAndElevation===============================================================================================
+    /*
+    * 统计记录个数
+    * */
+    def countMileageAndElevation() {
+        def count = MileageAndElevation.count()    //这是必须调整的
+        println("统计结果：${count}")
+        def result = [count: count]
+        if (request.xhr) {
+            render result as JSON
+        } else {
+            result
+        }
+    }
+
+    /*
+    * 列出对象
+    * */
+    def listMileageAndElevation() {
+        def mileageAndElevationList = MileageAndElevation.list(params)
+        if (request.xhr) {
+            render(template: 'listMileageAndElevation', model: [mileageAndElevationList: mileageAndElevationList])
+        } else {
+            respond mileageAndElevationList
+        }
+    }
+
+    /*
+    * 创建对象
+    * */
+
+    def createMileageAndElevation(MileageAndElevation mileageAndElevation) {
+        def newMileageAndElevation = new MileageAndElevation()
+        if (request.xhr) {
+            render(template: 'createMileageAndElevation', model: [mileageAndElevation: newMileageAndElevation])
+        } else {
+            respond newMileageAndElevation
+        }
+    }
+
+    /*
+    * 保存对象
+    * */
+
+    @Transactional
+    def deleteMileageAndElevation(MileageAndElevation mileageAndElevation) {
+        mileageAndElevation.delete()
+        redirect(action: 'index')
+    }
+
+    /*
+    * 保存对象
+    * */
+
+    @Transactional
+    def updateMileageAndElevation(MileageAndElevation mileageAndElevation) {
+        println("准备更新：${mileageAndElevation}")
+        mileageAndElevation.save flush: true
+        redirect(action: 'index')
+    }
+
+    /*
+    * 编辑对象
+    * */
+
+    def editMileageAndElevation(MileageAndElevation mileageAndElevation) {
+        if (request.xhr) {
+            render(template: 'editMileageAndElevation', model: [mileageAndElevation: mileageAndElevation])
+        } else {
+            respond mileageAndElevation
+        }
+    }
 
     //HydraulicVertex===================================================================================================
     /*
@@ -113,12 +187,21 @@ class Operation4PipeSimulationController {
         }
     }
 
+    @Transactional
     def importMileageAndElevation(PipeNetwork pipeNetwork) {
+        //--------------------------------------------------------------------------------------------------------------
+        println("${params}")
+        def mae = new MileageAndElevation(name: params.name, start: params.start, end: params.end, pipeNetwork: pipeNetwork)
+        mae.save(true)
+        println("${mae}")
+        //--------------------------------------------------------------------------------------------------------------
         def destDir = servletContext.getRealPath("/") + "uploads"
         params.destDir = destDir
         def sf = commonService.upload(params)
         println("上传${sf}成功...")
-        pipeNetwork.importFromExcel(sf)
+        //--------------------------------------------------------------------------------------------------------------
+        //commonService.importObjectFromExcelFile(mae, sf)
+        //--------------------------------------------------------------------------------------------------------------
         redirect(action: 'index')
     }
 
