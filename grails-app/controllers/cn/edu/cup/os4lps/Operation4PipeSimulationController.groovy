@@ -179,21 +179,24 @@ class Operation4PipeSimulationController {
     * */
 
     def prepareImportMileageAndElevation(PipeNetwork pipeNetwork) {
+        def mileageAndElevation = new MileageAndElevation(
+                start: pipeNetwork.hydraulicVertexes.first(),
+                end: pipeNetwork.hydraulicVertexes.last(),
+                pipeNetwork: pipeNetwork
+        )
         if (request.xhr) {
-            render(template: "prepareImportMileageAndElevation", model: [pipeNetwork: pipeNetwork])
+            render(template: "prepareImportMileageAndElevation", model: [pipeNetwork: pipeNetwork, mileageAndElevation: mileageAndElevation])
         } else {
             model:
-            [pipeNetwork: pipeNetwork]
+            [pipeNetwork: pipeNetwork, mileageAndElevation: mileageAndElevation]
         }
     }
 
     @Transactional
-    def importMileageAndElevation(PipeNetwork pipeNetwork) {
-        //--------------------------------------------------------------------------------------------------------------
+    def importMileageAndElevation(PipeNetwork pipeNetwork, MileageAndElevation mileageAndElevation) {
         println("${params}")
-        def mae = new MileageAndElevation(name: params.name, start: params.start, end: params.end, pipeNetwork: pipeNetwork)
-        mae.save(true)
-        println("${mae}")
+        //def mileageAndElevation = new MileageAndElevation(name: params.name, start: params.start, end: params.end, pipeNetwork: params.pipeNetwork)
+        mileageAndElevation.save(true)
         //--------------------------------------------------------------------------------------------------------------
         def destDir = servletContext.getRealPath("/") + "uploads"
         params.destDir = destDir
@@ -201,6 +204,8 @@ class Operation4PipeSimulationController {
         println("上传${sf}成功...")
         //--------------------------------------------------------------------------------------------------------------
         //commonService.importObjectFromExcelFile(mae, sf)
+        //--------------------------------------------------------------------------------------------------------------
+        mileageAndElevation.importFromeExcelFile(sf)
         //--------------------------------------------------------------------------------------------------------------
         redirect(action: 'index')
     }

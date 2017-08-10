@@ -27,18 +27,25 @@
         <g:uploadForm controller="operation4PipeSimulation" action="importMileageAndElevation">
             <table>
                 <tr>
-                    <td>
-                        <label>请指定名称</label>
-                        <g:textField name="name" value="${pipeNetwork.name}-高程-里程"/>
-                    </td>
-                    <td>
-                        <label>请选择对应的管段起点</label>
-                        <g:select name="start" from="${pipeNetwork.hydraulicVertexes}"/>
-                    </td>
-                    <td>
-                        <label>请选择对应的管段起点</label>
-                        <g:select name="end" from="${pipeNetwork.hydraulicVertexes}"/>
-                    </td>
+                    <f:with bean="mileageAndElevation">
+                        <g:hiddenField name="id" value="${mileageAndElevation?.id}"/>
+                        <g:hiddenField name="version" value="${mileageAndElevation?.version}"/>
+                        <td>
+                            <label>请指定名称</label>
+                            <!--g:textField name="name" value="${pipeNetwork.name}-高程-里程"/-->
+                            <f:field property="name" value="${pipeNetwork.name}-高程-里程"/>
+                        </td>
+                        <td>
+                            <label>请选择对应的管段起点</label>
+                            <!--g:select name="start" from="${pipeNetwork.hydraulicVertexes}"/-->
+                            <f:field property="start"/>
+                        </td>
+                        <td>
+                            <label>请选择对应的管段起点</label>
+                            <!--g:select name="end" from="${pipeNetwork.hydraulicVertexes}"/-->
+                            <f:field property="end"/>
+                        </td>
+                    </f:with>
                 </tr>
                 <tr>
                     <td>

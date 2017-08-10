@@ -1,12 +1,20 @@
 package cn.edu.cup.common
 
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import grails.util.Environment
 import org.grails.web.util.WebUtils
 import org.springframework.web.context.request.RequestContextHolder
 
 @Transactional(readOnly = true)
 class CommonService {
+
+    /*
+    * 从Excel文件中导入对象
+    * */
+    def importObjectFromExcelFile(Object object, File excelFile) {
+
+        return object
+    }
 
     /*
     * 上传文件
