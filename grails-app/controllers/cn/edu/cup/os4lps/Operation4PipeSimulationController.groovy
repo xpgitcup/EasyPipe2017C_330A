@@ -16,6 +16,7 @@ class Operation4PipeSimulationController {
     /*
     * 统计记录个数
     * */
+
     def countMileageAndElevation() {
         def count = MileageAndElevation.count()    //这是必须调整的
         println("统计结果：${count}")
@@ -30,6 +31,7 @@ class Operation4PipeSimulationController {
     /*
     * 列出对象
     * */
+
     def listMileageAndElevation() {
         def mileageAndElevationList = MileageAndElevation.list(params)
         if (request.xhr) {
@@ -166,6 +168,7 @@ class Operation4PipeSimulationController {
     * downLoadTemplate
     * 下载数据模型的模板
     * */
+
     def downLoadTemplate() {
         def rootPath = servletContext.getRealPath("/")
         def fileName = PipeNetwork.createTemplate(rootPath)
@@ -193,10 +196,11 @@ class Operation4PipeSimulationController {
     }
 
     @Transactional
-    def importMileageAndElevation(PipeNetwork pipeNetwork, MileageAndElevation mileageAndElevation) {
+    def importMileageAndElevation() { //PipeNetwork pipeNetwork, MileageAndElevation mileageAndElevation
         println("${params}")
-        //def mileageAndElevation = new MileageAndElevation(name: params.name, start: params.start, end: params.end, pipeNetwork: params.pipeNetwork)
+        def mileageAndElevation = new MileageAndElevation(name: params.name, start: params.start, end: params.end, pipeNetwork: params.pipeNetwork)
         mileageAndElevation.save(true)
+        println("创建高程里程：${mileageAndElevation}")
         //--------------------------------------------------------------------------------------------------------------
         def destDir = servletContext.getRealPath("/") + "uploads"
         params.destDir = destDir
@@ -242,6 +246,34 @@ class Operation4PipeSimulationController {
         def excelName = pipeNetwork.exportPipeNetworkToExcel(rootPath)
         params.downLoadFileName = excelName
         commonService.downLoadFile(params)
+    }
+
+    /*
+    * 显示管道的纵断面图
+    * */
+
+    def showPipeNetworkProfile(PipeNetwork pipeNetwork) {
+        /*
+        int m = pipeNetwork.mileageAndElevations.elevationPoints.size()
+        def n = 2
+        def data = new double[m][n]
+        for (int i=0; i<pipeNetwork.mileageAndElevations.elevationPoints.size(); i++) {
+            data[i][0] = pipeNetwork.mileageAndElevations.elevationPoints[i].mileage
+            data[i][1] = pipeNetwork.mileageAndElevations.elevationPoints[i].elevation
+        }
+        */
+        def data = []
+        pipeNetwork.mileageAndElevations.elevationPoints.each { e->
+            data.add("${e}")
+        }
+
+        println("${data}")
+        if (request.xhr) {
+            render data as JSON
+        } else {
+            model:
+            [data: data]
+        }
     }
 
     /*

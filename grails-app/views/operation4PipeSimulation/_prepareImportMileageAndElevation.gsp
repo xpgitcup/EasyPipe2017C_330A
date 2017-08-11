@@ -30,6 +30,7 @@
                     <f:with bean="mileageAndElevation">
                         <g:hiddenField name="id" value="${mileageAndElevation?.id}"/>
                         <g:hiddenField name="version" value="${mileageAndElevation?.version}"/>
+                        <g:hiddenField name="pipeNetwork.id" value="${pipeNetwork?.id}"/>
                         <td>
                             <label>请指定名称</label>
                             <!--g:textField name="name" value="${pipeNetwork.name}-高程-里程"/-->

@@ -45,7 +45,7 @@
     <asset:javascript src="jtopo/jtopo-0.4.8-min.js"/>
 
     <!--引入绘图工具 -->
-    <asset:javascript src="echart/echarts.js"/>
+    <asset:javascript src="echarts/echarts.js"/>
 
     <!--用户自定义的-->
     <asset:javascript src="cn/edu/cup/common/common.js"/>

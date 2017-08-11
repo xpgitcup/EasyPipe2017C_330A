@@ -14,6 +14,10 @@ class MileageAndElevation {
     static belongsTo = [pipeNetwork: PipeNetwork]
     static hasMany = [elevationPoints: ElevationPoint]
 
+    static mapping = {
+        elevationPoints sort: 'id'
+    }
+
     static constraints = {
         name(unique: true)
         start()
@@ -21,7 +25,7 @@ class MileageAndElevation {
     }
 
     String toString() {
-        return "${name}/${pipeNetwork}(${elevationPoints?.size()})"
+        return "${name}/(${pipeNetwork}:${elevationPoints?.size()})"
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -63,7 +67,7 @@ class MileageAndElevation {
         for (int i = 0; i < nCols; i++) {
             cells[i] = sheet.getCell(i, rowIndex)
         }
-        println("本行： ${nCols}")
+        println("本行： ${nCols} ${cells}")
         switch (nCols) {
             case 2:
                 def x = Double.parseDouble(cells[0].getContents())

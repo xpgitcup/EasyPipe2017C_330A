@@ -43,7 +43,7 @@
                 </td>
                 <td>
                     <g:if test="${item.mileageAndElevations?.size()>0}">
-                        <a href="#">纵断面图</a>
+                        <a href="javascript: showPipeNetworkProfile(${item.id})">纵断面图</a>
                     </g:if>
                     <g:else>
                         <a href="javascript: prepareImportMileageAndElevation(${item.id})">导入高程里程</a>

@@ -13,8 +13,14 @@ var paginationListHydraulicVertexDiv;
 var listMileageAndElevationDiv;
 var paginationListMileageAndElevationDiv;
 
+var pipeNetworkDiv;
+
 $(function () {
     console.info("管道模拟...");
+
+    //------------------------------------------------------------------------------------------------------------------
+    //管道标签下的子标签
+    pipeNetworkDiv = $("#pipeNetworkDiv");
 
     //------------------------------------------------------------------------------------------------------------------
     //总体设置
@@ -245,6 +251,54 @@ function countPipeNetwork() {
     var total = ajaxCalculate("operation4PipeSimulation/countPipeNetwork");
     //console.info("正在听统计结果：" + total);
     return total;
+}
+
+function showPipeNetworkProfile(id) {
+    console.info("绘制纵断面图:" + id);
+    operation4PipeSimulationDiv.tabs("select", "管道");
+    pipeNetworkDiv.tabs("select", "纵断面图")
+
+    var str = ajaxCall("operation4PipeSimulation/showPipeNetworkProfile/" + id, 0);
+    console.info("下面是数据：");
+    console.info(str);
+    var data = eval(str[0]);
+    console.info(data);
+
+    var pipeNetworkProfileDiv = document.getElementById("pipeNetworkProfileDiv");
+    var pipeNetworkProfile = echarts.init(pipeNetworkProfileDiv);
+
+    var option =
+        {
+            title: {
+                text: 'Click to Add Points'
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                min: 0,
+                max: 300,
+                type: 'value'
+            },
+            yAxis: {
+                min: 0,
+                max: 2000,
+                type: 'value',
+                axisLine: {onZero: false}
+            },
+            series: [
+                {
+                    id: 'a',
+                    type: 'line',
+                    smooth: true,
+                    data: data
+                }
+            ]
+        }
+    pipeNetworkProfile.setOption(option);
 }
 
 function showPipeNetwork(id) {

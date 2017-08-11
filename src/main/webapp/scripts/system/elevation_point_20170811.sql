@@ -1,0 +1,328 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : sample
+Source Server Version : 50620
+Source Host           : localhost:3306
+Source Database       : easypipedba
+
+Target Server Type    : MYSQL
+Target Server Version : 50620
+File Encoding         : 65001
+
+Date: 2017-08-11 14:23:00
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+-- ----------------------------
+-- Table structure for `elevation_point`
+-- ----------------------------
+DROP TABLE IF EXISTS `elevation_point`;
+CREATE TABLE `elevation_point` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `mileage_and_elevation_id` bigint(20) NOT NULL,
+  `elevation` double NOT NULL,
+  `mileage` double NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKg4eq6u7es3ipx8nrjyss5xqcf` (`mileage_and_elevation_id`),
+  CONSTRAINT `FKg4eq6u7es3ipx8nrjyss5xqcf` FOREIGN KEY (`mileage_and_elevation_id`) REFERENCES `mileage_and_elevation` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=295 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of elevation_point
+-- ----------------------------
+INSERT INTO `elevation_point` VALUES ('1', '0', '1', '272.216', '0');
+INSERT INTO `elevation_point` VALUES ('2', '0', '1', '273.376', '0.267');
+INSERT INTO `elevation_point` VALUES ('3', '0', '1', '272.985', '0.811');
+INSERT INTO `elevation_point` VALUES ('4', '0', '1', '273.81', '1.479');
+INSERT INTO `elevation_point` VALUES ('5', '0', '1', '272.26', '2.191');
+INSERT INTO `elevation_point` VALUES ('6', '0', '1', '273.319', '3.078');
+INSERT INTO `elevation_point` VALUES ('7', '0', '1', '272.41', '3.602');
+INSERT INTO `elevation_point` VALUES ('8', '0', '1', '273.385', '3.836');
+INSERT INTO `elevation_point` VALUES ('9', '0', '1', '272.655', '4.438');
+INSERT INTO `elevation_point` VALUES ('10', '0', '1', '272.398', '4.921');
+INSERT INTO `elevation_point` VALUES ('11', '0', '1', '273.024', '5.316');
+INSERT INTO `elevation_point` VALUES ('12', '0', '1', '274.351', '6.171');
+INSERT INTO `elevation_point` VALUES ('13', '0', '1', '274.203', '7.948');
+INSERT INTO `elevation_point` VALUES ('14', '0', '1', '273.188', '8.704');
+INSERT INTO `elevation_point` VALUES ('15', '0', '1', '274.293', '9.373');
+INSERT INTO `elevation_point` VALUES ('16', '0', '1', '273.862', '10.13');
+INSERT INTO `elevation_point` VALUES ('17', '0', '1', '278.346', '11.273');
+INSERT INTO `elevation_point` VALUES ('18', '0', '1', '277.817', '12.428');
+INSERT INTO `elevation_point` VALUES ('19', '0', '1', '276.16', '13.733');
+INSERT INTO `elevation_point` VALUES ('20', '0', '1', '276.368', '14.362');
+INSERT INTO `elevation_point` VALUES ('21', '0', '1', '276.753', '15.66');
+INSERT INTO `elevation_point` VALUES ('22', '0', '1', '276.333', '16.864');
+INSERT INTO `elevation_point` VALUES ('23', '0', '1', '279.019', '17.782');
+INSERT INTO `elevation_point` VALUES ('24', '0', '1', '278.873', '18.805');
+INSERT INTO `elevation_point` VALUES ('25', '0', '1', '279.318', '19.79');
+INSERT INTO `elevation_point` VALUES ('26', '0', '1', '282.253', '20.859');
+INSERT INTO `elevation_point` VALUES ('27', '0', '1', '280.041', '21.845');
+INSERT INTO `elevation_point` VALUES ('28', '0', '1', '278.962', '22.804');
+INSERT INTO `elevation_point` VALUES ('29', '0', '1', '280.826', '23.827');
+INSERT INTO `elevation_point` VALUES ('30', '0', '1', '279.384', '25.414');
+INSERT INTO `elevation_point` VALUES ('31', '0', '1', '277.863', '26.459');
+INSERT INTO `elevation_point` VALUES ('32', '0', '1', '279.993', '27.881');
+INSERT INTO `elevation_point` VALUES ('33', '0', '1', '278.414', '28.883');
+INSERT INTO `elevation_point` VALUES ('34', '0', '1', '278.84', '29.883');
+INSERT INTO `elevation_point` VALUES ('35', '0', '1', '279.399', '30.677');
+INSERT INTO `elevation_point` VALUES ('36', '0', '1', '279.342', '31.678');
+INSERT INTO `elevation_point` VALUES ('37', '0', '1', '278.57', '32.904');
+INSERT INTO `elevation_point` VALUES ('38', '0', '1', '279.572', '33.973');
+INSERT INTO `elevation_point` VALUES ('39', '0', '1', '291.122', '35.35');
+INSERT INTO `elevation_point` VALUES ('40', '0', '1', '296.333', '37.249');
+INSERT INTO `elevation_point` VALUES ('41', '0', '1', '295.314', '37.935');
+INSERT INTO `elevation_point` VALUES ('42', '0', '1', '301.422', '38.337');
+INSERT INTO `elevation_point` VALUES ('43', '0', '1', '291.279', '39.237');
+INSERT INTO `elevation_point` VALUES ('44', '0', '1', '290.438', '40.201');
+INSERT INTO `elevation_point` VALUES ('45', '0', '1', '289.83', '41.372');
+INSERT INTO `elevation_point` VALUES ('46', '0', '1', '290.139', '42.099');
+INSERT INTO `elevation_point` VALUES ('47', '0', '1', '290.46', '42.573');
+INSERT INTO `elevation_point` VALUES ('48', '0', '1', '289.076', '43.592');
+INSERT INTO `elevation_point` VALUES ('49', '0', '1', '289.464', '44.685');
+INSERT INTO `elevation_point` VALUES ('50', '0', '1', '289.903', '45.702');
+INSERT INTO `elevation_point` VALUES ('51', '0', '1', '290.956', '46.668');
+INSERT INTO `elevation_point` VALUES ('52', '0', '1', '292.646', '47.615');
+INSERT INTO `elevation_point` VALUES ('53', '0', '1', '292.883', '48.97');
+INSERT INTO `elevation_point` VALUES ('54', '0', '1', '292.659', '49.317');
+INSERT INTO `elevation_point` VALUES ('55', '0', '1', '293.21', '49.896');
+INSERT INTO `elevation_point` VALUES ('56', '0', '1', '294.936', '50.27');
+INSERT INTO `elevation_point` VALUES ('57', '0', '1', '295.421', '51.44');
+INSERT INTO `elevation_point` VALUES ('58', '0', '1', '293.97', '53.169');
+INSERT INTO `elevation_point` VALUES ('59', '0', '1', '293.938', '54.449');
+INSERT INTO `elevation_point` VALUES ('60', '0', '1', '296.217', '55.323');
+INSERT INTO `elevation_point` VALUES ('61', '0', '1', '296.043', '56.455');
+INSERT INTO `elevation_point` VALUES ('62', '0', '1', '296.115', '56.681');
+INSERT INTO `elevation_point` VALUES ('63', '0', '1', '297.155', '57.656');
+INSERT INTO `elevation_point` VALUES ('64', '0', '1', '298.33', '58.758');
+INSERT INTO `elevation_point` VALUES ('65', '0', '1', '300.339', '59.973');
+INSERT INTO `elevation_point` VALUES ('66', '0', '1', '300.354', '60.242');
+INSERT INTO `elevation_point` VALUES ('67', '0', '1', '300.265', '61.613');
+INSERT INTO `elevation_point` VALUES ('68', '0', '1', '301.025', '62.649');
+INSERT INTO `elevation_point` VALUES ('69', '0', '1', '302.06', '64.211');
+INSERT INTO `elevation_point` VALUES ('70', '0', '1', '302.932', '65.186');
+INSERT INTO `elevation_point` VALUES ('71', '0', '1', '308.17', '66.131');
+INSERT INTO `elevation_point` VALUES ('72', '0', '1', '304.056', '66.461');
+INSERT INTO `elevation_point` VALUES ('73', '0', '1', '304.286', '67.682');
+INSERT INTO `elevation_point` VALUES ('74', '0', '1', '309.235', '69.172');
+INSERT INTO `elevation_point` VALUES ('75', '0', '1', '306.5', '69.901');
+INSERT INTO `elevation_point` VALUES ('76', '0', '1', '307.522', '71.442');
+INSERT INTO `elevation_point` VALUES ('77', '0', '1', '307.482', '71.803');
+INSERT INTO `elevation_point` VALUES ('78', '0', '1', '308.404', '73.513');
+INSERT INTO `elevation_point` VALUES ('79', '0', '1', '308.493', '73.916');
+INSERT INTO `elevation_point` VALUES ('80', '0', '1', '308.711', '74.189');
+INSERT INTO `elevation_point` VALUES ('81', '0', '1', '309.486', '75.804');
+INSERT INTO `elevation_point` VALUES ('82', '0', '1', '309.959', '76.001');
+INSERT INTO `elevation_point` VALUES ('83', '0', '1', '309.854', '76.379');
+INSERT INTO `elevation_point` VALUES ('84', '0', '1', '310.11', '76.667');
+INSERT INTO `elevation_point` VALUES ('85', '0', '1', '311.504', '77.178');
+INSERT INTO `elevation_point` VALUES ('86', '0', '1', '311.105', '78.064');
+INSERT INTO `elevation_point` VALUES ('87', '0', '1', '311.892', '79.165');
+INSERT INTO `elevation_point` VALUES ('88', '0', '1', '313.16', '80.266');
+INSERT INTO `elevation_point` VALUES ('89', '0', '1', '314.597', '81.352');
+INSERT INTO `elevation_point` VALUES ('90', '0', '1', '315.537', '82.306');
+INSERT INTO `elevation_point` VALUES ('91', '0', '1', '316.891', '83.186');
+INSERT INTO `elevation_point` VALUES ('92', '0', '1', '316.314', '83.292');
+INSERT INTO `elevation_point` VALUES ('93', '0', '1', '317.141', '84.085');
+INSERT INTO `elevation_point` VALUES ('94', '0', '1', '318.72', '85.908');
+INSERT INTO `elevation_point` VALUES ('95', '0', '1', '319.315', '86.534');
+INSERT INTO `elevation_point` VALUES ('96', '0', '1', '320.474', '87.869');
+INSERT INTO `elevation_point` VALUES ('97', '0', '1', '323.525', '90.182');
+INSERT INTO `elevation_point` VALUES ('98', '0', '1', '324.313', '90.377');
+INSERT INTO `elevation_point` VALUES ('99', '0', '1', '324.069', '91.496');
+INSERT INTO `elevation_point` VALUES ('100', '0', '1', '327.282', '92.732');
+INSERT INTO `elevation_point` VALUES ('101', '0', '1', '328.835', '93.499');
+INSERT INTO `elevation_point` VALUES ('102', '0', '1', '328.062', '93.603');
+INSERT INTO `elevation_point` VALUES ('103', '0', '1', '325.979', '94.808');
+INSERT INTO `elevation_point` VALUES ('104', '0', '1', '328.286', '96.108');
+INSERT INTO `elevation_point` VALUES ('105', '0', '1', '330.662', '97.598');
+INSERT INTO `elevation_point` VALUES ('106', '0', '1', '334.021', '98.743');
+INSERT INTO `elevation_point` VALUES ('107', '0', '1', '333.177', '100.617');
+INSERT INTO `elevation_point` VALUES ('108', '0', '1', '335.955', '102.418');
+INSERT INTO `elevation_point` VALUES ('109', '0', '1', '335.897', '102.703');
+INSERT INTO `elevation_point` VALUES ('110', '0', '1', '334.138', '103.375');
+INSERT INTO `elevation_point` VALUES ('111', '0', '1', '333.193', '103.836');
+INSERT INTO `elevation_point` VALUES ('112', '0', '1', '333.411', '103.896');
+INSERT INTO `elevation_point` VALUES ('113', '0', '1', '334.937', '104.571');
+INSERT INTO `elevation_point` VALUES ('114', '0', '1', '334.01', '104.995');
+INSERT INTO `elevation_point` VALUES ('115', '0', '1', '334.324', '107.158');
+INSERT INTO `elevation_point` VALUES ('116', '0', '1', '337.043', '108.057');
+INSERT INTO `elevation_point` VALUES ('117', '0', '1', '340.444', '109.205');
+INSERT INTO `elevation_point` VALUES ('118', '0', '1', '342.184', '109.411');
+INSERT INTO `elevation_point` VALUES ('119', '0', '1', '339.068', '110.978');
+INSERT INTO `elevation_point` VALUES ('120', '0', '1', '341.731', '112.226');
+INSERT INTO `elevation_point` VALUES ('121', '0', '1', '342.132', '112.883');
+INSERT INTO `elevation_point` VALUES ('122', '0', '1', '344.546', '113.124');
+INSERT INTO `elevation_point` VALUES ('123', '0', '1', '341.322', '114.368');
+INSERT INTO `elevation_point` VALUES ('124', '0', '1', '342.218', '114.922');
+INSERT INTO `elevation_point` VALUES ('125', '0', '1', '342.035', '115.663');
+INSERT INTO `elevation_point` VALUES ('126', '0', '1', '343.291', '116.858');
+INSERT INTO `elevation_point` VALUES ('127', '0', '1', '343.296', '117.883');
+INSERT INTO `elevation_point` VALUES ('128', '0', '1', '343.332', '118.729');
+INSERT INTO `elevation_point` VALUES ('129', '0', '1', '344.013', '119.967');
+INSERT INTO `elevation_point` VALUES ('130', '0', '1', '345.56', '121.077');
+INSERT INTO `elevation_point` VALUES ('131', '0', '1', '348.352', '122.144');
+INSERT INTO `elevation_point` VALUES ('132', '0', '1', '350.952', '123.139');
+INSERT INTO `elevation_point` VALUES ('133', '0', '1', '347.36', '124.16');
+INSERT INTO `elevation_point` VALUES ('134', '0', '1', '347.321', '125.44');
+INSERT INTO `elevation_point` VALUES ('135', '0', '1', '347.697', '126.257');
+INSERT INTO `elevation_point` VALUES ('136', '0', '1', '347.603', '126.289');
+INSERT INTO `elevation_point` VALUES ('137', '0', '1', '348.734', '127.288');
+INSERT INTO `elevation_point` VALUES ('138', '0', '1', '350.044', '127.693');
+INSERT INTO `elevation_point` VALUES ('139', '0', '1', '351.641', '128.43');
+INSERT INTO `elevation_point` VALUES ('140', '0', '1', '349.683', '129.483');
+INSERT INTO `elevation_point` VALUES ('141', '0', '1', '351.036', '130.38');
+INSERT INTO `elevation_point` VALUES ('142', '0', '1', '352.041', '131.372');
+INSERT INTO `elevation_point` VALUES ('143', '0', '1', '349.459', '132.742');
+INSERT INTO `elevation_point` VALUES ('144', '0', '1', '349.828', '133.892');
+INSERT INTO `elevation_point` VALUES ('145', '0', '1', '351.223', '134.002');
+INSERT INTO `elevation_point` VALUES ('146', '0', '1', '350.29', '134.285');
+INSERT INTO `elevation_point` VALUES ('147', '0', '1', '352.207', '135.795');
+INSERT INTO `elevation_point` VALUES ('148', '0', '1', '352.287', '136.581');
+INSERT INTO `elevation_point` VALUES ('149', '0', '1', '352.37', '136.86');
+INSERT INTO `elevation_point` VALUES ('150', '0', '1', '353.57', '137.676');
+INSERT INTO `elevation_point` VALUES ('151', '0', '1', '353.151', '137.925');
+INSERT INTO `elevation_point` VALUES ('152', '0', '1', '353.891', '139.501');
+INSERT INTO `elevation_point` VALUES ('153', '0', '1', '357.083', '141.308');
+INSERT INTO `elevation_point` VALUES ('154', '0', '1', '357.078', '142.029');
+INSERT INTO `elevation_point` VALUES ('155', '0', '1', '357.664', '142.311');
+INSERT INTO `elevation_point` VALUES ('156', '0', '1', '357.441', '143.013');
+INSERT INTO `elevation_point` VALUES ('157', '0', '1', '358.233', '143.792');
+INSERT INTO `elevation_point` VALUES ('158', '0', '1', '358.003', '144.966');
+INSERT INTO `elevation_point` VALUES ('159', '0', '1', '361.915', '146.133');
+INSERT INTO `elevation_point` VALUES ('160', '0', '1', '358.598', '147.524');
+INSERT INTO `elevation_point` VALUES ('161', '0', '1', '357.926', '148.171');
+INSERT INTO `elevation_point` VALUES ('162', '0', '1', '358.501', '149.251');
+INSERT INTO `elevation_point` VALUES ('163', '0', '1', '358.492', '149.463');
+INSERT INTO `elevation_point` VALUES ('164', '0', '1', '359.592', '149.598');
+INSERT INTO `elevation_point` VALUES ('165', '0', '1', '362.395', '151.833');
+INSERT INTO `elevation_point` VALUES ('166', '0', '1', '363.151', '152.943');
+INSERT INTO `elevation_point` VALUES ('167', '0', '1', '363.665', '154.148');
+INSERT INTO `elevation_point` VALUES ('168', '0', '1', '367.452', '155.332');
+INSERT INTO `elevation_point` VALUES ('169', '0', '1', '367.675', '156.658');
+INSERT INTO `elevation_point` VALUES ('170', '0', '1', '368.012', '156.884');
+INSERT INTO `elevation_point` VALUES ('171', '0', '1', '371.956', '158.396');
+INSERT INTO `elevation_point` VALUES ('172', '0', '1', '365.059', '158.776');
+INSERT INTO `elevation_point` VALUES ('173', '0', '1', '370.812', '159.074');
+INSERT INTO `elevation_point` VALUES ('174', '0', '1', '372.249', '159.846');
+INSERT INTO `elevation_point` VALUES ('175', '0', '1', '372.139', '160.556');
+INSERT INTO `elevation_point` VALUES ('176', '0', '1', '373.027', '160.732');
+INSERT INTO `elevation_point` VALUES ('177', '0', '1', '376.114', '162.224');
+INSERT INTO `elevation_point` VALUES ('178', '0', '1', '378.807', '163.321');
+INSERT INTO `elevation_point` VALUES ('179', '0', '1', '380.642', '164.219');
+INSERT INTO `elevation_point` VALUES ('180', '0', '1', '385.275', '166.411');
+INSERT INTO `elevation_point` VALUES ('181', '0', '1', '388.225', '167.504');
+INSERT INTO `elevation_point` VALUES ('182', '0', '1', '386.977', '168.397');
+INSERT INTO `elevation_point` VALUES ('183', '0', '1', '388.893', '169.825');
+INSERT INTO `elevation_point` VALUES ('184', '0', '1', '391.03', '171.102');
+INSERT INTO `elevation_point` VALUES ('185', '0', '1', '392.672', '172.872');
+INSERT INTO `elevation_point` VALUES ('186', '0', '1', '394.503', '174.33');
+INSERT INTO `elevation_point` VALUES ('187', '0', '1', '397.479', '175.965');
+INSERT INTO `elevation_point` VALUES ('188', '0', '1', '398.665', '177.411');
+INSERT INTO `elevation_point` VALUES ('189', '0', '1', '400.772', '178.427');
+INSERT INTO `elevation_point` VALUES ('190', '0', '1', '401.535', '179.762');
+INSERT INTO `elevation_point` VALUES ('191', '0', '1', '405.276', '181.199');
+INSERT INTO `elevation_point` VALUES ('192', '0', '1', '408.127', '183.327');
+INSERT INTO `elevation_point` VALUES ('193', '0', '1', '407.085', '183.597');
+INSERT INTO `elevation_point` VALUES ('194', '0', '1', '409.736', '184.214');
+INSERT INTO `elevation_point` VALUES ('195', '0', '1', '412.848', '185.592');
+INSERT INTO `elevation_point` VALUES ('196', '0', '1', '414.3', '186.226');
+INSERT INTO `elevation_point` VALUES ('197', '0', '1', '415.293', '186.771');
+INSERT INTO `elevation_point` VALUES ('198', '0', '1', '415.387', '186.827');
+INSERT INTO `elevation_point` VALUES ('199', '0', '1', '414.918', '187.403');
+INSERT INTO `elevation_point` VALUES ('200', '0', '1', '417.174', '188.126');
+INSERT INTO `elevation_point` VALUES ('201', '0', '1', '416.933', '188.294');
+INSERT INTO `elevation_point` VALUES ('202', '0', '1', '418.68', '189.01');
+INSERT INTO `elevation_point` VALUES ('203', '0', '1', '418.354', '189.074');
+INSERT INTO `elevation_point` VALUES ('204', '0', '1', '421.419', '190.47');
+INSERT INTO `elevation_point` VALUES ('205', '0', '1', '424.565', '191.944');
+INSERT INTO `elevation_point` VALUES ('206', '0', '1', '426.667', '193.112');
+INSERT INTO `elevation_point` VALUES ('207', '0', '1', '432.343', '195.461');
+INSERT INTO `elevation_point` VALUES ('208', '0', '1', '437.777', '198.163');
+INSERT INTO `elevation_point` VALUES ('209', '0', '1', '439.24', '198.963');
+INSERT INTO `elevation_point` VALUES ('210', '0', '1', '453.822', '202.272');
+INSERT INTO `elevation_point` VALUES ('211', '0', '1', '459.9', '204.138');
+INSERT INTO `elevation_point` VALUES ('212', '0', '1', '463.298', '205.095');
+INSERT INTO `elevation_point` VALUES ('213', '0', '1', '464.106', '206.121');
+INSERT INTO `elevation_point` VALUES ('214', '0', '1', '465.998', '207.271');
+INSERT INTO `elevation_point` VALUES ('215', '0', '1', '466.124', '207.87');
+INSERT INTO `elevation_point` VALUES ('216', '0', '1', '469.4', '208.727');
+INSERT INTO `elevation_point` VALUES ('217', '0', '1', '473.71', '209.817');
+INSERT INTO `elevation_point` VALUES ('218', '0', '1', '478.512', '211.204');
+INSERT INTO `elevation_point` VALUES ('219', '0', '1', '483.779', '212.738');
+INSERT INTO `elevation_point` VALUES ('220', '0', '1', '487.54', '213.996');
+INSERT INTO `elevation_point` VALUES ('221', '0', '1', '491.837', '215.279');
+INSERT INTO `elevation_point` VALUES ('222', '0', '1', '492.241', '215.475');
+INSERT INTO `elevation_point` VALUES ('223', '0', '1', '501.424', '217.406');
+INSERT INTO `elevation_point` VALUES ('224', '0', '1', '509.879', '219.072');
+INSERT INTO `elevation_point` VALUES ('225', '0', '1', '515.147', '220.519');
+INSERT INTO `elevation_point` VALUES ('226', '0', '1', '518.257', '221.688');
+INSERT INTO `elevation_point` VALUES ('227', '0', '1', '521.08', '222.894');
+INSERT INTO `elevation_point` VALUES ('228', '0', '1', '521.694', '223.023');
+INSERT INTO `elevation_point` VALUES ('229', '0', '1', '528.074', '224.594');
+INSERT INTO `elevation_point` VALUES ('230', '0', '1', '536.214', '226.14');
+INSERT INTO `elevation_point` VALUES ('231', '0', '1', '548.037', '226.857');
+INSERT INTO `elevation_point` VALUES ('232', '0', '1', '552.462', '227.02');
+INSERT INTO `elevation_point` VALUES ('233', '0', '1', '558.164', '227.468');
+INSERT INTO `elevation_point` VALUES ('234', '0', '1', '557.056', '227.649');
+INSERT INTO `elevation_point` VALUES ('235', '0', '1', '564.463', '228.927');
+INSERT INTO `elevation_point` VALUES ('236', '0', '1', '571.952', '229.453');
+INSERT INTO `elevation_point` VALUES ('237', '0', '1', '587.348', '230.612');
+INSERT INTO `elevation_point` VALUES ('238', '0', '1', '618.67', '232.911');
+INSERT INTO `elevation_point` VALUES ('239', '0', '1', '627.79', '233.341');
+INSERT INTO `elevation_point` VALUES ('240', '0', '1', '646.052', '235.245');
+INSERT INTO `elevation_point` VALUES ('241', '0', '1', '664.194', '236.739');
+INSERT INTO `elevation_point` VALUES ('242', '0', '1', '677.963', '238.64');
+INSERT INTO `elevation_point` VALUES ('243', '0', '1', '680.34', '239.513');
+INSERT INTO `elevation_point` VALUES ('244', '0', '1', '670.984', '240.4');
+INSERT INTO `elevation_point` VALUES ('245', '0', '1', '676.761', '240.881');
+INSERT INTO `elevation_point` VALUES ('246', '0', '1', '673.631', '242.28');
+INSERT INTO `elevation_point` VALUES ('247', '0', '1', '676.37', '243.125');
+INSERT INTO `elevation_point` VALUES ('248', '0', '1', '665.737', '248.079');
+INSERT INTO `elevation_point` VALUES ('249', '0', '1', '658.003', '249.079');
+INSERT INTO `elevation_point` VALUES ('250', '0', '1', '644.025', '250.503');
+INSERT INTO `elevation_point` VALUES ('251', '0', '1', '635.486', '251.578');
+INSERT INTO `elevation_point` VALUES ('252', '0', '1', '628.45', '252.543');
+INSERT INTO `elevation_point` VALUES ('253', '0', '1', '619.933', '254.119');
+INSERT INTO `elevation_point` VALUES ('254', '0', '1', '616.097', '255.067');
+INSERT INTO `elevation_point` VALUES ('255', '0', '1', '617.9', '256.653');
+INSERT INTO `elevation_point` VALUES ('256', '0', '1', '620.464', '257.162');
+INSERT INTO `elevation_point` VALUES ('257', '0', '1', '633.83', '258.916');
+INSERT INTO `elevation_point` VALUES ('258', '0', '1', '652.452', '260.51');
+INSERT INTO `elevation_point` VALUES ('259', '0', '1', '652.959', '261.565');
+INSERT INTO `elevation_point` VALUES ('260', '0', '1', '668.654', '262.978');
+INSERT INTO `elevation_point` VALUES ('261', '0', '1', '681.682', '264.591');
+INSERT INTO `elevation_point` VALUES ('262', '0', '1', '691.311', '266.272');
+INSERT INTO `elevation_point` VALUES ('263', '0', '1', '701.265', '269.182');
+INSERT INTO `elevation_point` VALUES ('264', '0', '1', '714.19', '270.467');
+INSERT INTO `elevation_point` VALUES ('265', '0', '1', '720.137', '271.811');
+INSERT INTO `elevation_point` VALUES ('266', '0', '1', '722.655', '272.978');
+INSERT INTO `elevation_point` VALUES ('267', '0', '1', '721.866', '273.048');
+INSERT INTO `elevation_point` VALUES ('268', '0', '1', '723.202', '273.479');
+INSERT INTO `elevation_point` VALUES ('269', '0', '1', '721.703', '273.624');
+INSERT INTO `elevation_point` VALUES ('270', '0', '1', '708.624', '275.51');
+INSERT INTO `elevation_point` VALUES ('271', '0', '1', '693.55', '277.135');
+INSERT INTO `elevation_point` VALUES ('272', '0', '1', '686.455', '277.891');
+INSERT INTO `elevation_point` VALUES ('273', '0', '1', '701.716', '279.808');
+INSERT INTO `elevation_point` VALUES ('274', '0', '1', '709.292', '280.351');
+INSERT INTO `elevation_point` VALUES ('275', '0', '1', '720.775', '281.369');
+INSERT INTO `elevation_point` VALUES ('276', '0', '1', '729.688', '282.224');
+INSERT INTO `elevation_point` VALUES ('277', '0', '1', '730.118', '282.327');
+INSERT INTO `elevation_point` VALUES ('278', '0', '1', '726.696', '282.896');
+INSERT INTO `elevation_point` VALUES ('279', '0', '1', '732.24', '283.381');
+INSERT INTO `elevation_point` VALUES ('280', '0', '1', '749.478', '284.154');
+INSERT INTO `elevation_point` VALUES ('281', '0', '1', '757.489', '285.296');
+INSERT INTO `elevation_point` VALUES ('282', '0', '1', '750.655', '287.354');
+INSERT INTO `elevation_point` VALUES ('283', '0', '1', '753.269', '289.068');
+INSERT INTO `elevation_point` VALUES ('284', '0', '1', '752.06', '289.298');
+INSERT INTO `elevation_point` VALUES ('285', '0', '1', '750.996', '290.265');
+INSERT INTO `elevation_point` VALUES ('286', '0', '1', '766.283', '291.795');
+INSERT INTO `elevation_point` VALUES ('287', '0', '1', '761.951', '292.373');
+INSERT INTO `elevation_point` VALUES ('288', '0', '1', '750.464', '293.04');
+INSERT INTO `elevation_point` VALUES ('289', '0', '1', '751.435', '293.197');
+INSERT INTO `elevation_point` VALUES ('290', '0', '1', '753.858', '293.325');
+INSERT INTO `elevation_point` VALUES ('291', '0', '1', '758.895', '293.492');
+INSERT INTO `elevation_point` VALUES ('292', '0', '1', '760.217', '293.694');
+INSERT INTO `elevation_point` VALUES ('293', '0', '1', '763.098', '293.913');
+INSERT INTO `elevation_point` VALUES ('294', '0', '1', '761.77', '296.9');

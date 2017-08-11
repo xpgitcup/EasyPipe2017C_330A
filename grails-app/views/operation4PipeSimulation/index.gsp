@@ -76,7 +76,7 @@
     </div>
 
     <div title="管道">
-        <div class="easyui-tabs">
+        <div class="easyui-tabs" id="pipeNetworkDiv">
             <div title="管道列表">
                 <div id="listPipeNetworkDiv"></div>
                 <div id="paginationListPipeNetworkDiv"></div>
@@ -97,6 +97,9 @@
             <div title="传热系数"></div>
 
             <div title="设备"></div>
+            <div title="纵断面图">
+                <div id="pipeNetworkProfileDiv" style="width: 800px; height: 400px"></div>
+            </div>
         </div>
     </div>
 
