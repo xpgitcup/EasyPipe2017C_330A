@@ -42,6 +42,10 @@
 
     <asset:javascript src="cn/edu/cup/lps/${entityName}.js"/>
     <asset:javascript src="cn/edu/cup/lps/PipeNetwork.js"/>
+    <asset:javascript src="cn/edu/cup/lps/HydrauliProject.js"/>
+    <asset:javascript src="cn/edu/cup/lps/HydraulicVertex.js"/>
+    <asset:javascript src="cn/edu/cup/lps/MileageAndElevation.js"/>
+    <asset:javascript src="cn/edu/cup/lps/AmbientTemperature.js"/>
 
     <title>${entityName}维护</title>
 </head>
@@ -102,7 +106,7 @@
 
             <div title="设备"></div>
             <div title="纵断面图">
-                <div id="pipeNetworkProfileDiv" style="width: 800px; height: 400px"></div>
+                <div id="pipeNetworkProfileDiv" style="width: 1200px; height: 400px"></div>
             </div>
         </div>
     </div>
@@ -125,7 +129,7 @@
     </div>
 
     <div title="拓扑结构">
-        <canvas width="800" height="500" id="canvas" style="background-color: grey"></canvas>
+        <canvas width="1200" height="500" id="canvas" style="background-color: grey"></canvas>
     </div>
 </div>
 </body>

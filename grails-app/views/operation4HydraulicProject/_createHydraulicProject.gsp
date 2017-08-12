@@ -31,7 +31,7 @@
         </ul>
     </g:hasErrors>
 <!--g:form resource="${this.hydraulicProject}" method="POST"-->
-    <g:form controller="operation4PipeSimulation" action="updateHydraulicProject">
+    <g:form controller="operation4HydraulicProject" action="updateHydraulicProject">
         <fieldset class="form">
             <f:all bean="hydraulicProject"/>
         </fieldset>

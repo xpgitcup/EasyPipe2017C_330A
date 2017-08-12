@@ -3,7 +3,7 @@
  * */
 function countPipeNetwork() {
     //console.info("开始统计...")
-    var total = ajaxCalculate("operation4PipeSimulation/countPipeNetwork");
+    var total = ajaxCalculate("operation4PipeNetwork/countPipeNetwork");
     //console.info("正在听统计结果：" + total);
     return total;
 }
@@ -41,7 +41,7 @@ function showPipeNetworkProfile(id) {
             },
             yAxis: {
                 min: 0,
-                max: 2000,
+                max: 1000,
                 type: 'value',
                 axisLine: {onZero: false}
             },
@@ -50,7 +50,9 @@ function showPipeNetworkProfile(id) {
                     id: 'a',
                     type: 'line',
                     smooth: true,
-                    data: data
+                    showSymbol: false,
+                    data: data,
+                    itemStyle : { normal: {label : {show: false}}}
                 }
             ]
         }

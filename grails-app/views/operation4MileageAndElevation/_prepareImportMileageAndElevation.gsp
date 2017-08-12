@@ -24,17 +24,17 @@
                 </td>
             </tr>
         </table>
-        <g:uploadForm controller="operation4PipeSimulation" action="importAmbientTemperature">
+        <g:uploadForm controller="operation4MileageAndElevation" action="importMileageAndElevation">
             <table>
                 <tr>
-                    <f:with bean="ambientTemperature">
-                        <g:hiddenField name="id" value="${ambientTemperature?.id}"/>
-                        <g:hiddenField name="version" value="${ambientTemperature?.version}"/>
+                    <f:with bean="mileageAndElevation">
+                        <g:hiddenField name="id" value="${mileageAndElevation?.id}"/>
+                        <g:hiddenField name="version" value="${mileageAndElevation?.version}"/>
                         <g:hiddenField name="pipeNetwork.id" value="${pipeNetwork?.id}"/>
                         <td>
                             <label>请指定名称</label>
                             <!--g:textField name="name" value="${pipeNetwork.name}-高程-里程"/-->
-                            <f:field property="name" value="${pipeNetwork.name}-环境温度"/>
+                            <f:field property="name" value="${pipeNetwork.name}-高程-里程"/>
                         </td>
                         <td>
                             <label>请选择对应的管段起点</label>
@@ -50,7 +50,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label>请为-${pipeNetwork}-选择(环境温度)数据文件(*.xls)</label>
+                        <label>请为-${pipeNetwork}-选择(里程-高程)数据文件(*.xls)</label>
                     </td>
                     <td>
                         <input type="file" name="uploadedFile">
