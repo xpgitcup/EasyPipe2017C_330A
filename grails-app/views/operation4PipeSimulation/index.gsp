@@ -41,6 +41,7 @@
     </g:javascript>
 
     <asset:javascript src="cn/edu/cup/lps/${entityName}.js"/>
+    <asset:javascript src="cn/edu/cup/lps/PipeNetwork.js"/>
 
     <title>${entityName}维护</title>
 </head>

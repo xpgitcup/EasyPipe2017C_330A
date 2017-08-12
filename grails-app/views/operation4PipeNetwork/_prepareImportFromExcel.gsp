@@ -24,7 +24,7 @@
                 </td>
             </tr>
         </table>
-        <g:uploadForm controller="operation4PipeSimulation" action="importFromExcel">
+        <g:uploadForm controller="operation4PipeNetwork" action="importFromExcel">
             <table>
                 <tr>
                     <td>

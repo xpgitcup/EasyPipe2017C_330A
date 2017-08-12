@@ -31,7 +31,7 @@
         </ul>
     </g:hasErrors>
 <!--g:form resource="${this.pipeNetwork}" method="POST"-->
-    <g:form controller="operation4PipeSimulation" action="updatePipeNetwork">
+    <g:form controller="operation4PipeNetwork" action="updatePipeNetwork">
         <fieldset class="form">
             <f:all bean="pipeNetwork"/>
         </fieldset>

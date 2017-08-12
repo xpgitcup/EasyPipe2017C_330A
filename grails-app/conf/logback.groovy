@@ -22,6 +22,14 @@ appender('STDOUT', ConsoleAppender) {
     }
 }
 
+appender("FILE", FileAppender) {
+    file = "/var/logs/@info.app.name@.log"
+    append = true
+    encoder(PatternLayoutEncoder) {
+        pattern = "%level %logger - %msg%n"
+    }
+}
+
 def targetDir = BuildSettings.TARGET_DIR
 if (Environment.isDevelopmentMode() && targetDir != null) {
     appender("FULL_STACKTRACE", FileAppender) {
@@ -31,6 +39,8 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
             pattern = "%level %logger - %msg%n"
         }
     }
-    logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
+    logger("StackTrace", ERROR, ['FULL_STACKTRACE', 'FILE'], false)
+    root(ERROR, ['STDOUT', 'FULL_STACKTRACE', 'FILE'])
+} else {
+    root(ERROR, ['STDOUT', 'FILE'])
 }
-root(ERROR, ['STDOUT'])
