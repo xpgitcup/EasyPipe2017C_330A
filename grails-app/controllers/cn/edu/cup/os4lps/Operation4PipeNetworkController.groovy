@@ -48,17 +48,13 @@ class Operation4PipeNetworkController {
 
     def showPipeNetworkProfile(PipeNetwork pipeNetwork) {
         def profile = [:]
-
         profile.name = "${pipeNetwork.name}--纵断面图"
-
         def data = []
-
         pipeNetwork.mileageAndElevations.each { ms ->
             ms.elevationPoints.each { e ->
                 data.add([e.mileage, e.elevation])
             }
         }
-
         profile.data = data
 
         println("${data}")
