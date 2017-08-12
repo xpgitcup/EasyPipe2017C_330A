@@ -1,5 +1,6 @@
 package cn.edu.cup.lps
 
+import cn.edu.cup.lps.hydraulic.AmbientTemperature
 import cn.edu.cup.lps.hydraulic.HydraulicEdge
 import cn.edu.cup.lps.hydraulic.HydraulicVertex
 import cn.edu.cup.lps.hydraulic.MileageAndElevation
@@ -14,7 +15,11 @@ class PipeNetwork {
 
     String name
 
-    static hasMany = [hydraulicVertexes: HydraulicVertex, mileageAndElevations: MileageAndElevation]
+    static hasMany = [
+            hydraulicVertexes: HydraulicVertex,
+            mileageAndElevations: MileageAndElevation,
+            ambientTemperatures: AmbientTemperature
+    ]
 
     static constraints = {
         name(unique: true)

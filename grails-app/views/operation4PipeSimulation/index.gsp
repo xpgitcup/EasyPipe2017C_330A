@@ -92,7 +92,10 @@
                 <div id="paginationListMileageAndElevationDiv"></div>
             </div>
 
-            <div title="地温"></div>
+            <div title="地温">
+                <div id="listAmbientTemperatureDiv"></div>
+                <div id="paginationListAmbientTemperatureDiv"></div>
+            </div>
 
             <div title="传热系数"></div>
 
@@ -112,6 +115,7 @@
     <div title="导入管道">
         <div id="prepareImportFromExcelDiv"></div>
         <div id="prepareImportMileageAndElevationDiv"></div>
+        <div id="prepareImportAmbientTemperatureDiv"></div>
     </div>
 
     <div title="编辑">

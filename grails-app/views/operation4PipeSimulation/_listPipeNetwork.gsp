@@ -34,7 +34,7 @@
                 <td>${item.hydraulicVertexes?.size()}</td>
                 <td>${item.mileageAndElevations?.size()}</td>
                 <td>
-                    <g:if test="${item.edges().size()>0}">
+                    <g:if test="${item.edges().size() > 0}">
                         <a href="operation4PipeSimulation/exportToExcel/${item.id}">导出</a>
                     </g:if>
                     <g:else>
@@ -42,11 +42,19 @@
                     </g:else>
                 </td>
                 <td>
-                    <g:if test="${item.mileageAndElevations?.size()>0}">
+                    <g:if test="${item.mileageAndElevations?.size() > 0}">
                         <a href="javascript: showPipeNetworkProfile(${item.id})">纵断面图</a>
                     </g:if>
                     <g:else>
                         <a href="javascript: prepareImportMileageAndElevation(${item.id})">导入高程里程</a>
+                    </g:else>
+                </td>
+                <td>
+                    <g:if test="${item.ambientTemperatures?.size() > 0}">
+                        <a href="javascript: showPipeNetworkProfile(${item.id})">纵断面图</a>
+                    </g:if>
+                    <g:else>
+                        <a href="javascript: prepareImportAmbientTemperature(${item.id})">导入环境温度</a>
                     </g:else>
                 </td>
                 <td>${item.edgesCount()}</td>
