@@ -13,12 +13,6 @@ class Operation4PipeSimulationController {
 
     def commonService
 
-
-    //MileageAndElevation===============================================================================================
-
-
-    //PipeNetwork-------------------------------------------------------------------------------------------------------
-
     /*
     * downLoadTemplate
     * 下载数据模型的模板
@@ -31,9 +25,6 @@ class Operation4PipeSimulationController {
         params.downLoadFileName = fileName
         commonService.downLoadFile(params)
     }
-
-
-
 
     def index() {}
 }
