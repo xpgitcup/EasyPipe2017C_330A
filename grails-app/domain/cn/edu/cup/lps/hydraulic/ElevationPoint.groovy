@@ -4,8 +4,8 @@ import cn.edu.cup.lps.PipeNetwork
 
 class ElevationPoint {
 
-    Double mileage
-    Double elevation
+    double mileage
+    double elevation
 
     static belongsTo = [mileageAndElevation: MileageAndElevation]
 

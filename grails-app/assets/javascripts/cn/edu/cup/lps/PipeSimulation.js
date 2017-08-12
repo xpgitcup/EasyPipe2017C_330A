@@ -253,15 +253,16 @@ function countPipeNetwork() {
     return total;
 }
 
+
 function showPipeNetworkProfile(id) {
     console.info("绘制纵断面图:" + id);
     operation4PipeSimulationDiv.tabs("select", "管道");
     pipeNetworkDiv.tabs("select", "纵断面图")
 
-    var str = ajaxCall("operation4PipeSimulation/showPipeNetworkProfile/" + id, 0);
+    var profile = ajaxCall("operation4PipeSimulation/showPipeNetworkProfile/" + id, 0);
+    var data = profile.data
+
     console.info("下面是数据：");
-    console.info(str);
-    var data = eval(str[0]);
     console.info(data);
 
     var pipeNetworkProfileDiv = document.getElementById("pipeNetworkProfileDiv");
@@ -270,7 +271,7 @@ function showPipeNetworkProfile(id) {
     var option =
         {
             title: {
-                text: 'Click to Add Points'
+                text: profile.name
             },
             grid: {
                 left: '3%',

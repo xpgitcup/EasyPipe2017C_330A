@@ -2,10 +2,12 @@ package cn.edu.cup.os4lps
 
 import cn.edu.cup.lps.HydraulicProject
 import cn.edu.cup.lps.PipeNetwork
+import cn.edu.cup.lps.hydraulic.ElevationPoint
 import cn.edu.cup.lps.hydraulic.HydraulicVertex
 import cn.edu.cup.lps.hydraulic.MileageAndElevation
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
+import groovy.json.JsonOutput
 
 @Transactional(readOnly = true)
 class Operation4PipeSimulationController {
@@ -253,23 +255,24 @@ class Operation4PipeSimulationController {
     * */
 
     def showPipeNetworkProfile(PipeNetwork pipeNetwork) {
-        /*
-        int m = pipeNetwork.mileageAndElevations.elevationPoints.size()
-        def n = 2
-        def data = new double[m][n]
-        for (int i=0; i<pipeNetwork.mileageAndElevations.elevationPoints.size(); i++) {
-            data[i][0] = pipeNetwork.mileageAndElevations.elevationPoints[i].mileage
-            data[i][1] = pipeNetwork.mileageAndElevations.elevationPoints[i].elevation
-        }
-        */
+        def profile = [:]
+
+        profile.name = "${pipeNetwork.name}--纵断面图"
+
         def data = []
-        pipeNetwork.mileageAndElevations.elevationPoints.each { e->
-            data.add("${e}")
+
+        pipeNetwork.mileageAndElevations.each { ms->
+            ms.elevationPoints.each { e->
+                data.add([e.mileage, e.elevation])
+            }
         }
 
+        profile.data = data
+
         println("${data}")
+
         if (request.xhr) {
-            render data as JSON
+            render profile as JSON
         } else {
             model:
             [data: data]
