@@ -41,6 +41,15 @@ class Operation4PipeNetworkController {
     }
 
     /*
+    * 更新边的情况
+    * */
+    @Transactional
+    def updateHydraulicEdges(PipeNetwork pipeNetwork) {
+        pipeNetwork.updateEdges4OneBranch()
+        redirect(controller: 'operation4PipeSimulation', action: 'index')
+    }
+
+    /*
     * 导出管道
     * */
 
@@ -49,6 +58,35 @@ class Operation4PipeNetworkController {
         def excelName = pipeNetwork.exportPipeNetworkToExcel(rootPath)
         params.downLoadFileName = excelName
         commonService.downLoadFile(params)
+    }
+
+    /*
+    * 显示拓扑图
+    * */
+    def showPipeNetworkTopo(PipeNetwork pipeNetwork) {
+        def topo = [:]
+        topo.name = "${pipeNetwork.name}--拓扑图"
+
+        def data = []
+        pipeNetwork.hydraulicVertexes.each { ms ->
+            data.add([name: "${ms.id}-${ms.name}", x: ms.mileage, value: ms.elevation])
+        }
+        topo.data = data
+
+        def links = []
+        pipeNetwork.edges().each { e->
+            links.add([source: "${e.start.id}-${e.start.name}", target: "${e.end.id}-${e.end.name}"])
+        }
+        topo.links = links
+
+        println("${topo}")
+
+        if (request.xhr) {
+            render topo as JSON
+        } else {
+            model:
+            [topo: topo]
+        }
     }
 
     /*

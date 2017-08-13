@@ -35,6 +35,18 @@ class PipeNetwork {
     //==================================================================================================================
 
     /*
+    * 建立单支管线的边信息
+    * */
+    def updateEdges4OneBranch() {
+        int m = hydraulicVertexes.size()
+        for (int i=1; i<m; i++) {
+            def e = new HydraulicEdge(start: hydraulicVertexes[i-1], end: hydraulicVertexes[i])
+            e.save()
+            println("${e}")
+        }
+    }
+
+    /*
     * 根据里程-高程，生成逻辑坐标
     * 只是针对单支管线--
     * */

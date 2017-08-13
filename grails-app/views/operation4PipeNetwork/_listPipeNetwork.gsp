@@ -30,6 +30,9 @@
                     <a href="javascript: showPipeNetwork(${item.id})">
                         ${item.name}
                     </a>
+                    <a href="javascript: showPipeNetworkTopo(${item.id})">
+                        ${item.name}拓扑
+                    </a>
                 </td>
                 <td>${item.hydraulicVertexes?.size()}</td>
                 <td>${item.mileageAndElevations?.size()}</td>
@@ -39,6 +42,7 @@
                     </g:if>
                     <g:else>
                         <a href="javascript: prepareImportFromExcel(${item.id})">导入</a>
+                        <a href="operation4PipeNetwork/updateHydraulicEdges/${item.id}">更新连接关系</a>
                     </g:else>
                 </td>
                 <td>

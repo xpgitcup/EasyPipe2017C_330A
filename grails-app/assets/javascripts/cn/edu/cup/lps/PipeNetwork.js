@@ -41,7 +41,66 @@ function countPipeNetwork() {
     return total;
 }
 
+/*
+* 显示拓扑图
+* */
+function showPipeNetworkTopo(id) {
+    console.info("拓扑图:" + id);
+    operation4PipeSimulationDiv.tabs("select", "管道");
+    pipeNetworkDiv.tabs("select", "纵断面图")
 
+    var topo = ajaxCall("operation4PipeNetwork/showPipeNetworkTopo/" + id, 0);
+    var data = topo.data;
+    var links = topo.links;
+
+    console.info("下面是数据：");
+    console.info(data);
+    console.info(links);
+
+    var pipeNetworkProfileDiv = document.getElementById("pipeNetworkProfileDiv");
+    var pipeNetworkProfile = echarts.init(pipeNetworkProfileDiv);
+
+    var option =
+        {
+            title: {
+                text: topo.name
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value'
+            },
+            yAxis: {
+                type: 'value',
+                scale: true
+            },
+            series: [
+                {
+                    id: 'a',
+                    type: 'graph',
+                    symbolSize: 50,
+                    showSymbol: true,
+                    coordinateSystem: 'cartesian2d',
+                    label: {
+                        normal: {
+                            show: true
+                        }
+                    },
+                    data: data,
+                    links: links
+                }
+            ]
+        }
+    pipeNetworkProfile.setOption(option);
+}
+
+/*
+* 显示纵断面图
+* */
 function showPipeNetworkProfile(id) {
     console.info("绘制纵断面图:" + id);
     operation4PipeSimulationDiv.tabs("select", "管道");
@@ -85,7 +144,7 @@ function showPipeNetworkProfile(id) {
                     smooth: true,
                     showSymbol: false,
                     data: data,
-                    itemStyle : { normal: {label : {show: false}}}
+                    itemStyle: {normal: {label: {show: false}}}
                 }
             ]
         }
@@ -120,7 +179,7 @@ function drawTopo(items) {
     var cHeight = stage.height
     var xoffset =
 
-    stage.frames = -24;
+        stage.frames = -24;
     scene.clear();
 
     // 不指定布局的时候，容器的布局为自动(容器边界随元素变化）
