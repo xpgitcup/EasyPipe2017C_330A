@@ -129,7 +129,7 @@
     </div>
 
     <div title="拓扑结构">
-        <canvas width="1200" height="500" id="canvas" style="background-color: grey"></canvas>
+        <canvas width="1200" height="500" id="canvas" style="background-color: white"></canvas>
     </div>
 </div>
 </body>

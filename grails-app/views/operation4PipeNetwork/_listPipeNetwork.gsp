@@ -44,6 +44,7 @@
                 <td>
                     <g:if test="${item.mileageAndElevations?.size() > 0}">
                         <a href="javascript: showPipeNetworkProfile(${item.id})">纵断面图</a>
+                        <a href="operation4PipeNetwork/updateLogicalPosition/${item.id}">更新逻辑坐标</a>
                     </g:if>
                     <g:else>
                         <a href="javascript: prepareImportMileageAndElevation(${item.id})">导入高程里程</a>

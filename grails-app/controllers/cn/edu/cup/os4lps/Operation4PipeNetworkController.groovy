@@ -9,6 +9,15 @@ class Operation4PipeNetworkController {
     def commonService
 
     /*
+    * 更新逻辑坐标
+    * */
+    @Transactional
+    def updateLogicalPosition(PipeNetwork pipeNetwork) {
+        pipeNetwork.setupLogicalPosition()
+        redirect(controller: 'operation4PipeSimulation', action: 'index')
+    }
+
+    /*
     * 导入管道
     * */
 

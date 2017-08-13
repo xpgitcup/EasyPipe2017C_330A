@@ -1,4 +1,37 @@
 /*
+* 处理显示标签页的转换，以及分页显示问题
+* */
+function tabAndPage4HydraulicProject() {
+    //----------------------------------------------------------------------------------------------------------------
+    //获取当前页面的div
+    listHydraulicProjectDiv = $("#listHydraulicProjectDiv");
+    paginationListHydraulicProjectDiv = $("#paginationListHydraulicProjectDiv");
+
+    //获取当前页
+    var currentPgaeHydraulicProject = readCookie("currentPgaeHydraulicProject", 1);
+    var pageSizeHydraulicProject = readCookie("pageSizeHydraulicProject", pageSize);
+    var totalHydraulicProject = countHydraulicProject();
+    //console.info("记录总数：" + totalHydraulicProject);
+
+
+    //分页
+    paginationListHydraulicProjectDiv.pagination({
+        pageSize: pageSizeHydraulicProject,
+        total: totalHydraulicProject,
+        showPageList: true,
+        displayMsg: '',
+        layout: ['first', 'prev', 'links', 'next', 'last'],
+        //翻页函数
+        onSelectPage: function (pageNumber, pageSize) {
+            listHydraulicProject(pageNumber, pageSize);
+            $.cookie("currentPgaeHydraulicProject", pageNumber);
+        }
+    });
+    paginationListHydraulicProjectDiv.pagination("select", currentPgaeHydraulicProject);
+    //------------------------------------------------------------------------------------------------------------------
+}
+
+/*
  * 统计记录总数
  * */
 function countHydraulicProject() {

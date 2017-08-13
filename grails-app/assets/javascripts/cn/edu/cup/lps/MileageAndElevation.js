@@ -1,3 +1,37 @@
+
+/*
+* 处理显示标签页的转换，以及分页显示问题
+* */
+function tabAndPage4MileageAndElevation() {
+    //----------------------------------------------------------------------------------------------------------------
+    //获取当前页面的div
+    listMileageAndElevationDiv = $("#listMileageAndElevationDiv");
+    paginationListMileageAndElevationDiv = $("#paginationListMileageAndElevationDiv");
+
+    //获取当前页
+    var currentPgaeMileageAndElevation = readCookie("currentPgaeMileageAndElevation", 1);
+    var pageSizeMileageAndElevation = readCookie("pageSizeMileageAndElevation", pageSize);
+    var totalMileageAndElevation = countMileageAndElevation();
+    //console.info("记录总数：" + totalMileageAndElevation);
+
+
+    //分页
+    paginationListMileageAndElevationDiv.pagination({
+        pageSize: pageSizeMileageAndElevation,
+        total: totalMileageAndElevation,
+        showPageList: true,
+        displayMsg: '',
+        layout: ['first', 'prev', 'links', 'next', 'last'],
+        //翻页函数
+        onSelectPage: function (pageNumber, pageSize) {
+            listMileageAndElevation(pageNumber, pageSize);
+            $.cookie("currentPgaeMileageAndElevation", pageNumber);
+        }
+    });
+    paginationListMileageAndElevationDiv.pagination("select", currentPgaeMileageAndElevation);
+    //------------------------------------------------------------------------------------------------------------------
+}
+
 /*
  * 统计记录总数
  * */

@@ -10,6 +10,8 @@ import jxl.Workbook
 import jxl.write.Label
 import jxl.write.WritableSheet
 import jxl.write.WritableWorkbook
+import org.apache.commons.math3.analysis.interpolation.LinearInterpolator
+import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction
 
 class PipeNetwork {
 
@@ -31,6 +33,50 @@ class PipeNetwork {
     }
 
     //==================================================================================================================
+
+    /*
+    * 根据里程-高程，生成逻辑坐标
+    * 只是针对单支管线--
+    * */
+    def setupLogicalPosition() {
+        //首先形成横纵坐标的两个向量
+        def x = []
+        def y = []
+        mileageAndElevations.each { e->
+            e.elevationPoints.each { ee->
+                x.add(ee.mileage)
+                y.add(ee.elevation)
+            }
+        }
+        def xmin = x.min()
+        def xmax = x.max()
+        def ymin = y.min()
+        def ymax = y.max()
+        def dx = xmax - xmin
+        def dy = ymax - ymin
+
+        //声明插值对象
+        double[] vx = x.toArray()
+        double[] vy = y.toArray()
+        println("${vx}")
+        println("${vy}")
+        LinearInterpolator linearInterpolator = new LinearInterpolator()
+        PolynomialSplineFunction polynomialSplineFunction = linearInterpolator.interpolate(vx, vy)
+        hydraulicVertexes.each { e->
+            def xx = e.mileage
+            def yy = polynomialSplineFunction.value(xx)
+            e.elevation = yy
+            //----------------------------------------------------------------------------------------------------------
+            if (dx>0) {
+                e.xLocation = (e.mileage - xmin) / dx
+            }
+            if (dy>0) {
+                e.yLocation = (e.elevation - ymin) / dy
+            }
+            //----------------------------------------------------------------------------------------------------------
+            e.save()
+        }
+    }
 
     /*
     * 获取边的数量

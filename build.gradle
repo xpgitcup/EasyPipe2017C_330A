@@ -54,6 +54,9 @@ dependencies {
     //compile "org.grails.plugins:jxl:0.54" //--这个不行了
     compile "net.sourceforge.jexcelapi:jxl:2.6.12"
 
+    //引用commons-math
+    compile "org.apache.commons:commons-math3:3.6.1"
+
     //excel输出 -- 安装失败
     //compile 'pl.touk:excel-export:2.1'
 

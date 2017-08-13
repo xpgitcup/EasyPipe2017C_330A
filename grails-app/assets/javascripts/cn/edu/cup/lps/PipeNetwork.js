@@ -1,4 +1,37 @@
 /*
+* 标签页--分页
+* */
+function tabAndPage4PipeNetwork() {
+    //----------------------------------------------------------------------------------------------------------------
+    //获取当前页面的div
+    listPipeNetworkDiv = $("#listPipeNetworkDiv");
+    paginationListPipeNetworkDiv = $("#paginationListPipeNetworkDiv");
+
+    //获取当前页
+    var currentPgaePipeNetwork = readCookie("currentPgaePipeNetwork", 1);
+    var pageSizePipeNetwork = readCookie("pageSizePipeNetwork", pageSize);
+    var totalPipeNetwork = countPipeNetwork();
+    //console.info("记录总数：" + totalPipeNetwork);
+
+
+    //分页
+    paginationListPipeNetworkDiv.pagination({
+        pageSize: pageSizePipeNetwork,
+        total: totalPipeNetwork,
+        showPageList: true,
+        displayMsg: '',
+        layout: ['first', 'prev', 'links', 'next', 'last'],
+        //翻页函数
+        onSelectPage: function (pageNumber, pageSize) {
+            listPipeNetwork(pageNumber, pageSize);
+            $.cookie("currentPgaePipeNetwork", pageNumber);
+        }
+    });
+    paginationListPipeNetworkDiv.pagination("select", currentPgaePipeNetwork);
+    //------------------------------------------------------------------------------------------------------------------
+}
+
+/*
  * 统计记录总数
  * */
 function countPipeNetwork() {
@@ -85,6 +118,7 @@ function drawTopo(items) {
 
     var cWidth = stage.width
     var cHeight = stage.height
+    var xoffset =
 
     stage.frames = -24;
     scene.clear();
@@ -92,17 +126,20 @@ function drawTopo(items) {
     // 不指定布局的时候，容器的布局为自动(容器边界随元素变化）
     var container = new JTopo.Container(items.name);
     container.textPosition = 'Middle_Center';
-    container.fontColor = '100,255,0';
+    container.fontColor = '128,128,128';
     container.font = '18pt 微软雅黑';
     container.borderColor = '255,0,0';
-    container.borderRadius = 30; // 圆角
+    container.borderRadius = 10; // 圆角
+    container.width = cWidth;
+    container.height = cHeight;
+
     scene.add(container);
 
     function drawNode(node) {
         var anode = new JTopo.CircleNode(node.name)
         anode.setSize(10, 10);
-        var x = node.xLocation * cWidth;
-        var y = node.yLocation * cHeight;
+        var x = node.xLocation * cWidth * 0.8 + 10;
+        var y = cHeight - node.yLocation * cHeight * 0.8 + 10;
         anode.setLocation(x, y);
         console.info("(" + x + "," + y + ")");
         node.tnode = anode;

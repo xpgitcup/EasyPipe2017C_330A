@@ -1,4 +1,37 @@
 /*
+* 处理显示标签页的转换，以及分页显示问题
+* */
+function tabAndPage4AmbientTemperature() {
+    //----------------------------------------------------------------------------------------------------------------
+    //获取当前页面的div
+    listAmbientTemperatureDiv = $("#listAmbientTemperatureDiv");
+    paginationListAmbientTemperatureDiv = $("#paginationListAmbientTemperatureDiv");
+
+    //获取当前页
+    var currentPgaeAmbientTemperature = readCookie("currentPgaeAmbientTemperature", 1);
+    var pageSizeAmbientTemperature = readCookie("pageSizeAmbientTemperature", pageSize);
+    var totalAmbientTemperature = countAmbientTemperature();
+    //console.info("记录总数：" + totalAmbientTemperature);
+
+
+    //分页
+    paginationListAmbientTemperatureDiv.pagination({
+        pageSize: pageSizeAmbientTemperature,
+        total: totalAmbientTemperature,
+        showPageList: true,
+        displayMsg: '',
+        layout: ['first', 'prev', 'links', 'next', 'last'],
+        //翻页函数
+        onSelectPage: function (pageNumber, pageSize) {
+            listAmbientTemperature(pageNumber, pageSize);
+            $.cookie("currentPgaeAmbientTemperature", pageNumber);
+        }
+    });
+    paginationListAmbientTemperatureDiv.pagination("select", currentPgaeAmbientTemperature);
+    //------------------------------------------------------------------------------------------------------------------
+}
+
+/*
 * 准备导入地温
 * */
 function prepareImportAmbientTemperature(id) {

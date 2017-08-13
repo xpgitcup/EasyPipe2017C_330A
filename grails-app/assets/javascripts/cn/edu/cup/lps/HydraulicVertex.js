@@ -1,4 +1,38 @@
 /*
+* 处理显示标签页的转换，以及分页显示问题
+* */
+function tabAndPage4HydraulicVertex() {
+    //----------------------------------------------------------------------------------------------------------------
+    //获取当前页面的div
+    listHydraulicVertexDiv = $("#listHydraulicVertexDiv");
+    paginationListHydraulicVertexDiv = $("#paginationListHydraulicVertexDiv");
+
+    //获取当前页
+    var currentPgaeHydraulicVertex = readCookie("currentPgaeHydraulicVertex", 1);
+    var pageSizeHydraulicVertex = readCookie("pageSizeHydraulicVertex", pageSize);
+    var totalHydraulicVertex = countHydraulicVertex();
+    //console.info("记录总数：" + totalHydraulicVertex);
+
+
+    //分页
+    paginationListHydraulicVertexDiv.pagination({
+        pageSize: pageSizeHydraulicVertex,
+        total: totalHydraulicVertex,
+        showPageList: true,
+        displayMsg: '',
+        layout: ['first', 'prev', 'links', 'next', 'last'],
+        //翻页函数
+        onSelectPage: function (pageNumber, pageSize) {
+            listHydraulicVertex(pageNumber, pageSize);
+            $.cookie("currentPgaeHydraulicVertex", pageNumber);
+        }
+    });
+    paginationListHydraulicVertexDiv.pagination("select", currentPgaeHydraulicVertex);
+    //------------------------------------------------------------------------------------------------------------------
+}
+
+
+/*
  * 统计记录总数
  * */
 function countHydraulicVertex() {
