@@ -96,6 +96,7 @@ class Operation4PipeNetworkController {
     def showPipeNetworkProfile(PipeNetwork pipeNetwork) {
         def profile = [:]
         profile.name = "${pipeNetwork.name}--纵断面图"
+
         def data = []
         pipeNetwork.mileageAndElevations.each { ms ->
             ms.elevationPoints.each { e ->
@@ -104,7 +105,13 @@ class Operation4PipeNetworkController {
         }
         profile.data = data
 
-        println("${data}")
+        def stations = []
+        pipeNetwork.hydraulicVertexes.each { ms ->
+            //stations.add([name: "${ms.id}-${ms.name}", x: ms.mileage, y: ms.heatTransferCoefficient])
+            stations.add([ms.mileage, ms.elevation])
+        }
+        profile.stations = stations
+        //println("${data}")
 
         if (request.xhr) {
             render profile as JSON

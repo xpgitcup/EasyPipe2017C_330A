@@ -1,9 +1,11 @@
 package cn.edu.cup.lps
 
 import cn.edu.cup.lps.hydraulic.AmbientTemperature
+import cn.edu.cup.lps.hydraulic.HeatTransferCoefficientPoint
 import cn.edu.cup.lps.hydraulic.HydraulicEdge
 import cn.edu.cup.lps.hydraulic.HydraulicVertex
 import cn.edu.cup.lps.hydraulic.MileageAndElevation
+import cn.edu.cup.lps.hydraulic.OverallHeatTransferCoefficient
 import jxl.Cell
 import jxl.Sheet
 import jxl.Workbook
@@ -20,6 +22,7 @@ class PipeNetwork {
     static hasMany = [
             hydraulicVertexes: HydraulicVertex,
             mileageAndElevations: MileageAndElevation,
+            overallHeatTransferCoefficients: OverallHeatTransferCoefficient,
             ambientTemperatures: AmbientTemperature
     ]
 
@@ -246,7 +249,7 @@ class PipeNetwork {
         }
         if (yl > 0) {
             hvs.each { e ->
-                e.yLocation = (e.elevation - miny) / yl;
+                e.yLocation = (e.heatTransferCoefficient - miny) / yl;
             }
         }
         hvs.each { e -> e.save(true) }

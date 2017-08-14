@@ -18,6 +18,9 @@ var pipeNetworkDiv;
 var listAmbientTemperatureDiv;
 var paginationListAmbientTemperatureDiv;
 
+var listOverallHeatTransferCoefficientDiv;
+var paginationListOverallHeatTransferCoefficientDiv;
+
 $(function () {
     console.info("管道模拟...");
 
@@ -55,6 +58,8 @@ $(function () {
     tabAndPage4MileageAndElevation();
 
     tabAndPage4AmbientTemperature();
+
+    tabAndPage4OverallHeatTransferCoefficient();
 
     //------------------------------------------------------------------------------------------------------------------
     //页面跳转--放到最后，试试看

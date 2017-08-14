@@ -46,6 +46,7 @@
     <asset:javascript src="cn/edu/cup/lps/HydraulicVertex.js"/>
     <asset:javascript src="cn/edu/cup/lps/MileageAndElevation.js"/>
     <asset:javascript src="cn/edu/cup/lps/AmbientTemperature.js"/>
+    <asset:javascript src="cn/edu/cup/lps/OverallHeatTransferCoefficient.js"/>
 
     <title>${entityName}维护</title>
 </head>
@@ -102,7 +103,10 @@
                 <div id="paginationListAmbientTemperatureDiv"></div>
             </div>
 
-            <div title="传热系数"></div>
+            <div title="传热系数">
+                <div id="listOverallHeatTransferCoefficientDiv"></div>
+                <div id="paginationListOverallHeatTransferCoefficientDiv"></div>
+            </div>
 
             <div title="设备"></div>
             <div title="纵断面图">
@@ -121,6 +125,7 @@
         <div id="prepareImportFromExcelDiv"></div>
         <div id="prepareImportMileageAndElevationDiv"></div>
         <div id="prepareImportAmbientTemperatureDiv"></div>
+        <div id="prepareImportOverallHeatTransferCoefficientDiv"></div>
     </div>
 
     <div title="编辑">

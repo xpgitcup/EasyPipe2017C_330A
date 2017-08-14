@@ -19,9 +19,8 @@
         <thead>
         <th>管道名称</th>
         <th colspan="2">节点&里程-高程数</th>
-        <th>操作</th>
+        <th colspan="4">操作</th>
         <th>连接关系数</th>
-        <th>连接关系</th>
         </thead>
         <tbody>
         <g:each in="${pipeNetworkList}" var="item" status="i">
@@ -62,14 +61,22 @@
                         <a href="javascript: prepareImportAmbientTemperature(${item.id})">导入环境温度</a>
                     </g:else>
                 </td>
+                <td>
+                    <g:if test="${item.overallHeatTransferCoefficients?.size() > 0}">
+                        <a href="javascript: showPipeNetworkProfile(${item.id})">纵断面图</a>
+                    </g:if>
+                    <g:else>
+                        <a href="javascript: prepareImportOverallHeatTransferCoefficient(${item.id})">导入总传热系数</a>
+                    </g:else>
+                </td>
                 <td>${item.edgesCount()}</td>
-                <td>${item.edges()}</td>
+            </tr>
+            <tr>
+                <td colspan="7">${item.edges()}</td>
             </tr>
         </g:each>
         </tbody>
     </table>
-
-    <!--f:table collection="${pipeNetworkList}" /-->
 
 </div>
 </body>

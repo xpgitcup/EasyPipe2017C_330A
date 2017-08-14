@@ -60,6 +60,25 @@ function showPipeNetworkTopo(id) {
     var pipeNetworkProfileDiv = document.getElementById("pipeNetworkProfileDiv");
     var pipeNetworkProfile = echarts.init(pipeNetworkProfileDiv);
 
+    data = [
+        {
+            name: 'A',
+            x: 0,
+            y: 0
+        },
+        {
+            name: 'B',
+            x: 100,
+            y: 100
+        }
+    ];
+    links = [
+        {
+            source: 'A',
+            target: 'B'
+        }
+    ];
+
     var option =
         {
             title: {
@@ -72,9 +91,13 @@ function showPipeNetworkTopo(id) {
                 containLabel: true
             },
             xAxis: {
+                min: 0,
+                max: 1000,
                 type: 'value'
             },
             yAxis: {
+                min: 0,
+                max: 1000,
                 type: 'value',
                 scale: true
             },
@@ -82,14 +105,10 @@ function showPipeNetworkTopo(id) {
                 {
                     id: 'a',
                     type: 'graph',
+                    layout: 'none',
                     symbolSize: 50,
                     showSymbol: true,
                     coordinateSystem: 'cartesian2d',
-                    label: {
-                        normal: {
-                            show: true
-                        }
-                    },
                     data: data,
                     links: links
                 }
@@ -108,9 +127,11 @@ function showPipeNetworkProfile(id) {
 
     var profile = ajaxCall("operation4PipeNetwork/showPipeNetworkProfile/" + id, 0);
     var data = profile.data
+    var stations = profile.stations;
 
     console.info("下面是数据：");
     console.info(data);
+    console.info(stations);
 
     var pipeNetworkProfileDiv = document.getElementById("pipeNetworkProfileDiv");
     var pipeNetworkProfile = echarts.init(pipeNetworkProfileDiv);
@@ -145,6 +166,11 @@ function showPipeNetworkProfile(id) {
                     showSymbol: false,
                     data: data,
                     itemStyle: {normal: {label: {show: false}}}
+                },
+                {
+                    id: 'station',
+                    type: 'scatter',
+                    data: stations
                 }
             ]
         }
