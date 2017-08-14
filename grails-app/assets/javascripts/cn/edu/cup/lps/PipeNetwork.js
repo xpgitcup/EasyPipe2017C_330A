@@ -150,14 +150,23 @@ function showPipeNetworkProfile(id) {
             xAxis: {
                 min: 0,
                 max: 300,
-                type: 'value'
-            },
-            yAxis: {
-                min: 0,
-                max: 1000,
                 type: 'value',
-                axisLine: {onZero: false}
+                axisLine: {onZero: true}
             },
+            yAxis: [
+                {
+                    min: 0,
+                    max: 1000,
+                    type: 'value',
+                    axisLine: {onZero: false}
+                },
+                {
+                    min: -10,
+                    max: 90,
+                    type: 'value',
+                    axisLine: {onZero: true}
+                }
+            ],
             series: [
                 {
                     id: 'a',

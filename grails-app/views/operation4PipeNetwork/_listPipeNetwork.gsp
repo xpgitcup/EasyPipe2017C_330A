@@ -18,7 +18,7 @@
     <table>
         <thead>
         <th>管道名称</th>
-        <th colspan="2">节点&里程-高程数</th>
+        <th colspan="4">节点&详细信息</th>
         <th colspan="4">操作</th>
         <th>连接关系数</th>
         </thead>
@@ -33,14 +33,16 @@
                         ${item.name}拓扑
                     </a>
                 </td>
-                <td>${item.hydraulicVertexes?.size()}</td>
-                <td>${item.mileageAndElevations?.size()}</td>
+                <td>节点=${item.hydraulicVertexes?.size()}</td>
+                <td>高程=${item.mileageAndElevations?.size()}</td>
+                <td>地温=${item.ambientTemperatures?.size()}</td>
+                <td>K=${item.overallHeatTransferCoefficients?.size()}</td>
                 <td>
                     <g:if test="${item.edges().size() > 0}">
                         <a href="operation4PipeSimulation/exportToExcel/${item.id}">导出</a>
                     </g:if>
                     <g:else>
-                        <a href="javascript: prepareImportFromExcel(${item.id})">导入</a>
+                        <a href="javascript: prepareImportFromExcel(${item.id})">导入节点位置</a>
                         <a href="operation4PipeNetwork/updateHydraulicEdges/${item.id}">更新连接关系</a>
                     </g:else>
                 </td>
@@ -72,7 +74,7 @@
                 <td>${item.edgesCount()}</td>
             </tr>
             <tr>
-                <td colspan="7">${item.edges()}</td>
+                <td colspan="10">${item.edges()}</td>
             </tr>
         </g:each>
         </tbody>
