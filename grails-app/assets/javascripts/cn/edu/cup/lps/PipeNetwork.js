@@ -128,10 +128,12 @@ function showPipeNetworkProfile(id) {
     var profile = ajaxCall("operation4PipeNetwork/showPipeNetworkProfile/" + id, 0);
     var data = profile.data
     var stations = profile.stations;
+    var temperatures = profile.temperatures
 
     console.info("下面是数据：");
     console.info(data);
     console.info(stations);
+    console.info(temperatures);
 
     var pipeNetworkProfileDiv = document.getElementById("pipeNetworkProfileDiv");
     var pipeNetworkProfile = echarts.init(pipeNetworkProfileDiv);
@@ -144,10 +146,13 @@ function showPipeNetworkProfile(id) {
             grid: {
                 left: '3%',
                 right: '4%',
-                bottom: '3%',
+                bottom: '4%',
                 containLabel: true
             },
             xAxis: {
+                name: '里程/km',
+                nameLocation: 'middle',
+                nameGap: 20,
                 min: 0,
                 max: 300,
                 type: 'value',
@@ -155,12 +160,18 @@ function showPipeNetworkProfile(id) {
             },
             yAxis: [
                 {
+                    name: '高程/m',
+                    nameLocation: 'middle',
+                    nameGap: 30,
                     min: 0,
                     max: 1000,
                     type: 'value',
-                    axisLine: {onZero: false}
+                    axisLine: {onZero: true}
                 },
                 {
+                    name: '地温/℃',
+                    nameLocation: 'middle',
+                    nameGap: 30,
                     min: -10,
                     max: 90,
                     type: 'value',
@@ -180,6 +191,12 @@ function showPipeNetworkProfile(id) {
                     id: 'station',
                     type: 'scatter',
                     data: stations
+                },
+                {
+                    id: '地温',
+                    type: 'line',
+                    data: temperatures,
+                    yAxisIndex: 1
                 }
             ]
         }

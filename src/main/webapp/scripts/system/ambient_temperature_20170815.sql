@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : sample
-Source Server Version : 50716
+Source Server Version : 50620
 Source Host           : localhost:3306
 Source Database       : easypipedba
 
 Target Server Type    : MYSQL
-Target Server Version : 50716
+Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2017-08-14 21:31:27
+Date: 2017-08-15 11:03:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;

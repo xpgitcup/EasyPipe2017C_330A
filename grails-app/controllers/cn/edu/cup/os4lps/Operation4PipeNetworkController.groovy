@@ -113,6 +113,14 @@ class Operation4PipeNetworkController {
         profile.stations = stations
         //println("${data}")
 
+        def temperatures = []
+        pipeNetwork.ambientTemperatures.each { ea->
+            ea.temperaturePoints.each { et->
+                temperatures.add([et.mileage, et.temperature])
+            }
+        }
+        profile.temperatures = temperatures
+
         if (request.xhr) {
             render profile as JSON
         } else {
