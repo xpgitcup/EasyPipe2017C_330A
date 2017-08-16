@@ -5,7 +5,7 @@ import cn.edu.cup.dictionary.DataKey
 import cn.edu.cup.dictionary.DataKeyController
 import cn.edu.cup.dictionary.JsFrame
 import grails.converters.JSON
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 
 @Transactional(readOnly = true)
 class Operation4DataKeyController extends DataKeyController{
