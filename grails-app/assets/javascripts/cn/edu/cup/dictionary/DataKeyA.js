@@ -24,6 +24,7 @@ $(function(){
         onSelect: function (node) {
             showDataKeyA(node);
             $("#createDataKeyA").attr('href', 'javascript: createDataKeyA(' + node.attributes[0] + ')');
+            $("#createDataKeyA_inheritModel").attr('href', 'javascript: createDataKeyA_inheritModel(' + node.attributes[0] + ')');
             $("#createDataKeyA_normalData").attr('href', 'javascript: createDataKeyA_normalData(' + node.attributes[0] + ')');
             $("#createDataKeyA_vector1D").attr('href', 'javascript: createDataKeyA_vector1D(' + node.attributes[0] + ')');
             $("#createDataKeyA_vector2D").attr('href', 'javascript: createDataKeyA_vector2D(' + node.attributes[0] + ')');
@@ -70,6 +71,11 @@ $(function(){
 function createDataKeyA(id) {
     console.info("创建DataKeyA. 上级节点：" + id);
     ajaxRun("operation4DataKeyA/createDataKeyA", id, "showDataKeyADiv");
+}
+
+function createDataKeyA_inheritModel(id) {
+    console.info("创建DataKeyA. 上级节点：" + id);
+    ajaxRun("operation4DataKeyA/createDataKeyA/?type=inheritModel", id, "showDataKeyADiv");
 }
 
 function createDataKeyA_normalData(id) {

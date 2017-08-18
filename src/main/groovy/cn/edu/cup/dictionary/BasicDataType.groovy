@@ -6,6 +6,7 @@ package cn.edu.cup.dictionary
 
 enum BasicDataType {
     dataModel,
+    inheritModel,
     normalData,
     vector1D,
     vector2D,

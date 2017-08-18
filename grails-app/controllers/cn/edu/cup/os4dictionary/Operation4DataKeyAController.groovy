@@ -13,6 +13,58 @@ import static org.springframework.http.HttpStatus.NO_CONTENT
 class Operation4DataKeyAController extends DataKeyAController{
 
     def treeViewService
+    def commonService
+
+    /*
+    * 下载模板
+    * */
+    def downloadTemplate(DataKeyA dataKeyA) {
+        def path = servletContext.getRealPath("/") + "templates"
+        def fileName = dataKeyA.createTemplate(path)
+        params.downLoadFileName = fileName
+        commonService.downLoadFile(params)
+    }
+
+    /*
+    * 统计数据模型的数量
+    * */
+    def countDataKeyA4DataModel() {
+        def q = DataKeyA.createCriteria()
+        def count = q.get{
+            projections{
+                count 'dataTag'
+                'in' ('basicDataType', [BasicDataType.dataModel, BasicDataType.inheritModel])
+            }
+        }
+        println("统计结果：${count}")
+        def result = [count: count]
+        if (request.xhr) {
+            render result as JSON
+        } else {
+            result
+        }
+    }
+
+    /*
+    * 对象列表--数据模型
+    * */
+
+    def listDataKeyA4DataModel() {
+        def dataKeyAList = DataKeyA.list(params)
+
+        def q = DataKeyA.createCriteria()
+        dataKeyAList = q.list(params) {
+            projections{
+                'in' ('basicDataType', [BasicDataType.dataModel, BasicDataType.inheritModel])
+            }
+        }
+
+        if (request.xhr) {
+            render(template: 'listDataKeyA', model: [dataKeyAList: dataKeyAList])
+        } else {
+            respond dataKeyA
+        }
+    }
 
     /*
     * 删除对象

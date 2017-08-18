@@ -26,42 +26,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${entityName}维护</title>
     <asset:javascript src="cn/edu/cup/dictionary/${entityName}.js"/>
+    <asset:javascript src="cn/edu/cup/dictionary/DataKeyAA.js"/>
 </head>
 
 <body>
+<div id="operation4Dictionary" class="easyui-tabs">
+    <div title="模型列表">
+        <div id="listDataKeyADiv"></div>
+        <div id="paginationListDataKeyADiv"></div>
+    </div>
+    <div title="数据显示">
 
-<div class="nav" role="navigation">
-    <ul>
-        <li><a class="create" href="javascript: createDataKeyA(0)">新建根节点</a></li>
-        <li><a id="createDataKeyA" class="create" href="#">新建子节点</a></li>
-        <li><a href="#">----</a></li>
-        <li><a id="createDataKeyAProjectCase" class="create" href="#">projectCase子节点</a></li>
-        <li><a id="createDataKeyADataModel" class="create" href="#">dataModel子节点</a></li>
-    </ul>
-</div>
-
-<div class="container">
-    <div class="row-fluid">
-        <div class="col-md-4 column">
-            <div class="panel panel-default">
-                <div class="easyui-panel">
-                    <div id="displayTreeDataKeyADiv" class="easyui-tree"></div>
-
-                    <div id="paginationDataKeyADiv" class="easyui-pagination"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-8 column">
-            <div class="panel panel-default">
-                <div class="easyui-panel">
-                    <div id="showDataKeyADiv"></div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
-</div>
-
 </body>
 </html>
