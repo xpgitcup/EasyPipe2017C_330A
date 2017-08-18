@@ -128,9 +128,11 @@ function showDataKeyA(node) {
     console.info("显示当前系统属性" + node);
     if (node !== null) {
         var id = node.attributes[0];
+        console.info("id=" + id);
         ajaxRun("operation4DataKeyA/getDataKeyA", id, "showDataKeyADiv");
     }
     else {
+        console.info("error 找不到id!");
         $("#showDataKeyADiv").html("");
     }
 }

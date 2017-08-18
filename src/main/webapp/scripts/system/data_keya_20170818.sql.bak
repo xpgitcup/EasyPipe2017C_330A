@@ -35,7 +35,7 @@ CREATE TABLE `data_keya` (
 -- ----------------------------
 -- Records of data_keya
 -- ----------------------------
-INSERT INTO `data_keya` VALUES ('1', '0', null, null, null, '0', '站点_节点位置', 'dataModel');
+INSERT INTO `data_keya` VALUES ('1', '0', null, null, null, '0', '站点/节点位置', 'dataModel');
 INSERT INTO `data_keya` VALUES ('2', '0', null, '1', null, '0', '管道标识', 'normalData');
 INSERT INTO `data_keya` VALUES ('3', '0', null, '1', '节点, 里程（km）', '0', '节点位置二维数组', 'vector2D');
 INSERT INTO `data_keya` VALUES ('9', '0', null, null, null, '0', '管段信息', 'dataModel');

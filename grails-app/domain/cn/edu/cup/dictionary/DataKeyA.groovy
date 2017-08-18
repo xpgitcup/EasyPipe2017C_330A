@@ -1,5 +1,6 @@
 package cn.edu.cup.dictionary
 
+import jxl.Sheet
 import jxl.Workbook
 import jxl.write.Label
 import jxl.write.WritableSheet
@@ -68,7 +69,7 @@ class DataKeyA {
      * */
     def createTemplate(String path) {
 
-        def fileName = "${path}/${this.id}"
+        def fileName = "${path}/${this.dataTag}_${this.id}.xls"
 
         try {
             //  打开文件
@@ -76,16 +77,41 @@ class DataKeyA {
             WritableWorkbook book = Workbook.createWorkbook(file);
             //  生成名为“第一页”的工作表，参数0表示这是第一页
             WritableSheet sheet = book.createSheet("${this.dataTag}", 0);
+
+            /*
+            * 整体的策略：
+            *
+            * 1.数据按列分布
+            * 2.如果遇到数组，数组的标题就是appendParameter,逗号分隔
+            * 3.
+            * */
             Label label
+            Label labelUnit
+            def colIndex = 0
             if (isDataModel()) {
+                //先处理继承的问题
+                if (this.basicDataType == BasicDataType.inheritModel) {
+                    def ms = []
+                    def pe = this.upDataKey
+                    while (pe) {
+                        ms.add(pe)
+                        if (pe.basicDataType == BasicDataType.inheritModel) {
+                            pe = pe.upDataKey
+                        } else {
+                            pe = null
+                        }
+                    }
+                    println("${ms}")
+                    ms.reverse().each { me->
+                        me.subDataKeys.each() { it->
+                            colIndex = createCell4Field(it, colIndex, sheet)
+                        }
+                    }
+                }
+                //在处理本身
                 this.subDataKeys.eachWithIndex() { e, i ->
-                    println "ExcelService ${e} ${e.quantityUnit}"
-
-                    label = new Label(i, 0, e.keyContext)
-                    sheet.addCell(label);
-
-                    label = new Label(i, 1, e.quantityUnit)
-                    sheet.addCell(label);
+                    println("${e}")
+                    colIndex = createCell4Field(e, colIndex, sheet)
                 }
             } else {
                 label = new Label(0, 0, "这不是一个数据模型，无法生成模板")
@@ -99,6 +125,48 @@ class DataKeyA {
             println "exportExcelFile error: ${e}";
         }
         return fileName
+    }
+
+    private int createCell4Field(DataKeyA e, int colIndex, Sheet sheet) {
+        Label labelUnit
+        Label label
+        switch (e.basicDataType) {
+            case BasicDataType.dataModel:
+                break;
+            case BasicDataType.inheritModel:
+                break;
+            case BasicDataType.normalData:
+                label = new Label(colIndex, 0, e.dataTag)
+                labelUnit = new Label(colIndex, 1, e.dataUnit)
+                sheet.addCell(label)
+                sheet.addCell(labelUnit)
+                colIndex++
+                break
+            case BasicDataType.vector1D:
+                break
+            case BasicDataType.vector2D:
+                label = new Label(colIndex, 0, e.dataTag)
+                sheet.addCell(label)
+
+                def heads = e.appendParameter.split(',')
+                if (heads.length != 2) {
+                    labelUnit = new Label(colIndex, 1, "${heads} -- 数组的标题有问题，请检查。注意：分隔符为逗号。")
+                    sheet.addCell(labelUnit)
+                } else {
+                    labelUnit = new Label(colIndex, 1, heads[0])
+                    sheet.addCell(labelUnit)
+                    labelUnit = new Label(colIndex + 1, 1, heads[1])
+                    sheet.addCell(labelUnit)
+                }
+                colIndex++
+                colIndex++
+                break
+            case BasicDataType.vector3D:
+                break
+            case BasicDataType.refDataModel:
+                break
+        }
+        return colIndex
     }
 
     /*
