@@ -24,8 +24,11 @@ $(function(){
         onSelect: function (node) {
             showDataKeyA(node);
             $("#createDataKeyA").attr('href', 'javascript: createDataKeyA(' + node.attributes[0] + ')');
-            $("#createDataKeyAProjectCase").attr('href', 'javascript: createDataKeyAProjectCase(' + node.attributes[0] + ')');
-            $("#createDataKeyADataModel").attr('href', 'javascript: createDataKeyADataModel(' + node.attributes[0] + ')');
+            $("#createDataKeyA_normalData").attr('href', 'javascript: createDataKeyA_normalData(' + node.attributes[0] + ')');
+            $("#createDataKeyA_vector1D").attr('href', 'javascript: createDataKeyA_vector1D(' + node.attributes[0] + ')');
+            $("#createDataKeyA_vector2D").attr('href', 'javascript: createDataKeyA_vector2D(' + node.attributes[0] + ')');
+            $("#createDataKeyA_vector3D").attr('href', 'javascript: createDataKeyA_vector3D(' + node.attributes[0] + ')');
+            $("#createDataKeyA_refDataModel").attr('href', 'javascript: createDataKeyA_refDataModel(' + node.attributes[0] + ')');
             console.info(node);
             console.info("当前节点：" + node.target.id);
             $.cookie("currentDataKeyA", node.target.id);
@@ -37,7 +40,6 @@ $(function(){
             if (nodeid) {
                 var cNode = $("#" + nodeid);
                 displayTreeDataKeyADiv.tree("expandTo", cNode);
-                //displayTreeDataKeyADiv.tree("select", cNode);
             }
         }
     });
@@ -70,16 +72,29 @@ function createDataKeyA(id) {
     ajaxRun("operation4DataKeyA/createDataKeyA", id, "showDataKeyADiv");
 }
 
-function createDataKeyAProjectCase(id) {
+function createDataKeyA_normalData(id) {
     console.info("创建DataKeyA. 上级节点：" + id);
-    ajaxRun("operation4DataKeyA/createDataKeyA/?type=projectCase", id, "showDataKeyADiv");
+    ajaxRun("operation4DataKeyA/createDataKeyA/?type=normalData", id, "showDataKeyADiv");
 }
 
-
-
-function createDataKeyADataModel(id) {
+function createDataKeyA_vector1D(id) {
     console.info("创建DataKeyA. 上级节点：" + id);
-    ajaxRun("operation4DataKeyA/createDataKeyA/?type=dataModel", id, "showDataKeyADiv");
+    ajaxRun("operation4DataKeyA/createDataKeyA/?type=vector1D", id, "showDataKeyADiv");
+}
+
+function createDataKeyA_vector2D(id) {
+    console.info("创建DataKeyA. 上级节点：" + id);
+    ajaxRun("operation4DataKeyA/createDataKeyA/?type=vector2D", id, "showDataKeyADiv");
+}
+
+function createDataKeyA_vector3D(id) {
+    console.info("创建DataKeyA. 上级节点：" + id);
+    ajaxRun("operation4DataKeyA/createDataKeyA/?type=vector3D", id, "showDataKeyADiv");
+}
+
+function createDataKeyA_refDataModel(id) {
+    console.info("创建DataKeyA. 上级节点：" + id);
+    ajaxRun("operation4DataKeyA/createDataKeyA/?type=refDataModel", id, "showDataKeyADiv");
 }
 
 /*

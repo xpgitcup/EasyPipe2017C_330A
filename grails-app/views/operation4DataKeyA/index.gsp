@@ -26,16 +26,22 @@
 <div class="nav" role="navigation">
     <ul>
         <li><a class="create" href="javascript: createDataKeyA(0)">新建：根/模型节点</a></li>
-        <li><a id="createDataKey_normalData" class="create" href="#">新建：普通数据节点</a></li>
-        <li><a href="#">----</a></li>
-        <li><a id="createDataKeyProjectCase" class="create" href="#">projectCase子节点</a></li>
-        <li><a id="createDataKeyDataModel" class="create" href="#">dataModel子节点</a></li>
+        <li><a id="createDataKeyA_normalData" class="create" href="#">新建：普通数据节点</a></li>
+        <li><a id="createDataKeyA_vector1D" class="create" href="#">新建：一维数组节点</a></li>
+        <li><a id="createDataKeyA_vector2D" class="create" href="#">新建：二维数组节点</a></li>
+        <li><a id="createDataKeyA_vector3D" class="create" href="#">新建：三维数组节点</a></li>
+        <li><a id="createDataKeyA_refDataModel" class="create" href="#">新建：模型引用节点</a></li>
     </ul>
 </div>
 
 <div class="container">
     <div class="row-fluid">
         <div class="col-md-4 column">
+            <div>
+                <g:if test="${flash.message}">
+                    <div class="message" role="status">${flash.message}</div>
+                </g:if>
+            </div>
             <div class="panel panel-default">
                 <div class="easyui-panel">
                     <div id="displayTreeDataKeyADiv" class="easyui-tree"></div>

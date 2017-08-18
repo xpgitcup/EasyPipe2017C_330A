@@ -17,12 +17,12 @@
     </g:if>
     <f:display bean="dataKeyA"/>
 <!--g:form resource="${this.dataKeyA}" method="DELETE"-->
-    <g:form controller="operation4DataKeyA" action="deleteDataKeyA">
+    <g:form controller="operation4DataKeyA" action="deleteDataKeyA" id="${this.dataKeyA.id}">
         <fieldset class="buttons">
             <!--g:link class="edit" action="edit" resource="${this.dataKeyA}"-->
-            <g:link class="edit" action="editDataKeyA" controller="operation4DataKeyA" id="${this.dataKeyA.id}">
+            <a href="javascript: editDataKeyA(${this.dataKeyA.id})">
                 <g:message code="default.button.edit.label" default="Edit"/>
-            </g:link>
+            </a>
             <input class="delete" type="submit"
                    value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>

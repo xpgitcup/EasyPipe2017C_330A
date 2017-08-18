@@ -40,7 +40,7 @@ class Operation4DataKeyAController extends DataKeyAController{
     * 创建对象
     * */
     def createDataKeyA(DataKeyA dataKeyA) {
-        def newDataKeyA = new DataKeyA(upKey: dataKeyA)
+        def newDataKeyA = new DataKeyA(upDataKey: dataKeyA)
         if (params.type) {
             def dataValueType = BasicDataType.valueOf(params.type)
             newDataKeyA.basicDataType = dataValueType

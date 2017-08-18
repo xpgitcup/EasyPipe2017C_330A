@@ -34,6 +34,7 @@
     </g:hasErrors>
 <!--g:form resource="${this.dataKeyA}" method="PUT"-->
     <g:form controller="operation4DataKeyA" action="updateDataKeyA">
+        <g:hiddenField name="id" value="${this.dataKeyA?.id}"/>
         <g:hiddenField name="version" value="${this.dataKeyA?.version}"/>
         <fieldset class="form">
             <f:all bean="dataKeyA"/>
