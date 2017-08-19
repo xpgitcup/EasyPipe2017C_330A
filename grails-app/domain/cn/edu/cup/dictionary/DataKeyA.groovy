@@ -40,6 +40,9 @@ class DataKeyA {
     //触发器
     def beforeInsert() {
         calculateInheritCount()
+        if (upDataKey) {
+            dictionary = upDataKey.dictionary
+        }
     }
 
     private void calculateInheritCount() {

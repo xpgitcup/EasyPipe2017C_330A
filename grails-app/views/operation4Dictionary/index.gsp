@@ -36,12 +36,6 @@
         <div class="container">
             <div class="row-fluid">
                 <div class="col-md-6 column">
-                    <div>
-                        <g:if test="${flash.message}">
-                            <div class="message" role="status">${flash.message}</div>
-                        </g:if>
-                    </div>
-
                     <div class="panel panel-default">
                         <div class="easyui-panel">
                             <div id="listDataDictionaryDiv"></div>
@@ -52,6 +46,11 @@
 
                 <div class="col-md-6 column">
                     <div class="panel panel-default">
+                        <div>
+                            <g:if test="${flash.message}">
+                                <div class="message" role="status">${flash.message}</div>
+                            </g:if>
+                        </div>
                         <div class="easyui-panel">
                             <div id="showDataDictionaryDiv"></div>
                             <div id="editDataDictionaryDiv"></div>
@@ -79,12 +78,6 @@
         <div class="container">
             <div class="row-fluid">
                 <div class="col-md-4 column">
-                    <div>
-                        <g:if test="${flash.message}">
-                            <div class="message" role="status">${flash.message}</div>
-                        </g:if>
-                    </div>
-
                     <div class="panel panel-default">
                         <div class="easyui-panel">
                             <div id="displayTreeDataKeyADiv" class="easyui-tree"></div>
@@ -96,6 +89,12 @@
 
                 <div class="col-md-8 column">
                     <div class="panel panel-default">
+                        <div>
+                            <div id="currentDataDictionary">?????</div>
+                            <g:if test="${flash.message}">
+                                <div class="message" role="status">${flash.message}</div>
+                            </g:if>
+                        </div>
                         <div class="easyui-panel">
                             <div id="showDataKeyADiv"></div>
                         </div>

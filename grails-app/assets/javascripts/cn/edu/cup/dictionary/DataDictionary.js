@@ -34,6 +34,14 @@ function tabAndPage4DataDictionary() {
     //------------------------------------------------------------------------------------------------------------------
 }
 
+/*
+* 维护数据字典
+* */
+function maintainDataDictionary(id) {
+    operation4DictionaryDiv.tabs("select", "模型维护");
+    $.cookie("currentDataDictionary", id);
+    $("#currentDataDictionary").html("当前字典：" + id);
+}
 
 /*
  * 统计记录总数
@@ -58,6 +66,14 @@ function listDataDictionary(pageNumber, pageSize) {
  * */
 function createDataDictionary(id) {
     ajaxRun("operation4DataDictionary/createDataDictionary", id, "editDataDictionaryDiv");
+}
+
+/*
+ * 编辑
+ * */
+function showDataDictionary(id) {
+    //console.info("编辑DataDictionary." + id);
+    ajaxRun("operation4DataDictionary/showDataDictionary", id, "editDataDictionaryDiv");
 }
 
 /*

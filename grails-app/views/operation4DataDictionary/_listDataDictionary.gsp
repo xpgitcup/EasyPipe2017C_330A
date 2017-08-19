@@ -12,7 +12,31 @@
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${dataDictionaryList}" />
+            <!--f:table collection="${dataDictionaryList}" /-->
+            <table>
+                <thead>
+                <th>字典名称</th>
+                <th>字典维护</th>
+                <th>数据模型数</th>
+                </thead>
+                <tbody>
+                <g:each in="${dataDictionaryList}" var="item" status="i">
+                    <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                        <td>
+                            <a href="javascript: showDataDictionary(${item.id})">
+                                ${item.name}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="javascript: maintainDataDictionary(${item.id})">
+                                ${item.name}
+                            </a>
+                        </td>
+                        <td>${item.datakeys?.size()}</td>
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
         </div>
     </body>
 </html>

@@ -1,6 +1,7 @@
 package cn.edu.cup.os4dictionary
 
 import cn.edu.cup.dictionary.BasicDataType
+import cn.edu.cup.dictionary.DataDictionary
 import cn.edu.cup.dictionary.DataKeyA
 import cn.edu.cup.dictionary.DataKeyAController
 import cn.edu.cup.dictionary.JsFrame
@@ -83,7 +84,7 @@ class Operation4DataKeyAController extends DataKeyAController{
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'dataKeyA.label', default: 'DataKeyA'), dataKeyA.id])
-                redirect action:"index", method:"GET"
+                redirect action:"index", method:"GET", controller: "operation4Dictionary"
             }
             '*'{ render status: NO_CONTENT }
         }
@@ -94,9 +95,18 @@ class Operation4DataKeyAController extends DataKeyAController{
     * */
     def createDataKeyA(DataKeyA dataKeyA) {
         def newDataKeyA = new DataKeyA(upDataKey: dataKeyA)
+        //处理数据类型
         if (params.type) {
             def dataValueType = BasicDataType.valueOf(params.type)
             newDataKeyA.basicDataType = dataValueType
+        }
+        //处理所述字典
+        def dataDictionary
+        if (params.dataDictionary) {
+            dataDictionary = DataDictionary.get(params.dataDictionary)
+            if (dataDictionary) {
+                newDataKeyA.dictionary = dataDictionary
+            }
         }
         if (request.xhr) {
             render(template: 'createDataKeyA', model: [dataKeyA: newDataKeyA])
@@ -181,6 +191,7 @@ class Operation4DataKeyAController extends DataKeyAController{
 
     /*
     * 获取json格式的树形结构数据
+    * 获取某个节点下的所有子节点
     * */
     def getDataKeyATree(DataKeyA dataKeyA) {
         def data = dataKeyA.subDataKeys
@@ -198,9 +209,21 @@ class Operation4DataKeyAController extends DataKeyAController{
 
     /*
     * 获取json格式的树形结构数据
+    * 获取根节点
     * */
     def getTreeDataKeyA() {
-        def data = DataKeyA.findAllByUpDataKeyIsNull(params)     //这是必须调整的
+        def data
+        def dataDictionary
+        def did = request.getCookie("currentDataDictionary")
+        if (did > 0) {
+            dataDictionary = DataDictionary.get(did)
+        }
+        if (dataDictionary) {
+            data = DataKeyA.findAllByDictionaryAndUpDataKeyIsNull(dataDictionary, params)
+        } else {
+            data = DataKeyA.findAllByUpDataKeyIsNull(params)     //这是必须调整的
+        }
+        println("${data} ${dataDictionary}")
         params.context = "dataTag"
         params.subItems = "subDataKeys"
         params.attributes = "id"    //

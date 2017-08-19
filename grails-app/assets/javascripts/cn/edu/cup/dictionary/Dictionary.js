@@ -7,6 +7,8 @@ var paginationListDataDictionaryDiv;
 var displayTreeDataKeyADiv;
 var paginationDataKeyADiv;
 
+var currentDataDictionary;
+
 $(function () {
 
     console.info("字典维护...");

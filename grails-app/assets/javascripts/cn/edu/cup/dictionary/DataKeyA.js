@@ -15,12 +15,14 @@ function tabAndPage4DataKeyA() {
     var pageSizeDataKeyA = readCookie("pageSizeDataKeyA", pageSize);
     var totalDataKeyA = countDataKeyA();
     console.info("记录总数：" + totalDataKeyA);
+    currentDataDictionary = $.cookie("currentDataDictionary", 0);
 
     //加载数据
     displayTreeDataKeyADiv.tree({
         url: "operation4DataKeyA/getTreeDataKeyA" + getParams(currentPgaeDataKeyA, pageSizeDataKeyA),
         onSelect: function (node) {
             showDataKeyA(node);
+            $("#currentDictionary").attr('text', currentDataDictionary);
             $("#createDataKeyA").attr('href', 'javascript: createDataKeyA(' + node.attributes[0] + ')');
             $("#createDataKeyA_inheritModel").attr('href', 'javascript: createDataKeyA_inheritModel(' + node.attributes[0] + ')');
             $("#createDataKeyA_normalData").attr('href', 'javascript: createDataKeyA_normalData(' + node.attributes[0] + ')');
@@ -68,7 +70,8 @@ function tabAndPage4DataKeyA() {
  * */
 function createDataKeyA(id) {
     console.info("创建DataKeyA. 上级节点：" + id);
-    ajaxRun("operation4DataKeyA/createDataKeyA", id, "showDataKeyADiv");
+    currentDataDictionary = $.cookie("currentDataDictionary");
+    ajaxRun("operation4DataKeyA/createDataKeyA/?dataDictionary=" + currentDataDictionary, id, "showDataKeyADiv");
 }
 
 function createDataKeyA_inheritModel(id) {

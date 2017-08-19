@@ -1,12 +1,14 @@
 package cn.edu.cup.os4dictionary
 
 import cn.edu.cup.dictionary.DataDictionary
+import cn.edu.cup.dictionary.DataDictionaryController
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
 
+import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.OK
 
-class Operation4DataDictionaryController {
+class Operation4DataDictionaryController extends DataDictionaryController {
 
     /*
     * 统计记录个数
@@ -55,8 +57,23 @@ class Operation4DataDictionaryController {
 
     @Transactional
     def deleteDataDictionary(DataDictionary dataDictionary) {
-        dataDictionary.delete()
-        redirect(controller: 'operation4PipeSimulation', action: 'index')
+
+        if (dataDictionary == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        dataDictionary.delete flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'dataDictionary.label', default: 'DataDictionary'), dataDictionary.id])
+                redirect action:"index", method:"GET", controller: "operation4Dictionary"
+            }
+            '*'{ render status: NO_CONTENT }
+        }
+
     }
 
     /*
@@ -85,6 +102,18 @@ class Operation4DataDictionaryController {
                 redirect(controller: 'operation4Dictionary', action: 'index')
             }
             '*'{ respond dataDictionary, [status: OK] }
+        }
+    }
+
+    /*
+    * 显示对象
+    * */
+
+    def showDataDictionary(DataDictionary dataDictionary) {
+        if (request.xhr) {
+            render(template: 'showDataDictionary', model: [dataDictionary: dataDictionary])
+        } else {
+            respond dataDictionary
         }
     }
 
