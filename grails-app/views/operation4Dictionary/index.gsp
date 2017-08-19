@@ -1,14 +1,8 @@
-<!--
-  To change this license header, choose License Headers in Project Properties.
-  To change this template file, choose Tools | Templates
-  and open the template in the editor.
--->
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--meta name="layout" content="main"/-->
 <!-- 实现可定制的布局 -->
     <g:if test="${layout}">
         <meta name="layout" content="${layout}"/>
@@ -26,17 +20,89 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${entityName}维护</title>
     <asset:javascript src="cn/edu/cup/dictionary/${entityName}.js"/>
-    <asset:javascript src="cn/edu/cup/dictionary/DataKeyAA.js"/>
+    <asset:javascript src="cn/edu/cup/dictionary/DataDictionary.js"/>
+    <asset:javascript src="cn/edu/cup/dictionary/DataKeyA.js"/>
 </head>
 
 <body>
-<div id="operation4Dictionary" class="easyui-tabs">
-    <div title="模型列表">
-        <div id="listDataKeyADiv"></div>
-        <div id="paginationListDataKeyADiv"></div>
-    </div>
-    <div title="数据显示">
 
+<div id="operation4DictionaryDiv" class="easyui-tabs">
+    <div title="数据字典">
+        <div class="nav" role="navigation">
+            <ul>
+                <li><a class="create" href="javascript: createDataDictionary(0)">新建数据字典</a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="row-fluid">
+                <div class="col-md-6 column">
+                    <div>
+                        <g:if test="${flash.message}">
+                            <div class="message" role="status">${flash.message}</div>
+                        </g:if>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="easyui-panel">
+                            <div id="listDataDictionaryDiv"></div>
+                            <div id="paginationListDataDictionaryDiv"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 column">
+                    <div class="panel panel-default">
+                        <div class="easyui-panel">
+                            <div id="showDataDictionaryDiv"></div>
+                            <div id="editDataDictionaryDiv"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div title="模型维护">
+        <div class="nav" role="navigation">
+            <ul>
+                <li><a class="create" href="javascript: createDataKeyA(0)">新建：根/模型节点</a></li>
+                <li><a id="createDataKeyA_inheritModel" class="create" href="#">派生：新模型节点</a></li>
+                <li><a id="createDataKeyA_normalData" class="create" href="#">新建：普通数据节点</a></li>
+                <li><a id="createDataKeyA_vector1D" class="create" href="#">新建：一维数组节点</a></li>
+                <li><a id="createDataKeyA_vector2D" class="create" href="#">新建：二维数组节点</a></li>
+                <li><a id="createDataKeyA_vector3D" class="create" href="#">新建：三维数组节点</a></li>
+                <li><a id="createDataKeyA_refDataModel" class="create" href="#">新建：模型引用节点</a></li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <div class="row-fluid">
+                <div class="col-md-4 column">
+                    <div>
+                        <g:if test="${flash.message}">
+                            <div class="message" role="status">${flash.message}</div>
+                        </g:if>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="easyui-panel">
+                            <div id="displayTreeDataKeyADiv" class="easyui-tree"></div>
+
+                            <div id="paginationDataKeyADiv" class="easyui-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 column">
+                    <div class="panel panel-default">
+                        <div class="easyui-panel">
+                            <div id="showDataKeyADiv"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

@@ -16,6 +16,8 @@ class DataKeyA {
 
     DataKeyA upDataKey
 
+    static belongsTo = [dictionary: DataDictionary]
+
     static hasMany = [subDataKeys: DataKeyA]
 
     static mapping = {
@@ -31,7 +33,7 @@ class DataKeyA {
     }
 
     String toString() {
-        return "${dataTag}/${basicDataType}"
+        return "${dictionary}.${dataTag}/${basicDataType}"
     }
 
     //------------------------------------------------------------------------------------------------------------------

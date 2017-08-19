@@ -2,10 +2,8 @@
  * Created by LiXiaoping on 2017/2/26.
  */
 
-var displayTreeDataKeyADiv;
-var paginationDataKeyADiv;
 
-$(function(){
+function tabAndPage4DataKeyA() {
     console.info($("title").text() + "加载成功...");
 
     //获取当前页面的div
@@ -63,7 +61,7 @@ $(function(){
         }
     });
     paginationDataKeyADiv.pagination("select", currentPgaeDataKeyA);
-});
+}
 
 /*
  * 新建

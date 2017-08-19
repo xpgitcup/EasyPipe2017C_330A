@@ -7,6 +7,7 @@ import cn.edu.cup.dictionary.JsFrame
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
 
+import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NO_CONTENT
 
 @Transactional(readOnly = true)
@@ -107,6 +108,32 @@ class Operation4DataKeyAController extends DataKeyAController{
     /*
     * 保存对象
     * */
+    @Transactional
+    def saveDataKeyA(DataKeyA dataKeyA) {
+        if (dataKeyA == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (dataKeyA.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond dataKeyA.errors, view:'create'
+            return
+        }
+
+        dataKeyA.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'dataKeyA.label', default: 'DataKeyA'), dataKeyA.id])
+                redirect(controller: 'operation4Dictionary', action: 'index', model: [dataKeyA: dataKeyA])
+            }
+            '*' { respond dataKeyA, [status: CREATED] }
+        }
+    }
+
+
     @Transactional
     def updateDataKeyA(DataKeyA dataKeyA) {
         println("准备更新：${dataKeyA}")

@@ -167,7 +167,7 @@ class InitService {
                     menuDescription: "对系统的菜单结构进行底层维护",
                     upMenuItem: null,
                     roleAttribute: "底层管理",
-                    menuOrder: 0
+                    menuOrder: 100
             )
             m0.save(true)
             //----------------------------------------------------------------------------------------------------------
@@ -307,7 +307,7 @@ class InitService {
             //----------------------------------------------------------------------------------------------------------
             def m35 = new SystemMenu(
                     menuContext: "数据字典A维护",
-                    menuAction: "operation4DataKeyA/index",
+                    menuAction: "operation4Dictionary/index",
                     menuDescription: "维护数据字典（新）",
                     upMenuItem: m3,
                     menuOrder: 0
@@ -316,7 +316,7 @@ class InitService {
             //----------------------------------------------------------------------------------------------------------
             def m36 = new SystemMenu(
                     menuContext: "数据A维护",
-                    menuAction: "operation4Dictionary/index",
+                    menuAction: "operation4DataA/index",
                     menuDescription: "维护数据字典（新）",
                     upMenuItem: m3,
                     menuOrder: 0
