@@ -23,42 +23,40 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <table>
-        <tr>
-            <td>
-            <!--g:form resource="${this.dataKeyA}" method="POST"-->
-                <g:form controller="operation4DataKeyA" action="saveDataKeyA" method="POST">
-                    <fieldset class="form">
-                        <!--f:all bean="dataKeyA"/-->
-                        <f:with bean="dataKeyA">
-                            <f:field property="basicDataType"/>
-                            <f:field property="dataTag"/>
-                            <f:field property="dataUnit"/>
-                            <f:field property="appendParameter"/>
-                            <f:field property="upDataKey"/>
-                            <f:field property="dictionary"/>
-                            <f:field property="inheritCount"/>
-                        </f:with>
-                    </fieldset>
-                    <fieldset class="buttons">
-                        <g:submitButton name="create" class="save"
-                                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-                    </fieldset>
-                </g:form>
-            </td>
-            <td>
-                <div id="appendForm4DataKeyA">
-                    <h1>辅助信息</h1>
-                    <g:if test="${session.currentDataKeyA.basicDataType==cn.edu.cup.dictionary.BasicDataType.refDataModel}">
-                        <div class="easyui-panel">
-                            <div id="appendTreeDataKeyADiv" class="easyui-tree"></div>
-                            <div id="paginationAppendDataKeyADiv" class="easyui-pagination"></div>
-                        </div>
-                    </g:if>
-                </div>
-            </td>
-        </tr>
-    </table>
+<!--g:form resource="${this.dataKeyA}" method="POST"-->
+    <g:form controller="operation4DataKeyA" action="saveDataKeyA" method="POST">
+        <div class="container">
+            <div class="col-md-6">
+                <fieldset class="form">
+                    <!--f:all bean="dataKeyA"/-->
+                    <f:with bean="dataKeyA">
+                        <f:field property="dataTag" label="标签"/>
+                        <f:field property="refDataModel" label="引用"/>
+                        <f:field property="dataUnit" label="单位"/>
+                        <f:field property="dimension" label="维度"/>
+                        <f:field property="appendParameter" label="附加"/>
+                        <f:field property="upDataKey" label="超类"/>
+                        <f:field property="isEnumeration" label="枚举？"/>
+                        <f:field property="single" label="单行？"/>
+                        <f:field property="dictionary"/>
+                    </f:with>
+                </fieldset>
+                <fieldset class="buttons">
+                    <g:submitButton name="create" class="save"
+                                    value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                </fieldset>
+            </div>
+
+            <div class="col-md-6">
+                <h2>辅助信息输入</h2>
+                <p>对于枚举类型，请在辅助信息中输入各个分量，然后点击输入按钮。</p>
+                <p>对数组，请在辅助信息中输入各列的标题，然后点击输入按钮。</p>
+                <hr>
+                <g:textArea name="appendText" id="appendText"></g:textArea>
+                <input type="button" value="输入" onclick="updateAppendForm4DataKeyA()">
+            </div>
+        </div>
+    </g:form>
 </div>
 </body>
 </html>

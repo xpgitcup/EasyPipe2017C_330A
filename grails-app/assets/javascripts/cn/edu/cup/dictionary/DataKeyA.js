@@ -24,12 +24,6 @@ function tabAndPage4DataKeyA() {
             showDataKeyA(node);
             $("#currentDictionary").attr('text', currentDataDictionary);
             $("#createDataKeyA").attr('href', 'javascript: createDataKeyA(' + node.attributes[0] + ')');
-            $("#createDataKeyA_inheritModel").attr('href', 'javascript: createDataKeyA_inheritModel(' + node.attributes[0] + ')');
-            $("#createDataKeyA_normalData").attr('href', 'javascript: createDataKeyA_normalData(' + node.attributes[0] + ')');
-            $("#createDataKeyA_vector1D").attr('href', 'javascript: createDataKeyA_vector1D(' + node.attributes[0] + ')');
-            $("#createDataKeyA_vector2D").attr('href', 'javascript: createDataKeyA_vector2D(' + node.attributes[0] + ')');
-            $("#createDataKeyA_vector3D").attr('href', 'javascript: createDataKeyA_vector3D(' + node.attributes[0] + ')');
-            $("#createDataKeyA_refDataModel").attr('href', 'javascript: createDataKeyA_refDataModel(' + node.attributes[0] + ')');
             console.info(node);
             console.info("当前节点：" + node.target.id);
             $.cookie("currentDataKeyA", node.target.id);
@@ -69,17 +63,20 @@ function tabAndPage4DataKeyA() {
  * 新建
  * */
 function updateAppendForm4DataKeyA() {
-    var appendForm4DataKeyA = $("#appendForm4DataKeyA");
     console.info("hi....");
-    var appendTreeDataKeyADiv = $("#appendTreeDataKeyADiv");
+    var appendParameter = $("#appendParameter");
+    var appendText = $("#appendText");
+    console.info(appendText);
+    console.info(appendText.val());
+    var reg = new RegExp("\n","g");
+    var ss = appendText.val().replace(reg,",");
+    console.info(ss.length);
+    appendParameter.attr("value", ss);
 }
 
 function createDataKeyA(id) {
     console.info("创建DataKeyA. 上级节点：" + id);
-    //currentDataDictionary = $.cookie("currentDataDictionary");
-    //ajaxRun("operation4DataKeyA/createDataKeyA/?dataDictionary=" + currentDataDictionary, id, "showDataKeyADiv");
     ajaxRun("operation4DataKeyA/createDataKeyA", id, "showDataKeyADiv");
-    updateAppendForm4DataKeyA();
 }
 
 function createDataKeyA_inheritModel(id) {

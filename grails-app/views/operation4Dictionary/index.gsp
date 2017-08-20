@@ -95,12 +95,7 @@
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="create" href="javascript: createDataKeyA(0)">新建：根/模型节点</a></li>
-                <li><a id="createDataKeyA_inheritModel" class="create" href="#">派生：新模型节点</a></li>
-                <li><a id="createDataKeyA_normalData" class="create" href="#">新建：普通数据节点</a></li>
-                <li><a id="createDataKeyA_vector1D" class="create" href="#">新建：一维数组节点</a></li>
-                <li><a id="createDataKeyA_vector2D" class="create" href="#">新建：二维数组节点</a></li>
-                <li><a id="createDataKeyA_vector3D" class="create" href="#">新建：三维数组节点</a></li>
-                <li><a id="createDataKeyA_refDataModel" class="create" href="#">新建：模型引用节点</a></li>
+                <li><a id="createDataKeyA" class="create" href="#">新建子节点</a></li>
             </ul>
         </div>
 

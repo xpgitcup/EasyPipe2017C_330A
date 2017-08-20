@@ -8,11 +8,13 @@ import jxl.write.WritableWorkbook
 
 class DataKeyA {
 
-    BasicDataType basicDataType //数据类型
     String dataTag              //数据标签
     String dataUnit             //数据单位
     String appendParameter      //附加参数
-    int inheritCount         //继承计数器
+    int dimension = 1        //维度
+    DataKeyA refDataModel       //引用
+    boolean isEnumeration = false       //是否枚举
+    boolean single = true              //单行？
 
     DataKeyA upDataKey
 
@@ -25,48 +27,32 @@ class DataKeyA {
     }
 
     static constraints = {
-        basicDataType()
         dataTag()
         dataUnit(nullable: true)
         appendParameter(nullable: true)
+        dimension()
+        refDataModel(nullable: true)
+        isEnumeration()
+        single()
         upDataKey(nullable: true)
     }
 
     String toString() {
-        return "${dictionary}.${dataTag}/${basicDataType}"
+        return "${dictionary}.${dataTag}"
     }
 
     //------------------------------------------------------------------------------------------------------------------
     //触发器
     def beforeInsert() {
-        calculateInheritCount()
         if (upDataKey) {
             dictionary = upDataKey.dictionary
         }
     }
 
-    private void calculateInheritCount() {
-        inheritCount = 0
-        //计算继承计数器
-        switch (basicDataType) {
-            case BasicDataType.inheritModel:
-                def p = upDataKey
-                while (p) {
-                    inheritCount++
-                    p = p.upDataKey
-                }
-                break;
-        }
-    }
-
-    def beforeUpdate() {
-        calculateInheritCount()
-    }
-
     //------------------------------------------------------------------------------------------------------------------
 
     def isDataModel() {
-        return this.basicDataType == BasicDataType.dataModel
+        return this.subDataKeys.size() > 0
     }
 
     /**
@@ -95,22 +81,20 @@ class DataKeyA {
             def colIndex = 0
             if (isDataModel()) {
                 //先处理继承的问题
-                if (this.basicDataType == BasicDataType.inheritModel) {
-                    def ms = []
-                    def pe = this.upDataKey
-                    while (pe) {
-                        ms.add(pe)
-                        if (pe.basicDataType == BasicDataType.inheritModel) {
-                            pe = pe.upDataKey
-                        } else {
-                            pe = null
-                        }
+                def ms = []
+                def pe = this.upDataKey
+                while (pe) {
+                    ms.add(pe)
+                    if (pe.isDataModel()) {
+                        pe = pe.upDataKey
+                    } else {
+                        pe = null
                     }
-                    println("${ms}")
-                    ms.reverse().each { me->
-                        me.subDataKeys.each() { it->
-                            colIndex = createCell4Field(it, colIndex, sheet)
-                        }
+                }
+                println("${ms}")
+                ms.reverse().each { me ->
+                    me.subDataKeys.each() { it ->
+                        colIndex = createCell4Field(it, colIndex, sheet)
                     }
                 }
                 //在处理本身
@@ -135,42 +119,14 @@ class DataKeyA {
     private int createCell4Field(DataKeyA e, int colIndex, Sheet sheet) {
         Label labelUnit
         Label label
-        switch (e.basicDataType) {
-            case BasicDataType.dataModel:
-                break;
-            case BasicDataType.inheritModel:
-                break;
-            case BasicDataType.normalData:
-                label = new Label(colIndex, 0, e.dataTag)
-                labelUnit = new Label(colIndex, 1, e.dataUnit)
-                sheet.addCell(label)
-                sheet.addCell(labelUnit)
-                colIndex++
-                break
-            case BasicDataType.vector1D:
-                break
-            case BasicDataType.vector2D:
-                label = new Label(colIndex, 0, e.dataTag)
-                sheet.addCell(label)
 
-                def heads = e.appendParameter.split(',')
-                if (heads.length != 2) {
-                    labelUnit = new Label(colIndex, 1, "${heads} -- 数组的标题有问题，请检查。注意：分隔符为逗号。")
-                    sheet.addCell(labelUnit)
-                } else {
-                    labelUnit = new Label(colIndex, 1, heads[0])
-                    sheet.addCell(labelUnit)
-                    labelUnit = new Label(colIndex + 1, 1, heads[1])
-                    sheet.addCell(labelUnit)
-                }
-                colIndex++
-                colIndex++
-                break
-            case BasicDataType.vector3D:
-                break
-            case BasicDataType.refDataModel:
-                break
-        }
+        label = new Label(colIndex, 0, e.dataTag)
+        labelUnit = new Label(colIndex, 1, e.dataUnit)
+        sheet.addCell(label)
+        sheet.addCell(labelUnit)
+
+        colIndex += e.dimension
+
         return colIndex
     }
 

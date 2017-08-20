@@ -10,6 +10,7 @@ import grails.gorm.transactions.Transactional
 
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NO_CONTENT
+import static org.springframework.http.HttpStatus.OK
 
 @Transactional(readOnly = true)
 class Operation4DataKeyAController extends DataKeyAController{
@@ -95,28 +96,13 @@ class Operation4DataKeyAController extends DataKeyAController{
     * */
     def createDataKeyA(DataKeyA dataKeyA) {
         def newDataKeyA = new DataKeyA(upDataKey: dataKeyA)
-        //处理数据类型
-        if (params.type) {
-            def dataValueType = BasicDataType.valueOf(params.type)
-            newDataKeyA.basicDataType = dataValueType
-        }
         //处理所属字典
         def dataDictionary
-        /*
-        if (params.dataDictionary) {
-            dataDictionary = DataDictionary.get(params.dataDictionary)
-            if (dataDictionary) {
-                newDataKeyA.dictionary = dataDictionary
-            }
-        }
-        */
         if (session.currentDataDictionary) {
             newDataKeyA.dictionary = session.currentDataDictionary
         }
 
         session.currentDataKeyA = newDataKeyA
-        //println("当前类型：${newDataKeyA.basicDataType}")
-        def appendDataKeyAList
 
         if (request.xhr) {
             render(template: 'createDataKeyA', model: [dataKeyA: newDataKeyA])
@@ -153,12 +139,29 @@ class Operation4DataKeyAController extends DataKeyAController{
         }
     }
 
-
     @Transactional
     def updateDataKeyA(DataKeyA dataKeyA) {
-        println("准备更新：${dataKeyA}")
+        if (dataKeyA == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (dataKeyA.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond dataKeyA.errors, view:'edit'
+            return
+        }
+
         dataKeyA.save flush:true
-        redirect(action: 'index')
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'dataKeyA.label', default: 'DataKeyA'), dataKeyA.id])
+                redirect(controller: 'operation4Dictionary', action: 'index', model: [dataKeyA: dataKeyA])
+            }
+            '*'{ respond dataKeyA, [status: OK] }
+        }
     }
 
     /*
