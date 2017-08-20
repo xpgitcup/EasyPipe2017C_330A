@@ -36,7 +36,7 @@ class Operation4DataKeyAController extends DataKeyAController{
         if (session.currentDataDictionary) {
             count = DataKeyA.countByDictionaryAndSubDataKeysIsNotEmpty(session.currentDataDictionary)
         } else {
-            count = DataKeyA.countBySubDataKeysIsNotNull()
+            count = DataKeyA.countBySubDataKeysIsNotEmpty()
         }
         println("统计结果：${count}")
         def result = [count: count]
@@ -52,10 +52,15 @@ class Operation4DataKeyAController extends DataKeyAController{
     * */
 
     def listDataKeyA4DataModel() {
-        def dataKeyAList = DataKeyA.list(params)
+        def dataKeyAList// = DataKeyA.findAllBySubDataKeysIsNotEmpty(params)
 
         if (session.currentDataDictionary) {
-            dataKeyAList = DataKeyA.findAllByDictionaryAndSubDataKeysIsNotEmpty(session.currentDataDiction)
+            //println("筛选...")
+            dataKeyAList = DataKeyA.findAllBySubDataKeysIsNotEmptyAndDictionary(session.currentDataDictionary, params)
+            //println("${session.currentDataDictionary}")
+            //println("${dataKeyAList}")
+        } else {
+            dataKeyAList = DataKeyA.findAllBySubDataKeysIsNotEmpty(params)
         }
 
         if (request.xhr) {

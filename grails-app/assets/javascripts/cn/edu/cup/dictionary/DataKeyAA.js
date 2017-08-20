@@ -57,19 +57,3 @@ function listDataKeyA(pageNumber, pageSize) {
     ajaxRun("operation4DataKeyA/listDataKeyA4DataModel" + getParams(pageNumber, pageSize), 0, "listDataKeyADiv");
 }
 
-/*
- * 新建
- * */
-function createDataKeyA(id) {
-    operation4PipeSimulationDiv.tabs("select", "编辑")
-    ajaxRun("operation4DataKeyA/createDataKeyA", id, "editDataKeyADiv");
-}
-
-/*
- * 编辑
- * */
-function editDataKeyA(id) {
-    operation4PipeSimulationDiv.tabs("select", "编辑")
-    //console.info("编辑DataKeyA." + id);
-    ajaxRun("operation4DataKeyA/editDataKeyA", id, "editDataKeyADiv");
-}
