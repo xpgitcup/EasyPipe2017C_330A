@@ -66,7 +66,7 @@ class DataKeyA {
     //------------------------------------------------------------------------------------------------------------------
 
     def isDataModel() {
-        return this.basicDataType in [BasicDataType.dataModel, BasicDataType.inheritModel]
+        return this.basicDataType == BasicDataType.dataModel
     }
 
     /**

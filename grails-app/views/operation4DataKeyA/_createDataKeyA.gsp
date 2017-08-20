@@ -23,16 +23,42 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <!--g:form resource="${this.dataKeyA}" method="POST"-->
-        <g:form controller="operation4DataKeyA" action="saveDataKeyA" method="POST">
-        <fieldset class="form">
-            <f:all bean="dataKeyA"/>
-        </fieldset>
-        <fieldset class="buttons">
-            <g:submitButton name="create" class="save"
-                            value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-        </fieldset>
-    </g:form>
+    <table>
+        <tr>
+            <td>
+            <!--g:form resource="${this.dataKeyA}" method="POST"-->
+                <g:form controller="operation4DataKeyA" action="saveDataKeyA" method="POST">
+                    <fieldset class="form">
+                        <!--f:all bean="dataKeyA"/-->
+                        <f:with bean="dataKeyA">
+                            <f:field property="basicDataType"/>
+                            <f:field property="dataTag"/>
+                            <f:field property="dataUnit"/>
+                            <f:field property="appendParameter"/>
+                            <f:field property="upDataKey"/>
+                            <f:field property="dictionary"/>
+                            <f:field property="inheritCount"/>
+                        </f:with>
+                    </fieldset>
+                    <fieldset class="buttons">
+                        <g:submitButton name="create" class="save"
+                                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                    </fieldset>
+                </g:form>
+            </td>
+            <td>
+                <div id="appendForm4DataKeyA">
+                    <h1>辅助信息</h1>
+                    <g:if test="${session.currentDataKeyA.basicDataType==cn.edu.cup.dictionary.BasicDataType.refDataModel}">
+                        <div class="easyui-panel">
+                            <div id="appendTreeDataKeyADiv" class="easyui-tree"></div>
+                            <div id="paginationAppendDataKeyADiv" class="easyui-pagination"></div>
+                        </div>
+                    </g:if>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

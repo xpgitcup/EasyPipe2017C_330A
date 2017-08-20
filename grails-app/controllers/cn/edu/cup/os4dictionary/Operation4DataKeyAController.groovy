@@ -114,6 +114,10 @@ class Operation4DataKeyAController extends DataKeyAController{
             newDataKeyA.dictionary = session.currentDataDictionary
         }
 
+        session.currentDataKeyA = newDataKeyA
+        //println("当前类型：${newDataKeyA.basicDataType}")
+        def appendDataKeyAList
+
         if (request.xhr) {
             render(template: 'createDataKeyA', model: [dataKeyA: newDataKeyA])
         } else {
