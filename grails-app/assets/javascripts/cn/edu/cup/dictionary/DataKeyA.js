@@ -79,41 +79,6 @@ function createDataKeyA(id) {
     ajaxRun("operation4DataKeyA/createDataKeyA", id, "showDataKeyADiv");
 }
 
-function createDataKeyA_inheritModel(id) {
-    console.info("创建DataKeyA. 上级节点：" + id);
-    ajaxRun("operation4DataKeyA/createDataKeyA/?type=inheritModel", id, "showDataKeyADiv");
-    updateAppendForm4DataKeyA();
-}
-
-function createDataKeyA_normalData(id) {
-    console.info("创建DataKeyA. 上级节点：" + id);
-    ajaxRun("operation4DataKeyA/createDataKeyA/?type=normalData", id, "showDataKeyADiv");
-    updateAppendForm4DataKeyA();
-}
-
-function createDataKeyA_vector1D(id) {
-    console.info("创建DataKeyA. 上级节点：" + id);
-    ajaxRun("operation4DataKeyA/createDataKeyA/?type=vector1D", id, "showDataKeyADiv");
-    updateAppendForm4DataKeyA();
-}
-
-function createDataKeyA_vector2D(id) {
-    console.info("创建DataKeyA. 上级节点：" + id);
-    ajaxRun("operation4DataKeyA/createDataKeyA/?type=vector2D", id, "showDataKeyADiv");
-    updateAppendForm4DataKeyA();
-}
-
-function createDataKeyA_vector3D(id) {
-    console.info("创建DataKeyA. 上级节点：" + id);
-    ajaxRun("operation4DataKeyA/createDataKeyA/?type=vector3D", id, "showDataKeyADiv");
-    updateAppendForm4DataKeyA();
-}
-
-function createDataKeyA_refDataModel(id) {
-    console.info("创建DataKeyA. 上级节点：" + id);
-    ajaxRun("operation4DataKeyA/createDataKeyA/?type=refDataModel", id, "showDataKeyADiv");
-    updateAppendForm4DataKeyA();
-}
 
 /*
  * 编辑

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2017-08-20 09:02:11
+Date: 2017-08-20 17:11:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,7 +31,7 @@ CREATE TABLE `data_dictionary` (
 -- ----------------------------
 INSERT INTO `data_dictionary` VALUES ('1', '0', '液体管道模拟');
 INSERT INTO `data_dictionary` VALUES ('2', '0', '气体管道模拟');
-INSERT INTO `data_dictionary` VALUES ('3', '0', '多相流管道莫尼');
+INSERT INTO `data_dictionary` VALUES ('3', '1', '多相流管道模拟');
 INSERT INTO `data_dictionary` VALUES ('4', '0', '液体管网模拟');
 INSERT INTO `data_dictionary` VALUES ('5', '0', '气体管网模拟');
 INSERT INTO `data_dictionary` VALUES ('6', '0', '多相流管网模拟');

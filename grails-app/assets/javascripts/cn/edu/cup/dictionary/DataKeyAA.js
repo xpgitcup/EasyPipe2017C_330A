@@ -45,7 +45,7 @@ function prepareImportDataKeyA(id) {
 function countDataKeyA() {
     //console.info("开始统计...")
     var total = ajaxCalculate("operation4DataKeyA/countDataKeyA4DataModel");
-    //console.info("正在听统计结果：" + total);
+    console.info("数据模型数：" + total);
     return total;
 }
 

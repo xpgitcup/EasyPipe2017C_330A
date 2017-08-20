@@ -32,12 +32,11 @@ class Operation4DataKeyAController extends DataKeyAController{
     * 统计数据模型的数量
     * */
     def countDataKeyA4DataModel() {
-        def q = DataKeyA.createCriteria()
-        def count = q.get{
-            projections{
-                count 'dataTag'
-                'in' ('basicDataType', [BasicDataType.dataModel, BasicDataType.inheritModel])
-            }
+        def count = 0
+        if (session.currentDataDictionary) {
+            count = DataKeyA.countByDictionaryAndSubDataKeysIsNotEmpty(session.currentDataDictionary)
+        } else {
+            count = DataKeyA.countBySubDataKeysIsNotNull()
         }
         println("统计结果：${count}")
         def result = [count: count]
@@ -55,11 +54,8 @@ class Operation4DataKeyAController extends DataKeyAController{
     def listDataKeyA4DataModel() {
         def dataKeyAList = DataKeyA.list(params)
 
-        def q = DataKeyA.createCriteria()
-        dataKeyAList = q.list(params) {
-            projections{
-                'in' ('basicDataType', [BasicDataType.dataModel, BasicDataType.inheritModel])
-            }
+        if (session.currentDataDictionary) {
+            dataKeyAList = DataKeyA.findAllByDictionaryAndSubDataKeysIsNotEmpty(session.currentDataDiction)
         }
 
         if (request.xhr) {

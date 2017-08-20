@@ -29,12 +29,15 @@ $(function () {
         }
     })
 
-    tabAndPage4DataDictionary();
+    tabAndPage4DataDictionary4Data();
     tabAndPage4DataKeyA();
 
     //------------------------------------------------------------------------------------------------------------------
     //页面跳转--放到最后，试试看
-    operation4DataADiv.tabs("select", currentTabDataADiv);
+    // operation4DataADiv.tabs("select", currentTabDataADiv);
+
+    var currentTab = checkSessionDataDictionary(currentTabDataADiv);
+    operation4DataADiv.tabs("select", currentTab);
 
 });
 

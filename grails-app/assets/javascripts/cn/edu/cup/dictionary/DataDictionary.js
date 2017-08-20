@@ -1,6 +1,39 @@
 /*
 * 处理显示标签页的转换，以及分页显示问题
 * */
+function tabAndPage4DataDictionary4Data() {
+
+    console.info("数据维护...");
+
+    //----------------------------------------------------------------------------------------------------------------
+    //获取当前页面的div
+    listDataDictionaryDiv = $("#listDataDictionaryDiv");
+    paginationListDataDictionaryDiv = $("#paginationListDataDictionaryDiv");
+
+    //获取当前页
+    var currentPgaeDataDictionary = readCookie("currentPgaeDataDictionary", 1);
+    var pageSizeDataDictionary = readCookie("pageSizeDataDictionary", pageSize);
+    var totalDataDictionary = countDataDictionary();
+    console.info("记录总数：" + totalDataDictionary);
+
+
+    //分页
+    paginationListDataDictionaryDiv.pagination({
+        pageSize: pageSizeDataDictionary,
+        total: totalDataDictionary,
+        showPageList: true,
+        displayMsg: '',
+        layout: ['first', 'prev', 'links', 'next', 'last'],
+        //翻页函数
+        onSelectPage: function (pageNumber, pageSize) {
+            listDataDictionary4Data(pageNumber, pageSize);
+            $.cookie("currentPgaeDataDictionary", pageNumber);
+        }
+    });
+    paginationListDataDictionaryDiv.pagination("select", currentPgaeDataDictionary);
+    //------------------------------------------------------------------------------------------------------------------
+}
+
 function tabAndPage4DataDictionary() {
 
     console.info("DataDictionary...");
@@ -55,6 +88,11 @@ function countDataDictionary() {
 /*
 * 列表显示当前所有对象
 * */
+function listDataDictionary4Data(pageNumber, pageSize) {
+    //console.info("列表显示对象：");
+    ajaxRun("operation4DataDictionary/listDataDictionary/?data=1" + getParams(pageNumber, pageSize), 0, "listDataDictionaryDiv");
+}
+
 function listDataDictionary(pageNumber, pageSize) {
     //console.info("列表显示对象：");
     ajaxRun("operation4DataDictionary/listDataDictionary" + getParams(pageNumber, pageSize), 0, "listDataDictionaryDiv");

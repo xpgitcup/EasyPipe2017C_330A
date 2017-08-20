@@ -14,13 +14,22 @@ class Operation4DataDictionaryController extends DataDictionaryController {
     * 设置、清除当前数据字典
     * */
     def selectCurrentDataDictionary(DataDictionary dataDictionary) {
+        println("${params}")
         session.currentDataDictionary = dataDictionary
-        redirect(controller: 'operation4Dictionary', action: 'index')
+        if (params.data) {
+            redirect(controller: 'operation4DataA', action: 'index')
+        } else {
+            redirect(controller: 'operation4Dictionary', action: 'index')
+        }
     }
 
     def clearCurrentDataDictionary() {
         session.removeAttribute('currentDataDictionary')
-        redirect(controller: 'operation4Dictionary', action: 'index')
+        if (params.data) {
+            redirect(controller: 'operation4DataA', action: 'index')
+        } else {
+            redirect(controller: 'operation4Dictionary', action: 'index')
+        }
     }
 
     /*
@@ -44,8 +53,12 @@ class Operation4DataDictionaryController extends DataDictionaryController {
 
     def listDataDictionary() {
         def dataDictionaryList = DataDictionary.list(params)
+        def templateFile = 'listDataDictionary'
+        if (params.data) {
+            templateFile = 'listDataDictionary4Data'
+        }
         if (request.xhr) {
-            render(template: 'listDataDictionary', model: [dataDictionaryList: dataDictionaryList])
+            render(template: templateFile, model: [dataDictionaryList: dataDictionaryList])
         } else {
             respond dataDictionaryList
         }

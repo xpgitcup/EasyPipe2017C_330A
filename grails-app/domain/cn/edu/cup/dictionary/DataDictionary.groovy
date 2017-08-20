@@ -13,4 +13,10 @@ class DataDictionary {
     String toString() {
         return "${name}/(${datakeys?.size()})"
     }
+
+    def modelCount() {
+        datakeys.countBy { e->
+            e.subDataKeys.size() > 0
+        }
+    }
 }
