@@ -100,7 +100,10 @@ class DataKeyA {
                 //在处理本身
                 this.subDataKeys.eachWithIndex() { e, i ->
                     println("${e}")
-                    colIndex = createCell4Field(e, colIndex, sheet)
+                    if (!e.isDataModel()) {
+                        //只有具体的数据属性才出现在模板中
+                        colIndex = createCell4Field(e, colIndex, sheet)
+                    }
                 }
             } else {
                 label = new Label(0, 0, "这不是一个数据模型，无法生成模板")
@@ -123,7 +126,25 @@ class DataKeyA {
         label = new Label(colIndex, 0, e.dataTag)
         labelUnit = new Label(colIndex, 1, e.dataUnit)
         sheet.addCell(label)
-        sheet.addCell(labelUnit)
+
+        if (e.refDataModel) {
+            labelUnit = new Label(colIndex, 1, "{ref: ${e.refDataModel.id}}")
+            sheet.addCell(labelUnit)
+        }
+
+        if (e.isEnumeration) {
+            labelUnit = new Label(colIndex, 1, "{${e.appendParameter}}")
+            sheet.addCell(labelUnit)
+        }
+
+        if (e.dimension >1) {
+            def ss = e.appendParameter.split(",")
+            for (int i=0; i<ss.size(); i++) {
+                labelUnit = new Label(colIndex + i, 1, "{${ss[i]}}")
+                sheet.addCell(labelUnit)
+            }
+        }
+
 
         colIndex += e.dimension
 
