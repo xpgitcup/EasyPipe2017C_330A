@@ -28,8 +28,8 @@
                             </a>
                         </td>
                         <td>
-                            <a href="javascript: maintainDataDictionary(${item.id})">
-                                ${item.name}
+                            <a href="operation4DataDictionary/selectCurrentDataDictionary/${item.id}">
+                                选择
                             </a>
                         </td>
                         <td>${item.datakeys?.size()}</td>

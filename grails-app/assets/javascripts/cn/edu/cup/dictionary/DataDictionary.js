@@ -39,8 +39,7 @@ function tabAndPage4DataDictionary() {
 * */
 function maintainDataDictionary(id) {
     operation4DictionaryDiv.tabs("select", "模型维护");
-    $.cookie("currentDataDictionary", id);
-    $("#currentDataDictionary").html("当前字典：" + id);
+    displayTreeDataKeyADiv.tree("reload");
 }
 
 /*

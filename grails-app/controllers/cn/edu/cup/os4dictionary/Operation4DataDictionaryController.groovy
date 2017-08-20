@@ -11,6 +11,19 @@ import static org.springframework.http.HttpStatus.OK
 class Operation4DataDictionaryController extends DataDictionaryController {
 
     /*
+    * 设置、清除当前数据字典
+    * */
+    def selectCurrentDataDictionary(DataDictionary dataDictionary) {
+        session.currentDataDictionary = dataDictionary
+        redirect(controller: 'operation4Dictionary', action: 'index')
+    }
+
+    def clearCurrentDataDictionary() {
+        session.removeAttribute('currentDataDictionary')
+        redirect(controller: 'operation4Dictionary', action: 'index')
+    }
+
+    /*
     * 统计记录个数
     * */
 

@@ -70,8 +70,9 @@ function tabAndPage4DataKeyA() {
  * */
 function createDataKeyA(id) {
     console.info("创建DataKeyA. 上级节点：" + id);
-    currentDataDictionary = $.cookie("currentDataDictionary");
-    ajaxRun("operation4DataKeyA/createDataKeyA/?dataDictionary=" + currentDataDictionary, id, "showDataKeyADiv");
+    //currentDataDictionary = $.cookie("currentDataDictionary");
+    //ajaxRun("operation4DataKeyA/createDataKeyA/?dataDictionary=" + currentDataDictionary, id, "showDataKeyADiv");
+    ajaxRun("operation4DataKeyA/createDataKeyA", id, "showDataKeyADiv");
 }
 
 function createDataKeyA_inheritModel(id) {

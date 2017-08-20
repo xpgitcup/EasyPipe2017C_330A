@@ -5,7 +5,7 @@ import cn.edu.cup.physical.QuantityUnit
 import cn.edu.cup.physical.UnitSystem
 import cn.edu.cup.system.SystemUser
 import grails.converters.JSON
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 
 @Transactional(readOnly = true)
 class Operation4PhysicalController {

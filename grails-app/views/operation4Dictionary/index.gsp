@@ -16,6 +16,20 @@
         </g:else>
     </g:else>
 <!-- end 实现可定制的布局 -->
+
+<!--为了处理cookie工作不正常的问题-->
+    <g:javascript>
+    function checkSessionDataDictionary(currentTab) {
+        console.info("处理前的：" + currentTab);
+        var tab = currentTab;
+        <% if (session.getAttribute("currentDataDictionary") != null) { %>
+        tab = "模型维护";
+        <% } %>
+        console.info("处理后的：" + tab);
+        return tab;
+    }
+    </g:javascript>
+
     <g:set var="entityName" value="Dictionary"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${entityName}维护</title>
@@ -25,6 +39,21 @@
 </head>
 
 <body>
+
+<div class="nav">
+    <g:if test="${session.currentDataDictionary}">
+        <ul>
+            <li>
+                <a href="#">
+                    当前物理量：${session.currentDataDictionary}
+                </a>
+            </li>
+            <li>
+                <a class="create" href="operation4DataDictionary/clearCurrentDataDictionary">清除当前选择</a>
+            </li>
+        </ul>
+    </g:if>
+</div>
 
 <div id="operation4DictionaryDiv" class="easyui-tabs">
     <div title="数据字典">
@@ -90,7 +119,6 @@
                 <div class="col-md-8 column">
                     <div class="panel panel-default">
                         <div>
-                            <div id="currentDataDictionary">?????</div>
                             <g:if test="${flash.message}">
                                 <div class="message" role="status">${flash.message}</div>
                             </g:if>

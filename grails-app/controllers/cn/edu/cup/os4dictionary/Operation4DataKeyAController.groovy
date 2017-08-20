@@ -100,14 +100,20 @@ class Operation4DataKeyAController extends DataKeyAController{
             def dataValueType = BasicDataType.valueOf(params.type)
             newDataKeyA.basicDataType = dataValueType
         }
-        //处理所述字典
+        //处理所属字典
         def dataDictionary
+        /*
         if (params.dataDictionary) {
             dataDictionary = DataDictionary.get(params.dataDictionary)
             if (dataDictionary) {
                 newDataKeyA.dictionary = dataDictionary
             }
         }
+        */
+        if (session.currentDataDictionary) {
+            newDataKeyA.dictionary = session.currentDataDictionary
+        }
+
         if (request.xhr) {
             render(template: 'createDataKeyA', model: [dataKeyA: newDataKeyA])
         } else {
@@ -214,11 +220,8 @@ class Operation4DataKeyAController extends DataKeyAController{
     def getTreeDataKeyA() {
         def data
         def dataDictionary
-        def did = request.getCookie("currentDataDictionary")
-        if (did > 0) {
-            dataDictionary = DataDictionary.get(did)
-        }
-        if (dataDictionary) {
+        if (session.currentDataDictionary) {
+            dataDictionary = session.currentDataDictionary
             data = DataKeyA.findAllByDictionaryAndUpDataKeyIsNull(dataDictionary, params)
         } else {
             data = DataKeyA.findAllByUpDataKeyIsNull(params)     //这是必须调整的

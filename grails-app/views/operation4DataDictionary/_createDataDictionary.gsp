@@ -7,8 +7,9 @@
 </head>
 
 <body>
-<a href="#create-dataDictionary" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
-                                                                       default="Skip to content&hellip;"/></a>
+<a href="#create-dataDictionary" class="skip" tabindex="-1">
+    <g:message code="default.link.skip.label" default="Skip to content&hellip;"/>
+</a>
 
 <div id="create-dataDictionary" class="content scaffold-create" role="main">
     <h1><g:message code="default.create.label" args="[entityName]"/></h1>

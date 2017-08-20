@@ -31,7 +31,8 @@ $(function () {
 
     //------------------------------------------------------------------------------------------------------------------
     //页面跳转--放到最后，试试看
-    operation4DictionaryDiv.tabs("select", currentTabDictionaryDiv);
+    var currentTab = checkSessionDataDictionary(currentTabDictionaryDiv);
+    operation4DictionaryDiv.tabs("select", currentTab);
 
 });
 
