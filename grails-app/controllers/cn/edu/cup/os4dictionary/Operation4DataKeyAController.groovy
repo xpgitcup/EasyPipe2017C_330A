@@ -15,17 +15,20 @@ class Operation4DataKeyAController extends DataKeyAController{
 
     def treeViewService
     def commonService
+    def excelService
 
     /*
     * 导入数据
     * */
+    @Transactional
     def importFromExcelFile(DataKeyA dataKeyA) {
         println("${params}")
         def destDir = servletContext.getRealPath("/") + "uploads"
         params.destDir = destDir
         def sf = commonService.upload(params)
         println("上传${sf}成功...")
-        def message = dataKeyA.importFromExcelFile(sf)
+        //def message = dataKeyA.importFromExcelFile(sf)
+        def message = excelService.importDataFromExcelFile(dataKeyA, sf)
         flash.message = message
         println("${flash}")
         redirect(controller: 'operation4DataA', action: 'index', model: [flush: flash])

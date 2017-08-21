@@ -187,7 +187,8 @@ class DataKeyA {
     * 从sheet中导入数据
     * */
     def importDataFromSheet(sheet, message) {
-        //def dataItem
+        def dataItem = new DataItemA(dataKeyA: this)
+        dataItem.save(true)
     }
 
     /*

@@ -19,6 +19,34 @@ class ExcelService {
     * 导入数据
     * */
 
+    def importDataFromExcelFile(DataKeyA dataKeyA, File excelFile) {
+        def message = []
+
+        try {
+            //  打开文件
+            Workbook book = Workbook.getWorkbook(excelFile);
+            //  首先查找对应的sheet
+            Sheet sheet = book.getSheet("${dataKeyA.dataTag}")
+
+            if (sheet) {
+                importDataFromSheet(dataKeyA, sheet, message)
+            } else {
+                message.add("找不到对应的[${dataKeyA.dataTag}]sheet.")
+            }
+            book.close();
+
+        } catch (Exception e) {
+            println "exportExcelFile error: ${e}";
+        }
+        return message
+    }
+
+    def importDataFromSheet(DataKeyA dataKeyA, Sheet sheet, message) {
+        def dataItem = new DataItemA(dataKeyA: dataKeyA)
+        dataItem.save(true)
+
+    }
+
     @Transactional
     def importExcel2DataItem(DataKeyA dataKey, File excelFile) {
         def message = checkExcelFile(dataKey, excelFile)
