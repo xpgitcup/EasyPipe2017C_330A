@@ -1,7 +1,6 @@
 package cn.edu.cup.system
 
-import cn.edu.cup.dictionary.BaseDataType
-import cn.edu.cup.dictionary.DataKey
+
 import cn.edu.cup.lps.HydraulicProject
 import cn.edu.cup.lps.PipeNetwork
 import cn.edu.cup.lps.hydraulic.HydraulicEdge
@@ -12,6 +11,7 @@ import cn.edu.cup.physical.UnitSystem
 import cn.edu.cup.userLibrary.UserClass
 import cn.edu.cup.userLibrary.UserLibrary
 import cn.edu.cup.userLibrary.UserLibraryClassify
+import easypipe2017c_330a.Application
 import grails.core.GrailsApplication
 import grails.gorm.transactions.Transactional
 
@@ -269,24 +269,6 @@ class InitService {
             )
             m3.save(true)
             //----------------------------------------------------------------------------------------------------------
-            def m31 = new SystemMenu(
-                    menuContext: "数据字典",
-                    menuAction: "Operation4DataKey/index",
-                    menuDescription: "数据字典维护",
-                    upMenuItem: m3,
-                    menuOrder: 0
-            )
-            m31.save(true)
-            //----------------------------------------------------------------------------------------------------------
-            def m32 = new SystemMenu(
-                    menuContext: "数据维护",
-                    menuAction: "Operation4Data/index",
-                    menuDescription: "数据维护",
-                    upMenuItem: m3,
-                    menuOrder: 0
-            )
-            m32.save(true)
-            //----------------------------------------------------------------------------------------------------------
             def m33 = new SystemMenu(
                     menuContext: "单位维护",
                     menuAction: "Operation4Physical/index",
@@ -520,38 +502,6 @@ class InitService {
     private void fillSampleDataKey() {
         println("测试数据字典的数据...")
         def dw = ["kg", "m", "s", "MPa", "m^3/s", "kg/s"]
-        for (int i=0; i<30; i++) {
-            def d = new DataKey(
-                    keyContext: "key${i}",
-                    dataValueType: BaseDataType.project
-            )
-            d.save(true)
-            for (int j=0; j<3; j++) {
-                def dd = new DataKey(
-                        keyContext: "key${i}_${j}",
-                        dataValueType: BaseDataType.projectCase,
-                        upKey: d
-                )
-                dd.save(true)
-                for (int k=0; k<3; k++) {
-                    def ddd = new DataKey(
-                            keyContext: "key${i}_${j}_${k}",
-                            dataValueType: BaseDataType.dataModel,
-                            upKey: d
-                    )
-                    ddd.save(true)
-                    for (int l=0; l<5; l++) {
-                        def dddd = new DataKey(
-                                keyContext: "key${i}_${j}_${k}_${l}",
-                                dataValueType: BaseDataType.simpleData,
-                                quantityUnit: dw[(i+l)%6],
-                                upKey: ddd
-                        )
-                        dddd.save(true)
-                    }
-                }
-            }
-        }
     }
 
     private void fillSampleChat() {

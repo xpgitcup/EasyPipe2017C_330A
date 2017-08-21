@@ -1,7 +1,5 @@
 package cn.edu.cup.os4dictionary
 
-import cn.edu.cup.dictionary.BasicDataType
-import cn.edu.cup.dictionary.DataDictionary
 import cn.edu.cup.dictionary.DataKeyA
 import cn.edu.cup.dictionary.DataKeyAController
 import cn.edu.cup.dictionary.JsFrame

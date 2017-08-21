@@ -1,7 +1,7 @@
 package cn.edu.cup.common
 
-import cn.edu.cup.dictionary.DataItem
-import cn.edu.cup.dictionary.DataKey
+import cn.edu.cup.dictionary.DataItemA
+import cn.edu.cup.dictionary.DataKeyA
 import grails.gorm.transactions.Transactional
 import jxl.Cell
 import jxl.Sheet
@@ -20,47 +20,15 @@ class ExcelService {
     * */
 
     @Transactional
-    def importExcel2DataItem(DataKey dataKey, File excelFile) {
+    def importExcel2DataItem(DataKeyA dataKey, File excelFile) {
         def message = checkExcelFile(dataKey, excelFile)
-        if (message.hasError) {
-
-        } else {
-            try {
-                println("开始导入...${excelFile}...")
-                Workbook book = Workbook.getWorkbook(excelFile)
-                Sheet sheet = book.getSheet(0)
-                //------------------------------------------------------------------------------------------------------
-                def m = sheet.rows
-                //------------------------------------------------------------------------------------------------------
-                for (int ii = 0; ii < m; ii++) {
-                    DataItem dataItem = new DataItem(labelKey: dataKey, value: "start ${excelFile.name}")
-                    dataItem.subItems = []
-                    dataKey.subKey.eachWithIndex { DataKey entry, int i ->
-                        Cell cell = sheet.getCell(i, ii + 2)
-                        def value = cell.getContents()
-                        def subItem = new DataItem(
-                                labelKey: entry,
-                                value: value,
-                                parentItem: dataItem
-                        )
-                        dataItem.subItems.add(subItem)
-                        subItem.save()
-                    }
-                    dataItem.save()
-                }
-                //------------------------------------------------------------------------------------------------------
-                book.close()
-            } catch (Exception e) {
-                println "importExcelFile error: ${e}";
-            }
-        }
     }
 
     /*
     * excel文件验证
     * */
 
-    def checkExcelFile(DataKey dataKey, File excelFile) {
+    def checkExcelFile(DataKeyA dataKey, File excelFile) {
         def message = [:]
         return message
     }
@@ -69,32 +37,7 @@ class ExcelService {
     * DataKey输出到excel
     * */
 
-    def exportDataKey2Excel(DataKey dataKey, String fileName) {
-        try {
-            //  打开文件
-            File file = new File(fileName)
-            WritableWorkbook book = Workbook.createWorkbook(file);
-            //  生成名为“第一页”的工作表，参数0表示这是第一页
-            WritableSheet sheet = book.createSheet("${dataKey.keyContext}", 0);
-
-            Label label
-            dataKey.subKey.eachWithIndex() { e, i ->
-                println "ExcelService ${e} ${e.quantityUnit}"
-
-                label = new Label(i, 0, e.keyContext)
-                sheet.addCell(label);
-
-                label = new Label(i, 1, e.quantityUnit)
-                sheet.addCell(label);
-            }
-
-            //  写入数据并关闭文件
-            book.write();
-            book.close();
-
-        } catch (Exception e) {
-            println "exportExcelFile error: ${e}";
-        }
+    def exportDataKey2Excel(DataKeyA dataKey, String fileName) {
         return fileName
     }
 
