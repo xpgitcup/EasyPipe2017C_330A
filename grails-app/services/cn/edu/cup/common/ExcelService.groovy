@@ -42,9 +42,26 @@ class ExcelService {
     }
 
     def importDataFromSheet(DataKeyA dataKeyA, Sheet sheet, message) {
-        def dataItem = new DataItemA(dataKeyA: dataKeyA)
-        dataItem.save(true)
-
+        def errorCount = 0
+        dataKeyA.subDataKeys.eachWithIndex { e, index->
+            def cell = sheet.getCell(index, 0)
+            if (!cell.contents.equals(e.dataTag)) {
+                errorCount++
+                message.add("${e.dataTag}不匹配.")
+            }
+        }
+        if (errorCount==0) {
+            def dataItem = new DataItemA(dataKeyA: dataKeyA)
+            dataItem.save(true)
+            def rowCount = sheet.rows
+            for (int i=2; i<rowCount; i++) {
+                dataKeyA.subDataKeys.eachWithIndex { DataKeyA entry, int index ->
+                    def cell = sheet.getCell(index, i)
+                    def subItem = new DataItemA(dataKeyA: entry, upDataItem: dataItem, dataValue: cell.contents)
+                    subItem.save(true)
+                }
+            }
+        }
     }
 
     @Transactional

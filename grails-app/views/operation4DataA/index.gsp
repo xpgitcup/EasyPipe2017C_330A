@@ -44,8 +44,8 @@
 
 <body>
 <div class="nav">
-    <g:if test="${session.currentDataDictionary}">
-        <ul>
+    <ul>
+        <g:if test="${session.currentDataDictionary}">
             <li>
                 <a href="#">
                     当前物理量：${session.currentDataDictionary}
@@ -54,23 +54,39 @@
             <li>
                 <a class="create" href="operation4DataDictionary/clearCurrentDataDictionary/?data=1">清除当前选择</a>
             </li>
-        </ul>
-    </g:if>
+        </g:if>
+        <g:if test="${session.currentDataKeyA}">
+            <li>
+                <a href="#">
+                    当前模型：${session.currentDataKeyA}
+                </a>
+            </li>
+            <li>
+                <a class="title" href="operation4DataKeyA/clearCurrentDataKeyA">清除</a>
+            </li>
+        </g:if>
+    </ul>
 </div>
+
 <div>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
 </div>
+
 <div id="operation4DataADiv" class="easyui-tabs">
     <div title="数据字典">
         <div id="listDataDictionaryDiv"></div>
+
         <div id="paginationListDataDictionaryDiv"></div>
     </div>
+
     <div title="模型列表">
         <div id="listDataKeyADiv"></div>
+
         <div id="paginationListDataKeyADiv"></div>
     </div>
+
     <div title="数据显示">
 
     </div>

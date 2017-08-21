@@ -18,6 +18,19 @@ class Operation4DataKeyAController extends DataKeyAController{
     def excelService
 
     /*
+    * 选择当前关键字
+    * */
+    def selectCurrentDataKeyA(DataKeyA dataKeyA) {
+        session.currentDataKeyA = dataKeyA
+        redirect(controller: 'operation4DataA', action: 'index')
+    }
+
+    def clearCurrentDataKeyA() {
+        session.removeAttribute("currentDataKeyA")
+        redirect(controller: 'operation4DataA', action: 'index')
+    }
+
+    /*
     * 导入数据
     * */
     @Transactional
