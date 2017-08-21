@@ -38,6 +38,7 @@
                         <f:field property="upDataKey" label="超类"/>
                         <f:field property="isEnumeration" label="枚举？"/>
                         <f:field property="single" label="单行？"/>
+                        <f:field property="orderNumber" label="序号"/>
                         <f:field property="dictionary"/>
                     </f:with>
                 </fieldset>

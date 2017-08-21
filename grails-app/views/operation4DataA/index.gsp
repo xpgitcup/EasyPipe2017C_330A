@@ -57,7 +57,11 @@
         </ul>
     </g:if>
 </div>
-
+<div>
+    <g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+    </g:if>
+</div>
 <div id="operation4DataADiv" class="easyui-tabs">
     <div title="数据字典">
         <div id="listDataDictionaryDiv"></div>

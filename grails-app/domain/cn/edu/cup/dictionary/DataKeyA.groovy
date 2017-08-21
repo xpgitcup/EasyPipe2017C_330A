@@ -11,8 +11,9 @@ class DataKeyA {
     String dataTag              //数据标签
     String dataUnit             //数据单位
     String appendParameter      //附加参数
-    int dimension = 1        //维度
+    int dimension = 1           //维度
     DataKeyA refDataModel       //引用
+    int orderNumber = 0         //顺序
     boolean isEnumeration = false       //是否枚举
     boolean single = true              //单行？
 
@@ -23,7 +24,7 @@ class DataKeyA {
     static hasMany = [subDataKeys: DataKeyA]
 
     static mapping = {
-        subDataKeys sort: 'id'
+        subDataKeys sort: 'orderNumber', 'id'
     }
 
     static constraints = {
@@ -34,11 +35,12 @@ class DataKeyA {
         refDataModel(nullable: true)
         isEnumeration()
         single()
+        orderNumber()
         upDataKey(nullable: true)
     }
 
     String toString() {
-        return "${dictionary}.${dataTag}"
+        return "${dictionary}.${dataTag}.${subDataKeys?.size()}"
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -94,10 +96,12 @@ class DataKeyA {
                 println("${ms}")
                 ms.reverse().each { me ->
                     me.subDataKeys.each() { it ->
-                        colIndex = createCell4Field(it, colIndex, sheet)
+                        if (!it.isDataModel()) {
+                            colIndex = createCell4Field(it, colIndex, sheet)
+                        }
                     }
                 }
-                //在处理本身
+                //再处理本身
                 this.subDataKeys.eachWithIndex() { e, i ->
                     println("${e}")
                     if (!e.isDataModel()) {
@@ -126,6 +130,7 @@ class DataKeyA {
         label = new Label(colIndex, 0, e.dataTag)
         labelUnit = new Label(colIndex, 1, e.dataUnit)
         sheet.addCell(label)
+        sheet.addCell(labelUnit)
 
         if (e.refDataModel) {
             labelUnit = new Label(colIndex, 1, "{ref: ${e.refDataModel.id}}")
@@ -157,6 +162,32 @@ class DataKeyA {
 
     def importFromExcelFile(File sf) {
 
+        def message = []
+
+        try {
+            //  打开文件
+            Workbook book = Workbook.getWorkbook(sf);
+            //  首先查找对应的sheet
+            Sheet sheet = book.getSheet("${this.dataTag}")
+
+            if (sheet) {
+                importDataFromSheet(sheet, message)
+            } else {
+                message.add("找不到对应的[${this.dataTag}]sheet.")
+            }
+            book.close();
+
+        } catch (Exception e) {
+            println "exportExcelFile error: ${e}";
+        }
+        return message
+    }
+
+    /*
+    * 从sheet中导入数据
+    * */
+    def importDataFromSheet(sheet, message) {
+        //def dataItem
     }
 
     /*

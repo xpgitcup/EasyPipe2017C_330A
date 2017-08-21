@@ -17,6 +17,21 @@ class Operation4DataKeyAController extends DataKeyAController{
     def commonService
 
     /*
+    * 导入数据
+    * */
+    def importFromExcelFile(DataKeyA dataKeyA) {
+        println("${params}")
+        def destDir = servletContext.getRealPath("/") + "uploads"
+        params.destDir = destDir
+        def sf = commonService.upload(params)
+        println("上传${sf}成功...")
+        def message = dataKeyA.importFromExcelFile(sf)
+        flash.message = message
+        println("${flash}")
+        redirect(controller: 'operation4DataA', action: 'index', model: [flush: flash])
+    }
+
+    /*
     * 下载模板
     * */
     def downloadTemplate(DataKeyA dataKeyA) {
