@@ -28,6 +28,9 @@
         var tab = currentTab;
         <% if (session.getAttribute("currentDataDictionary") != null) { %>
         tab = "模型列表";
+        <% if (session.getAttribute("currentDataKeyA") != null) { %>
+        tab = "数据显示";
+        <% } %>
         <% } %>
         console.info("处理后的：" + tab);
         return tab;
@@ -40,6 +43,7 @@
     <asset:javascript src="cn/edu/cup/dictionary/${entityName}.js"/>
     <asset:javascript src="cn/edu/cup/dictionary/DataDictionary.js"/>
     <asset:javascript src="cn/edu/cup/dictionary/DataKeyAA.js"/>
+    <asset:javascript src="cn/edu/cup/dictionary/DataItemA.js"/>
 </head>
 
 <body>
@@ -88,7 +92,13 @@
     </div>
 
     <div title="数据显示">
+        <div id="listDataItemADiv"></div>
 
+        <div id="paginationListDataItemADiv"></div>
+    </div>
+
+    <div title="图形显示">
+        <div id="dataKeyAChartDiv" style="width: 800px; height: 600px"></div>
     </div>
 </div>
 </body>

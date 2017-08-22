@@ -25,6 +25,7 @@ class Operation4DataDictionaryController extends DataDictionaryController {
 
     def clearCurrentDataDictionary() {
         session.removeAttribute('currentDataDictionary')
+        session.removeAttribute("currentDataKeyA")
         if (params.data) {
             redirect(controller: 'operation4DataA', action: 'index')
         } else {

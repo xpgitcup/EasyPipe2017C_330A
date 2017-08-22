@@ -9,7 +9,7 @@ import jxl.write.WritableWorkbook
 class DataKeyA {
 
     String dataTag              //数据标签
-    String dataUnit             //数据单位
+    String dataUnit = '？单位'  //数据单位
     String appendParameter      //附加参数
     int dimension = 1           //维度
     DataKeyA refDataModel       //引用
@@ -149,7 +149,6 @@ class DataKeyA {
                 sheet.addCell(labelUnit)
             }
         }
-
 
         colIndex += e.dimension
 

@@ -21,7 +21,9 @@ class Operation4DataKeyAController extends DataKeyAController{
     * 选择当前关键字
     * */
     def selectCurrentDataKeyA(DataKeyA dataKeyA) {
+        println("选择${dataKeyA}")
         session.currentDataKeyA = dataKeyA
+        session.currentDataDictionary = dataKeyA.dictionary
         redirect(controller: 'operation4DataA', action: 'index')
     }
 
@@ -52,7 +54,8 @@ class Operation4DataKeyAController extends DataKeyAController{
     * */
     def downloadTemplate(DataKeyA dataKeyA) {
         def path = servletContext.getRealPath("/") + "templates"
-        def fileName = dataKeyA.createTemplate(path)
+        //def fileName = dataKeyA.createTemplate(path)
+        def fileName = excelService.createTemplate(dataKeyA, path)
         params.downLoadFileName = fileName
         commonService.downLoadFile(params)
     }

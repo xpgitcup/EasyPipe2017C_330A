@@ -31,7 +31,7 @@ $(function () {
 
     tabAndPage4DataDictionary4Data();
     tabAndPage4DataKeyA();
-
+    tabAndPage4DataItemA();
     //------------------------------------------------------------------------------------------------------------------
     //页面跳转--放到最后，试试看
     // operation4DataADiv.tabs("select", currentTabDataADiv);

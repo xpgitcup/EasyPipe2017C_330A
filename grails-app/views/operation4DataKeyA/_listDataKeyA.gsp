@@ -28,7 +28,7 @@
         <g:each in="${dataKeyAList}" var="item" status="i">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                 <td>
-                    <a href="operation4DataKeyA/selectCurrentDataKeyA/${item.dataTag}">${item.dataTag}</a>
+                    <a href="operation4DataKeyA/selectCurrentDataKeyA/${item.id}">${item.dataTag}</a>
                 </td>
                 <td>
                     ${cn.edu.cup.dictionary.DataItemA.countByDataKeyA(item)}
