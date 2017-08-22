@@ -4,7 +4,7 @@ import cn.edu.cup.dictionary.JsFrame
 import cn.edu.cup.system.SystemMenu
 import cn.edu.cup.system.SystemMenuController
 import grails.converters.JSON
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 
 @Transactional(readOnly = true)
 class Operation4SystemMenuController extends SystemMenuController{

@@ -43,7 +43,7 @@ class Operation4DataKeyAController extends DataKeyAController{
         def sf = commonService.upload(params)
         println("上传${sf}成功...")
         //def message = dataKeyA.importFromExcelFile(sf)
-        def message = excelService.importDataFromExcelFile(dataKeyA, sf)
+        def message = excelService.importDataFromExcelFile4DataKeyA(dataKeyA, sf)
         flash.message = message
         println("${flash}")
         redirect(controller: 'operation4DataA', action: 'index', model: [flush: flash])

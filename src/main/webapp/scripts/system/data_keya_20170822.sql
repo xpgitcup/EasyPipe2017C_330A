@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : sample
-Source Server Version : 50620
+Source Server Version : 50716
 Source Host           : localhost:3306
 Source Database       : easypipedba
 
 Target Server Type    : MYSQL
-Target Server Version : 50620
+Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-08-22 19:09:46
+Date: 2017-08-22 21:21:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,23 +44,23 @@ CREATE TABLE `data_keya` (
 -- Records of data_keya
 -- ----------------------------
 INSERT INTO `data_keya` VALUES ('1', '0', null, '\0', '1', '？单位', null, null, '管道', '', '1', '0');
-INSERT INTO `data_keya` VALUES ('2', '0', '1', '\0', '1', '？单位', null, null, '管道名称', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('2', '1', '1', '\0', '1', '？单位', null, null, '管道名称', '\0', '1', '0');
 INSERT INTO `data_keya` VALUES ('3', '0', null, '\0', '1', '？单位', null, null, '节点位置', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('4', '0', '3', '\0', '1', '？单位', null, '2', '所属管道', '', '1', '0');
-INSERT INTO `data_keya` VALUES ('5', '0', '3', '\0', '1', '？单位', '节点名称,里程（km）', null, '节点名称', '', '1', '0');
-INSERT INTO `data_keya` VALUES ('6', '0', '3', '\0', '1', 'km', null, null, '节点位置', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('5', '1', '3', '\0', '1', '？单位', '节点名称,里程（km）', null, '节点名称', '\0', '1', '0');
+INSERT INTO `data_keya` VALUES ('6', '1', '3', '\0', '1', 'km', null, null, '节点位置', '\0', '1', '0');
 INSERT INTO `data_keya` VALUES ('7', '0', null, '\0', '1', '？单位', null, null, '地形', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('8', '0', '7', '\0', '1', '？单位', null, '5', '起点', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('9', '0', '7', '\0', '2', '？单位', '里程（km）,高程（m）', null, '地形数组', '\0', '1', '0');
 INSERT INTO `data_keya` VALUES ('10', '0', null, '\0', '1', '？单位', null, null, '地温', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('11', '0', '10', '\0', '1', '？单位', null, '5', '起点', '', '1', '0');
-INSERT INTO `data_keya` VALUES ('12', '0', '10', '\0', '2', '？单位', '里程（km）,地温（℃）', null, '地温数组', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('12', '1', '10', '\0', '2', '？单位', '里程（km）,地温（℃）', null, '地温数组', '\0', '1', '0');
 INSERT INTO `data_keya` VALUES ('13', '0', null, '\0', '1', '？单位', null, null, '总传热系数', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('14', '0', '13', '\0', '1', '？单位', null, '5', '起点', '', '1', '0');
-INSERT INTO `data_keya` VALUES ('15', '0', '13', '\0', '2', '？单位', '里程（km）,总传热系数（k）', null, '总传热系数数组', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('15', '1', '13', '\0', '2', '？单位', '里程（km）,总传热系数（k）', null, '总传热系数数组', '\0', '1', '0');
 INSERT INTO `data_keya` VALUES ('16', '0', null, '\0', '1', '？单位', null, null, '水力学元件类型', '', '1', '0');
-INSERT INTO `data_keya` VALUES ('17', '0', '16', '\0', '1', '？单位', null, null, '类型名称', '', '1', '0');
-INSERT INTO `data_keya` VALUES ('18', '0', '16', '\0', '1', '？单位', null, null, '类型说明', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('17', '1', '16', '\0', '1', '？单位', null, null, '类型名称', '\0', '1', '0');
+INSERT INTO `data_keya` VALUES ('18', '1', '16', '\0', '1', '？单位', null, null, '类型说明', '\0', '1', '0');
 INSERT INTO `data_keya` VALUES ('19', '0', null, '\0', '1', '？单位', null, null, '水力学元件', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('20', '0', '19', '\0', '1', '？单位', null, '2', '所属管道', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('21', '0', '19', '\0', '1', '？单位', null, null, '名称', '', '1', '0');
@@ -70,4 +70,4 @@ INSERT INTO `data_keya` VALUES ('24', '0', '19', '\0', '1', '？单位', null, n
 INSERT INTO `data_keya` VALUES ('25', '1', '24', '\0', '1', 'm3/h', null, null, '额定流量', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('26', '2', '24', '\0', '1', 'm', null, null, '额定扬程', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('27', '0', '24', '\0', '1', 'rpm', null, null, '额定转速', '', '1', '0');
-INSERT INTO `data_keya` VALUES ('28', '0', '24', '\0', '2', '？单位', '流量（m3/h）,扬程(m)', null, '扬程特性', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('28', '1', '24', '\0', '2', '？单位', '流量（m3/h）,扬程(m)', null, '扬程特性', '\0', '1', '0');

@@ -3,6 +3,7 @@ package cn.edu.cup.common
 import cn.edu.cup.dictionary.DataItemA
 import cn.edu.cup.dictionary.DataKeyA
 import grails.gorm.transactions.Transactional
+import groovy.json.JsonOutput
 import jxl.Cell
 import jxl.Sheet
 import jxl.Workbook
@@ -124,7 +125,7 @@ class ExcelService {
     * 导入数据
     * */
 
-    def importDataFromExcelFile(DataKeyA dataKeyA, File excelFile) {
+    def importDataFromExcelFile4DataKeyA(DataKeyA dataKeyA, File excelFile) {
         def message = []
 
         try {
@@ -159,13 +160,43 @@ class ExcelService {
             def dataItem = new DataItemA(dataKeyA: dataKeyA)
             dataItem.save(true)
             def rowCount = sheet.rows
-            for (int i=2; i<rowCount; i++) {
-                dataKeyA.subDataKeys.eachWithIndex { DataKeyA entry, int index ->
-                    def cell = sheet.getCell(index, i)
+            //处理数据
+            dataKeyA.subDataKeys.eachWithIndex { DataKeyA entry, int index ->
+                if (entry.single) {
+                    //只导入一行
+                    def cell = sheet.getCell(index, 2)
                     def subItem = new DataItemA(dataKeyA: entry, upDataItem: dataItem, dataValue: cell.contents)
                     subItem.save(true)
+                } else {
+                    //导入所有行
+                    for (int i=2; i<rowCount; i++) {
+                        //导入多维数据
+                        importVectorB(sheet, entry, index, i)
+                    }
                 }
             }
+        }
+    }
+
+    private void importVectorB(Sheet sheet, DataKeyA entry, int index, int i) {
+        def dataItem
+        def v = []
+        for (int j = 0; j < entry.dimension; j++) {
+            def cell = sheet.getCell(index + j, i)
+            v.add(cell.contents)
+        }
+        JsonOutput jsonOutput = new JsonOutput()
+        def vv = jsonOutput.toJson(v)
+        def subItem = new DataItemA(dataKeyA: entry, upDataItem: dataItem, dataValue: vv)
+        subItem.save(true)
+    }
+
+    private void importVectorA(DataKeyA entry, int index, int i) {
+        def dataItem
+        for (int j = 0; j < entry.dimension; j++) {
+            def cell = sheet.getCell(index + j, i)
+            def subItem = new DataItemA(dataKeyA: entry, upDataItem: dataItem, dataValue: cell.contents)
+            subItem.save(true)
         }
     }
 
