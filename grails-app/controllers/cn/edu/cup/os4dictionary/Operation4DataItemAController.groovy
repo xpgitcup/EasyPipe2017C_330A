@@ -13,8 +13,12 @@ class Operation4DataItemAController {
     * */
 
     def countDataItemA() {
-        def count = DataItemA.count()    //这是必须调整的
-        println("统计结果：${count}")
+        //def count = DataItemA.count()    //这是必须调整的
+        def count = DataItemA.countByUpDataItemIsNull()
+        //println("统计结果：${count}")
+        if (session.currentDataKeyA) {
+            count = DataItemA.countByDataKeyAAndUpDataItemIsNull(session.currentDataKey)
+        }
         def result = [count: count]
         if (request.xhr) {
             render result as JSON
@@ -28,7 +32,11 @@ class Operation4DataItemAController {
     * */
 
     def listDataItemA() {
-        def dataItemAList = DataItemA.list(params)
+        //def dataItemAList = DataItemA.list(params)
+        def dataItemAList = DataItemA.findAllByUpDataItemIsNull(params)
+        if (session.currentDataKeyA) {
+            dataItemAList = DataItemA.findAllByDataKeyAAndUpDataItemIsNull(session.currentDataKeyA, params)
+        }
         if (request.xhr) {
             render(template: 'listDataItemA', model: [dataItemAList: dataItemAList])
         } else {
