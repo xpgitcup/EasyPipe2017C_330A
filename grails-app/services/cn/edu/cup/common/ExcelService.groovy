@@ -3,6 +3,7 @@ package cn.edu.cup.common
 import cn.edu.cup.dictionary.DataItemA
 import cn.edu.cup.dictionary.DataKeyA
 import grails.gorm.transactions.Transactional
+import groovy.json.JsonBuilder
 import groovy.json.JsonOutput
 import jxl.Cell
 import jxl.Sheet
@@ -171,23 +172,28 @@ class ExcelService {
                     //导入所有行
                     for (int i=2; i<rowCount; i++) {
                         //导入多维数据
-                        importVectorB(sheet, entry, index, i)
+                        importVectorB(dataItem, sheet, entry, index, i)
                     }
                 }
             }
         }
     }
 
-    private void importVectorB(Sheet sheet, DataKeyA entry, int index, int i) {
-        def dataItem
+    private void importVectorB(DataItemA dataItemA, Sheet sheet, DataKeyA entry, int index, int i) {
         def v = []
         for (int j = 0; j < entry.dimension; j++) {
             def cell = sheet.getCell(index + j, i)
             v.add(cell.contents)
         }
+
+        /*
         JsonOutput jsonOutput = new JsonOutput()
         def vv = jsonOutput.toJson(v)
-        def subItem = new DataItemA(dataKeyA: entry, upDataItem: dataItem, dataValue: vv)
+        */
+        JsonBuilder jsonBuilder = new JsonBuilder(v)
+        def vv = v.toString()
+
+        def subItem = new DataItemA(dataKeyA: entry, upDataItem: dataItemA, dataValue: vv)
         subItem.save(true)
     }
 
