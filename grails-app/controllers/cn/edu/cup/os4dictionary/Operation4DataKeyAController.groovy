@@ -22,9 +22,13 @@ class Operation4DataKeyAController extends DataKeyAController{
     * */
     def selectCurrentDataKeyA(DataKeyA dataKeyA) {
         println("选择${dataKeyA}")
+        selectDataKeyA(dataKeyA)
+        redirect(controller: 'operation4DataA', action: 'index')
+    }
+
+    private void selectDataKeyA(DataKeyA dataKeyA) {
         session.currentDataKeyA = dataKeyA
         session.currentDataDictionary = dataKeyA.dictionary
-        redirect(controller: 'operation4DataA', action: 'index')
     }
 
     def clearCurrentDataKeyA() {
@@ -37,6 +41,7 @@ class Operation4DataKeyAController extends DataKeyAController{
     * */
     @Transactional
     def importFromExcelFile(DataKeyA dataKeyA) {
+        //selectDataKeyA(dataKeyA)      //不能操作session
         println("${params}")
         def destDir = servletContext.getRealPath("/") + "uploads"
         params.destDir = destDir

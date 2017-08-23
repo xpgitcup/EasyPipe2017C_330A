@@ -52,6 +52,25 @@ class DataKeyA {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    //返回数据列数
+    def columnCount() {
+        def c = 0
+        subDataKeys.each { e->
+            c += e.dimension
+        }
+        return c
+    }
+
+    //返回关键字的超类列表
+    def superKeys() {
+        def s = []
+        def p = upDataKey
+        while (p) {
+            s.add(p)
+            p = p.upDataKey
+        }
+        return s.reverse()
+    }
 
     def isDataModel() {
         return this.subDataKeys.size() > 0
