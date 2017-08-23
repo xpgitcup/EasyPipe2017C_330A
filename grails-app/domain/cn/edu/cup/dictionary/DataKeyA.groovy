@@ -56,7 +56,9 @@ class DataKeyA {
     def columnCount() {
         def c = 0
         subDataKeys.each { e->
-            c += e.dimension
+            if (!e.isDataModel()) {
+                c += e.dimension
+            }
         }
         return c
     }

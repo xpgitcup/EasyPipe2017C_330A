@@ -4,7 +4,6 @@ import cn.edu.cup.dictionary.DataItemA
 import cn.edu.cup.dictionary.DataKeyA
 import grails.gorm.transactions.Transactional
 import groovy.json.JsonBuilder
-import groovy.json.JsonOutput
 import jxl.Cell
 import jxl.Sheet
 import jxl.Workbook
@@ -106,10 +105,7 @@ class ExcelService {
                 sheet.addCell(labelUnit)
             }
         }
-
-
         colIndex += e.dimension
-
         return colIndex
     }
 
@@ -119,21 +115,18 @@ class ExcelService {
 
     def importDataFromExcelFile4DataKeyA(DataKeyA dataKeyA, File excelFile) {
         def message = []
-
         try {
             //  打开文件
             Workbook book = Workbook.getWorkbook(excelFile);
             //  首先查找对应的sheet
             Sheet sheet = book.getSheet("${dataKeyA.dataTag}")
-
             if (sheet) {
                 //导入当前关键字
-                message.add(importDataFromSheet(dataKeyA, sheet))
+                message.addAll(importDataFromSheet(dataKeyA, sheet))
             } else {
                 message.add("找不到对应的[${dataKeyA.dataTag}]sheet.")
             }
             book.close();
-
         } catch (Exception e) {
             println "exportExcelFile error: ${e}";
         }
@@ -141,84 +134,56 @@ class ExcelService {
     }
 
     def importDataFromSheet(DataKeyA dataKeyA, Sheet sheet) {
-
         def message = checkDataTag4DataModel(dataKeyA, sheet)
-
         if (message.isEmpty()) {
-
             //首先创建关键字的祖先类。。。
             def dataItem = new DataItemA(dataKeyA: dataKeyA)
             dataItem.save(true)
-            def rowCount = sheet.rows
-
-
-            colIndex = 0
-            //处理超类
-            supersA.eachWithIndex { Object entry, int si ->
-                if (entry.single) {
-                    //只导入一行
-                    def cell = sheet.getCell(si + colIndex, 2)
-                    def subItem = new DataItemA(dataKeyA: entry, upDataItem: dataItem, dataValue: cell.contents)
-                    subItem.save(true)
-                } else {
-                    //导入所有行
-                    for (int i=2; i<rowCount; i++) {
-                        //导入多维数据
-                        importVectorB(dataItem, sheet, entry, si + colIndex, i)
-                    }
-                }
-                colIndex++
-            }
-            //处理数据
-            dataKeyA.subDataKeys.eachWithIndex { DataKeyA entry, int index ->
-                if (entry.single) {
-                    //只导入一行
-                    def cell = sheet.getCell(index + colIndex, 2)
-                    def subItem = new DataItemA(dataKeyA: entry, upDataItem: dataItem, dataValue: cell.contents)
-                    subItem.save(true)
-                } else {
-                    //导入所有行
-                    for (int i=2; i<rowCount; i++) {
-                        //导入多维数据
-                        importVectorB(dataItem, sheet, entry, index + colIndex, i)
-                    }
-                }
-            }
+            //导入数据...
+            importDataTag4DataModel(dataKeyA, dataItem, sheet)
         }
+        return message
     }
 
-    //检查数据模型的标签
-    def checkDataTag4DataModel(DataKeyA dataKeyA, Sheet sheet) {
-        def message = []
+    //导入数据
+    def importDataTag4DataModel(DataKeyA dataKeyA, DataItemA dataItemA, Sheet sheet) {
+        //先处理超类的
         def colIndex = 0
+        //首先处理超类所对应的标签
         dataKeyA.superKeys().each { e->
-            message.add(checkDataTag4DataModelSelf(colIndex, e, sheet))
+            importDataTagDataModelSelf(colIndex, e, dataItemA, sheet)
             colIndex += e.columnCount()
         }
-        return message
+        //再处理本身的
+        importDataTagDataModelSelf(colIndex, dataKeyA, dataItemA, sheet)
     }
 
-    //检查数据模型的标签
-    def checkDataTag4DataModelSelf(int startColIndex, DataKeyA dataKeyA, Sheet sheet) {
-        def message = []
-        dataKeyA.subDataKeys().eachWithIndex{ def entry, int i ->
-            message.add(checkDataTag4DataKey(startColIndex + i, entry, sheet))
+    def importDataTagDataModelSelf(int startColIndex, DataKeyA dataKeyA, DataItemA dataItemA, Sheet sheet) {
+        dataKeyA.subDataKeys.eachWithIndex { DataKeyA entry, int i ->
+            if (!entry.isDataModel()) {
+                importDataTad4Cell(startColIndex + i, entry, dataItemA, sheet)
+            }
         }
-        return message
     }
 
-    //检查数据标签
-    private checkDataTag4DataKey(int index, DataKeyA e, Sheet sheet) {
-        def message = []
-        def cell = sheet.getCell(index, 0)
-        if (!cell.contents.equals(e.dataTag)) {
-            errorCount++
-            message.add("${e.dataTag}不匹配.")
+    def importDataTad4Cell(int startColIndex, DataKeyA dataKeyA, DataItemA dataItemA, Sheet sheet) {
+        if (dataKeyA.single) {
+            //只导入一行
+            def cell = sheet.getCell(startColIndex, 2)
+            def subItem = new DataItemA(dataKeyA: dataKeyA, upDataItem: dataItemA, dataValue: cell.contents)
+            subItem.save(true)
+        } else {
+            //导入所有行
+            def rowCount = sheet.rows
+            for (int i=2; i<rowCount; i++) {
+                //导入多维数据
+                //importVectorB(dataItem, sheet, entry, si + colIndex, i)
+                importVectorB(dataKeyA, dataItemA, sheet, startColIndex, i)
+            }
         }
-        return message
     }
 
-    private void importVectorB(DataItemA dataItemA, Sheet sheet, DataKeyA entry, int index, int i) {
+    private void importVectorB(DataKeyA entry, DataItemA dataItemA, Sheet sheet, int index, int i) {
         def v = []
         for (int j = 0; j < entry.dimension; j++) {
             def cell = sheet.getCell(index + j, i)
@@ -234,6 +199,44 @@ class ExcelService {
 
         def subItem = new DataItemA(dataKeyA: entry, upDataItem: dataItemA, dataValue: vv)
         subItem.save(true)
+    }
+
+    //检查数据模型的标签
+    def checkDataTag4DataModel(DataKeyA dataKeyA, Sheet sheet) {
+        def message = []
+        def colIndex = 0
+        //首先处理超类所对应的标签
+        dataKeyA.superKeys().each { e->
+            message.addAll(checkDataTag4DataModelSelf(colIndex, e, sheet))
+            colIndex += e.columnCount()
+        }
+        //处理自身的标签
+        println("测试自身${dataKeyA}的标签...")
+        message.addAll(checkDataTag4DataModelSelf(colIndex, dataKeyA, sheet))
+        return message
+    }
+
+    //检查数据模型的标签
+    def checkDataTag4DataModelSelf(int startColIndex, DataKeyA dataKeyA, Sheet sheet) {
+        def message = []
+        dataKeyA.subDataKeys.eachWithIndex{ def entry, int i ->
+            println("测试${entry}")
+            if (!entry.isDataModel()) {
+                println("测试标签：${entry} ${startColIndex + i}")
+                message.addAll(checkDataTag4DataKey(startColIndex + i, entry, sheet))
+            }
+        }
+        return message
+    }
+
+    //检查数据标签
+    private checkDataTag4DataKey(int index, DataKeyA e, Sheet sheet) {
+        def message = []
+        def cell = sheet.getCell(index, 0)
+        if (!cell.contents.equals(e.dataTag)) {
+            message.add("${e.dataTag}不匹配.")
+        }
+        return message
     }
 
     private void importVectorA(DataKeyA entry, int index, int i) {
