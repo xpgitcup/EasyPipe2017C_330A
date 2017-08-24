@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : sample
-Source Server Version : 50716
+Source Server Version : 50620
 Source Host           : localhost:3306
 Source Database       : easypipedba
 
 Target Server Type    : MYSQL
-Target Server Version : 50716
+Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2017-08-22 21:21:02
+Date: 2017-08-24 09:30:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,7 +38,7 @@ CREATE TABLE `data_keya` (
   CONSTRAINT `FK9l4diqnlwnipgyqxai15oq3k6` FOREIGN KEY (`dictionary_id`) REFERENCES `data_dictionary` (`id`),
   CONSTRAINT `FKmbblarevjr5nlixcd5r982xnr` FOREIGN KEY (`ref_data_model_id`) REFERENCES `data_keya` (`id`),
   CONSTRAINT `FKokoa47yvmx079u6sq1lu4dq9y` FOREIGN KEY (`up_data_key_id`) REFERENCES `data_keya` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of data_keya
@@ -71,3 +71,23 @@ INSERT INTO `data_keya` VALUES ('25', '1', '24', '\0', '1', 'm3/h', null, null, 
 INSERT INTO `data_keya` VALUES ('26', '2', '24', '\0', '1', 'm', null, null, '额定扬程', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('27', '0', '24', '\0', '1', 'rpm', null, null, '额定转速', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('28', '1', '24', '\0', '2', '？单位', '流量（m3/h）,扬程(m)', null, '扬程特性', '\0', '1', '0');
+INSERT INTO `data_keya` VALUES ('29', '0', null, '\0', '1', '？单位', null, null, '流体', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('30', '1', '29', '\0', '2', 'kg/m3', '温度（℃）,密度（kg/m3）', null, '密度特性', '\0', '1', '1');
+INSERT INTO `data_keya` VALUES ('31', '1', '29', '\0', '2', 'mPa.s', '温度（℃）,粘度（mPa.s）', null, '粘度特性', '\0', '1', '1');
+INSERT INTO `data_keya` VALUES ('32', '0', '29', '\0', '1', '？单位', null, null, '流体名称', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('33', '0', '29', '\0', '2', 'MPa', '温度（℃）,饱和蒸汽压(MPa)', null, '饱和蒸汽压特性', '\0', '1', '1');
+INSERT INTO `data_keya` VALUES ('34', '1', '29', '\0', '2', 'MPa', '温度（℃）,压缩系数（MPa）', null, '压缩系数特性', '\0', '1', '1');
+INSERT INTO `data_keya` VALUES ('35', '0', '29', '\0', '2', 'j/kg.℃', '温度（℃）,热容（j/kg.℃）', null, '热熔特性', '\0', '1', '1');
+INSERT INTO `data_keya` VALUES ('36', '0', null, '\0', '1', '？单位', null, null, '钢材', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('37', '0', '36', '\0', '1', '？单位', null, null, '型号', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('38', '1', '36', '\0', '1', 'MPa', null, null, '弹性模量', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('39', '0', '36', '\0', '1', 'MPa', null, null, '许用应力', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('40', '0', '36', '\0', '1', '无量纲', null, null, '泊松比', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('41', '0', '19', '\0', '1', '？单位', null, null, '通用阀', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('42', '0', '41', '\0', '2', 'Cd', '开度（小数）,阀特性Cd值', null, '阀特性', '\0', '1', '0');
+INSERT INTO `data_keya` VALUES ('43', '1', '44', '\0', '1', '%', null, null, '机械限位', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('44', '0', '41', '\0', '1', '？单位', null, null, '调节阀', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('45', '0', '44', '\0', '1', '%', null, null, '最小阀位', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('46', '0', '41', '\0', '1', '？单位', null, null, '泄压阀', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('47', '0', '46', '\0', '1', 'm3/h', null, null, '最大泄流量', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('48', '0', '46', '\0', '1', 'MPa', null, null, '设定压力', '', '1', '0');
