@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2017-08-24 09:30:10
+Date: 2017-08-25 11:19:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,7 +38,7 @@ CREATE TABLE `data_keya` (
   CONSTRAINT `FK9l4diqnlwnipgyqxai15oq3k6` FOREIGN KEY (`dictionary_id`) REFERENCES `data_dictionary` (`id`),
   CONSTRAINT `FKmbblarevjr5nlixcd5r982xnr` FOREIGN KEY (`ref_data_model_id`) REFERENCES `data_keya` (`id`),
   CONSTRAINT `FKokoa47yvmx079u6sq1lu4dq9y` FOREIGN KEY (`up_data_key_id`) REFERENCES `data_keya` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of data_keya
@@ -91,3 +91,14 @@ INSERT INTO `data_keya` VALUES ('45', '0', '44', '\0', '1', '%', null, null, '�
 INSERT INTO `data_keya` VALUES ('46', '0', '41', '\0', '1', '？单位', null, null, '泄压阀', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('47', '0', '46', '\0', '1', 'm3/h', null, null, '最大泄流量', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('48', '0', '46', '\0', '1', 'MPa', null, null, '设定压力', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('49', '0', '19', '\0', '1', '？单位', null, null, '理想源', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('50', '0', '49', '\0', '1', '输入流体名称', null, '29', '流体', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('51', '0', null, '\0', '1', '？单位', null, null, '连接关系', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('52', '0', '51', '\0', '1', '？单位', null, null, '连接关系名称', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('53', '0', '51', '\0', '2', '？单位', '起点,终点', null, '关系列表', '\0', '1', '0');
+INSERT INTO `data_keya` VALUES ('54', '0', '19', '\0', '1', '？单位', null, null, '管段', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('55', '0', '54', '\0', '1', 'mm', null, null, '外径', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('56', '0', '54', '\0', '1', 'mm', null, null, '壁厚', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('57', '0', '54', '\0', '1', '？单位', null, null, '绝对粗糙度', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('58', '0', '54', '\0', '1', '？单位', null, '5', '起点', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('59', '0', '54', '\0', '1', '？单位', null, '5', '终点', '', '1', '0');
