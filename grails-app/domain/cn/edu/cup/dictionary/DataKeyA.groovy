@@ -16,6 +16,7 @@ class DataKeyA {
     int orderNumber = 0         //顺序
     boolean isEnumeration = false       //是否枚举
     boolean single = true              //单行？
+    boolean isFile = false             //是文件吗？
 
     DataKeyA upDataKey
 
@@ -36,6 +37,7 @@ class DataKeyA {
         isEnumeration()
         single()
         orderNumber()
+        isFile()
         upDataKey(nullable: true)
     }
 
