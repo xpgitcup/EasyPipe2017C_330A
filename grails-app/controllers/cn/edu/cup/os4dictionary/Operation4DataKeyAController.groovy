@@ -91,6 +91,8 @@ class Operation4DataKeyAController extends DataKeyAController{
     def listDataKeyA4DataModel() {
         def dataKeyAList// = DataKeyA.findAllBySubDataKeysIsNotEmpty(params)
 
+        params.sort = 'orderNumber'
+
         if (session.currentDataDictionary) {
             //println("筛选...")
             dataKeyAList = DataKeyA.findAllBySubDataKeysIsNotEmptyAndDictionary(session.currentDataDictionary, params)
@@ -265,6 +267,7 @@ class Operation4DataKeyAController extends DataKeyAController{
     def getTreeDataKeyA() {
         def data
         def dataDictionary
+        params.sort = 'orderNumber'
         if (session.currentDataDictionary) {
             dataDictionary = session.currentDataDictionary
             data = DataKeyA.findAllByDictionaryAndUpDataKeyIsNull(dataDictionary, params)
