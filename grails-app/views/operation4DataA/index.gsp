@@ -100,6 +100,10 @@
     <div title="图形显示">
         <div id="dataKeyAChartDiv" style="width: 800px; height: 600px"></div>
     </div>
+
+    <div title="数据编辑">
+        <div id=""></div>
+    </div>
 </div>
 </body>
 </html>

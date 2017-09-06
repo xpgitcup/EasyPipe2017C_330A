@@ -22,6 +22,7 @@
         <th>名称</th>
         <th>数据量</th>
         <th>下载模板</th>
+        <th>输入</th>
         <th>导入数据</th>
         </thead>
         <tbody>
@@ -35,6 +36,9 @@
                 </td>
                 <td>
                     <a href="operation4DataKeyA/downloadTemplate/${item.id}">下载</a>
+                </td>
+                <td>
+                    <a href="#">输入${item.dataTag}</a>
                 </td>
                 <td>
                     <g:uploadForm controller="operation4DataKeyA" action="importFromExcelFile">
