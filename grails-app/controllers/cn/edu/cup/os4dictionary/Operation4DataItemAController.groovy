@@ -1,8 +1,11 @@
 package cn.edu.cup.os4dictionary
 
 import cn.edu.cup.dictionary.DataItemA
+import cn.edu.cup.dictionary.DataKeyA
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
+
+import static org.springframework.http.HttpStatus.CREATED
 
 class Operation4DataItemAController {
 
@@ -70,6 +73,30 @@ class Operation4DataItemAController {
     /*
     * 保存对象
     * */
+    @Transactional
+    def saveDataItemA(DataItemA dataItemA) {
+        if (dataItemA == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (dataItemA.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond dataItemA.errors, view:'create'
+            return
+        }
+
+        dataItemA.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'dataItemA.label', default: 'DataItemA'), dataItemA.id])
+                redirect dataItemA
+            }
+            '*' { respond dataItemA, [status: CREATED] }
+        }
+    }
 
     @Transactional
     def updateDataItemA(DataItemA dataItemA) {

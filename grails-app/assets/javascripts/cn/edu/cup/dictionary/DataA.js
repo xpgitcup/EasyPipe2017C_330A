@@ -18,9 +18,7 @@ $(function () {
         onSelect: function (title, index) {
             console.info("选择标签：" + title + "---" + index);
             switch (title) {
-                case "编辑":
-                case "导入管道":
-                case "拓扑结构":
+                case "数据编辑":
                     break;
                 default:
                     $.cookie("currentTabDataADiv", title, {path: '/'});

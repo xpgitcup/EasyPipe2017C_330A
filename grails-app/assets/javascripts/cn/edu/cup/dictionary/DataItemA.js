@@ -35,7 +35,7 @@ function tabAndPage4DataItemA() {
 * 准备导入
 * */
 function prepareImportDataItemA(id) {
-    operation4PipeSimulationDiv.tabs("select", "导入管道");
+    paginationListDataItemADiv.tabs("select", "导入管道");
     ajaxRun("operation4DataItemA/prepareImportDataItemA", id, "prepareImportDataItemADiv");
 }
 
@@ -61,7 +61,7 @@ function listDataItemA(pageNumber, pageSize) {
  * 新建
  * */
 function createDataItemA(id) {
-    operation4PipeSimulationDiv.tabs("select", "编辑")
+    operation4DataADiv.tabs("select", "数据编辑")
     ajaxRun("operation4DataItemA/createDataItemA", id, "editDataItemADiv");
 }
 
@@ -69,7 +69,7 @@ function createDataItemA(id) {
  * 编辑
  * */
 function editDataItemA(id) {
-    operation4PipeSimulationDiv.tabs("select", "编辑")
+    operation4DataADiv.tabs("select", "编辑")
     //console.info("编辑DataItemA." + id);
     ajaxRun("operation4DataItemA/editDataItemA", id, "editDataItemADiv");
 }
