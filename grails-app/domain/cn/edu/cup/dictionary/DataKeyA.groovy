@@ -42,7 +42,12 @@ class DataKeyA {
     }
 
     String toString() {
-        return "${dictionary}.${dataTag}.${subDataKeys?.size()}"
+        //return "${dictionary}.${dataTag}.${subDataKeys?.size()}"
+        if (subDataKeys) {
+            return "${dictionary}.${dataTag}/(模型)"
+        } else {
+            return "${dictionary}.${dataTag}/(数据项)"
+        }
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -58,7 +63,7 @@ class DataKeyA {
     //返回数据列数
     def columnCount() {
         def c = 0
-        subDataKeys.each { e->
+        subDataKeys.each { e ->
             if (!e.isDataModel()) {
                 c += e.dimension
             }
@@ -166,9 +171,9 @@ class DataKeyA {
             sheet.addCell(labelUnit)
         }
 
-        if (e.dimension >1) {
+        if (e.dimension > 1) {
             def ss = e.appendParameter.split(",")
-            for (int i=0; i<ss.size(); i++) {
+            for (int i = 0; i < ss.size(); i++) {
                 labelUnit = new Label(colIndex + i, 1, "{${ss[i]}}")
                 sheet.addCell(labelUnit)
             }
@@ -209,6 +214,7 @@ class DataKeyA {
     /*
     * 从sheet中导入数据
     * */
+
     def importDataFromSheet(sheet, message) {
         def dataItem = new DataItemA(dataKeyA: this)
         dataItem.save(true)

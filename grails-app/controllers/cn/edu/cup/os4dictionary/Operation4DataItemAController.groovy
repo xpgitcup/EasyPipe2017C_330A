@@ -51,8 +51,16 @@ class Operation4DataItemAController {
     * 创建对象
     * */
 
-    def createDataItemA(DataItemA dataItemA) {
-        def newDataItemA = new DataItemA()
+    def createDataItemA(DataKeyA dataKeyA) {
+        def newDataItemA = new DataItemA(dataKeyA: dataKeyA)
+        if (dataKeyA.subDataKeys) {
+            def newSubItems = []
+            dataKeyA.subDataKeys.each { e->
+                def subItem = new DataItemA(dataKeyA: e, upDataItem: newDataItemA)
+                newSubItems.add(subItem)
+            }
+            newDataItemA.subDataItems = newSubItems
+        }
         if (request.xhr) {
             render(template: 'createDataItemA', model: [dataItemA: newDataItemA])
         } else {
@@ -75,6 +83,9 @@ class Operation4DataItemAController {
     * */
     @Transactional
     def saveDataItemA(DataItemA dataItemA) {
+
+        println("${params}")
+
         if (dataItemA == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -83,7 +94,11 @@ class Operation4DataItemAController {
 
         if (dataItemA.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond dataItemA.errors, view:'create'
+            //respond dataItemA.errors, view:'create'
+            //render(template: 'createDataItemA', model: [dataItemA: dataItemA])
+
+            flash.message = dataItemA.errors
+            redirect(controller: 'operation4DataA', action: 'index')
             return
         }
 
@@ -92,7 +107,8 @@ class Operation4DataItemAController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'dataItemA.label', default: 'DataItemA'), dataItemA.id])
-                redirect dataItemA
+                //redirect dataItemA
+                redirect(controller: 'operation4DataA', action: 'index')
             }
             '*' { respond dataItemA, [status: CREATED] }
         }
