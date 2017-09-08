@@ -220,6 +220,9 @@ class Operation4DataKeyAController extends DataKeyAController{
     * */
     def countDataKeyA() {
         def count = DataKeyA.countByUpDataKeyIsNull()    //这是必须调整的
+        if (session.currentDataDictionary) {
+            count = DataKeyA.countByDictionaryAndUpDataKeyIsNull(session.currentDataDictionary)
+        }
         println("统计结果：${count}")
         def result = [count: count]
         if (request.xhr) {

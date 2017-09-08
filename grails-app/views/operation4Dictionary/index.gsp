@@ -45,7 +45,7 @@
         <ul>
             <li>
                 <a href="#">
-                    当前物理量：${session.currentDataDictionary}
+                    当前字典：${session.currentDataDictionary}
                 </a>
             </li>
             <li>
@@ -99,31 +99,23 @@
             </ul>
         </div>
 
-        <div class="container">
-            <div class="row-fluid">
-                <div class="col-md-4 column">
-                    <div class="panel panel-default">
-                        <div class="easyui-panel">
-                            <div id="displayTreeDataKeyADiv" class="easyui-tree"></div>
+        <div>
+            <g:if test="${flash.message}">
+                <div class="message" role="status">${flash.message}</div>
+            </g:if>
+        </div>
+        <div class="panel panel-default">
+            <div class="easyui-panel">
+                <div id="displayTreeDataKeyADiv" class="easyui-tree"></div>
 
-                            <div id="paginationDataKeyADiv" class="easyui-pagination"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-8 column">
-                    <div class="panel panel-default">
-                        <div>
-                            <g:if test="${flash.message}">
-                                <div class="message" role="status">${flash.message}</div>
-                            </g:if>
-                        </div>
-                        <div class="easyui-panel">
-                            <div id="showDataKeyADiv"></div>
-                        </div>
-                    </div>
-                </div>
+                <div id="paginationDataKeyADiv" class="easyui-pagination"></div>
             </div>
+        </div>
+    </div>
+
+    <div title="模型编辑">
+        <div class="easyui-panel">
+            <div id="showDataKeyADiv"></div>
         </div>
     </div>
 </div>

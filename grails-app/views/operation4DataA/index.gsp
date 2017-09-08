@@ -52,7 +52,7 @@
         <g:if test="${session.currentDataDictionary}">
             <li>
                 <a href="#">
-                    当前物理量：${session.currentDataDictionary}
+                    当前字典：${session.currentDataDictionary}
                 </a>
             </li>
             <li>

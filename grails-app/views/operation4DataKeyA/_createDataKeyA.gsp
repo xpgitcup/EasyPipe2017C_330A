@@ -36,6 +36,7 @@
                         <f:field property="dimension" label="维度"/>
                         <f:field property="appendParameter" label="附加"/>
                         <f:field property="upDataKey" label="超类"/>
+                        <f:field property="isFile" label="文件类型"/>
                         <f:field property="isEnumeration" label="枚举？"/>
                         <f:field property="single" label="单行？"/>
                         <f:field property="orderNumber" label="序号"/>

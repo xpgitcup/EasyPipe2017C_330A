@@ -22,7 +22,12 @@ $(function () {
     operation4DictionaryDiv.tabs({
         onSelect: function (title, index) {
             console.info("选择标签：" + title + "---" + index);
-            $.cookie("currentTabDictionaryDiv", title, {path: '/'});
+            switch (title) {
+                case "模型编辑":
+                    break;
+                default:
+                    $.cookie("currentTabDictionaryDiv", title, {path: '/'});
+            }
         }
     })
 

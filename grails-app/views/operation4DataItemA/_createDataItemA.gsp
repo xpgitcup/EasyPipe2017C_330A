@@ -39,10 +39,12 @@
                 <f:with bean="dataItemA">
                     <tr>
                         <td>
-                            <f:field property="dataKeyA"></f:field>
+                            <!--f:field property="dataKeyA"/-->
+                            ${dataItemA.dataKeyA}
+                            <g:hiddenField name="dataKeyA.id" value="${dataItemA.dataKeyA.id}"/>
                         </td>
                         <td>
-                            <f:field property="dataValue"></f:field>
+                            <!--f:field property="dataValue"/-->
                         </td>
                     </tr>
                 </f:with>
@@ -56,11 +58,21 @@
                             <g:hiddenField name="subDataItems[${i}].upDataItem.id" value="${dataItemA.id}"></g:hiddenField>
                         </td>
                         <td>
-                            <g:if test="${subItem.dataKeyA.single==true}">
+                            <g:if test="${subItem.dataKeyA.isFile}">
                                 <g:textField name="subDataItems[${i}].dataValue"/>
                             </g:if>
                             <g:else>
-                                <g:textArea name="subDataItems[${i}].dataValue"/>
+                                <g:if test="${subItem.dataKeyA.single==true}">
+                                    <g:textField name="subDataItems[${i}].dataValue"/>
+                                </g:if>
+                                <g:else>
+                                    <ul>
+                                        <li>${subItem.dataKeyA.appendParameter}</li>
+                                        <li>
+                                            <g:textArea name="subDataItems[${i}].dataValue"/>
+                                        </li>
+                                    </ul>
+                                </g:else>
                             </g:else>
                         </td>
                     </tr>
