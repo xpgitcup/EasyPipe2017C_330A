@@ -37,7 +37,8 @@
         <g:hiddenField name="id" value="${this.dataKeyA?.id}"/>
         <g:hiddenField name="version" value="${this.dataKeyA?.version}"/>
         <fieldset class="form">
-            <f:all bean="dataKeyA"/>
+            <!--f:all bean="dataKeyA"/-->
+            <g:render template="form4DataKeyA"/>
         </fieldset>
         <fieldset class="buttons">
             <input class="save" type="submit"

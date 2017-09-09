@@ -29,19 +29,7 @@
             <div class="col-md-6">
                 <fieldset class="form">
                     <!--f:all bean="dataKeyA"/-->
-                    <f:with bean="dataKeyA">
-                        <f:field property="dataTag" label="标签"/>
-                        <f:field property="refDataModel" label="引用"/>
-                        <f:field property="dataUnit" label="单位"/>
-                        <f:field property="dimension" label="维度"/>
-                        <f:field property="appendParameter" label="附加"/>
-                        <f:field property="upDataKey" label="超类"/>
-                        <f:field property="isFile" label="文件类型"/>
-                        <f:field property="isEnumeration" label="枚举？"/>
-                        <f:field property="single" label="单行？"/>
-                        <f:field property="orderNumber" label="序号"/>
-                        <f:field property="dictionary"/>
-                    </f:with>
+                    <g:render template="form4DataKeyA"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save"

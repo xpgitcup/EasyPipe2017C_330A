@@ -102,7 +102,16 @@ class Operation4DataItemAController {
             return
         }
 
-        dataItemA.save flush:true
+        dataItemA.save(flush:true)
+
+        def uploadFileNames = params.uploadFile
+        def upIndex = 0
+        dataItemA.subDataItems.each{ DataItemA entry ->
+            if (entry.dataKeyA.isFile) {
+                entry.dataValue = uploadFileNames[upIndex].originalFilename
+                upIndex++
+            }
+        }
 
         request.withFormat {
             form multipartForm {

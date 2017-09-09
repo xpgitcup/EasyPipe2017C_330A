@@ -92,30 +92,38 @@
     </div>
 
     <div title="模型维护">
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="create" href="javascript: createDataKeyA(0)">新建：根/模型节点</a></li>
-                <li><a id="createDataKeyA" class="create" href="#">新建子节点</a></li>
-            </ul>
-        </div>
+        <div class="container">
+            <div class="col-md-6">
+                <div class="nav" role="navigation">
+                    <ul>
+                        <li><a class="create" href="javascript: createDataKeyA(0)">新建：根/模型节点</a></li>
+                        <li><a id="createDataKeyA" class="create" href="#">新建子节点</a></li>
+                    </ul>
+                </div>
 
-        <div>
-            <g:if test="${flash.message}">
-                <div class="message" role="status">${flash.message}</div>
-            </g:if>
-        </div>
-        <div class="panel panel-default">
-            <div class="easyui-panel">
-                <div id="displayTreeDataKeyADiv" class="easyui-tree"></div>
-
-                <div id="paginationDataKeyADiv" class="easyui-pagination"></div>
+                <div class="panel panel-default">
+                    <div class="easyui-panel">
+                        <div id="displayTreeDataKeyADiv" class="easyui-tree"></div>
+                        <div id="paginationDataKeyADiv" class="easyui-pagination"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <g:if test="${flash.message}">
+                        <div class="message" role="status">${flash.message}</div>
+                    </g:if>
+                </div>
+                <div class="easyui-panel">
+                    <div id="showDataKeyADiv"></div>
+                </div>
             </div>
         </div>
     </div>
 
     <div title="模型编辑">
         <div class="easyui-panel">
-            <div id="showDataKeyADiv"></div>
+            <div id="editDataKeyADiv"></div>
         </div>
     </div>
 </div>

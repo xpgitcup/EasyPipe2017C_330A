@@ -36,8 +36,8 @@ class DataKeyA {
         refDataModel(nullable: true)
         isEnumeration()
         single()
-        orderNumber()
         isFile()
+        orderNumber()
         upDataKey(nullable: true)
     }
 

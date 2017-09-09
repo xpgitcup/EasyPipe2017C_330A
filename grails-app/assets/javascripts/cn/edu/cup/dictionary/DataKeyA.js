@@ -77,7 +77,7 @@ function updateAppendForm4DataKeyA() {
 function createDataKeyA(id) {
     console.info("创建DataKeyA. 上级节点：" + id);
     operation4DictionaryDiv.tabs('select','模型编辑');
-    ajaxRun("operation4DataKeyA/createDataKeyA", id, "showDataKeyADiv");
+    ajaxRun("operation4DataKeyA/createDataKeyA", id, "editDataKeyADiv");
 }
 
 
@@ -86,7 +86,8 @@ function createDataKeyA(id) {
  * */
 function editDataKeyA(id) {
     console.info("编辑DataKeyA." + id);
-    ajaxRun("operation4DataKeyA/editDataKeyA", id, "showDataKeyADiv");
+    operation4DictionaryDiv.tabs('select','模型编辑');
+    ajaxRun("operation4DataKeyA/editDataKeyA", id, "editDataKeyADiv");
 }
 
 /*

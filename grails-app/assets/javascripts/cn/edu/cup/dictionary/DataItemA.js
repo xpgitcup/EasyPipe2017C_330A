@@ -41,10 +41,12 @@ function updateUploadFileName(id) {
     var afile = "file_" + id;
     var aainput = document.getElementById(ainput);
     var aafile = document.getElementById(afile);
+    var fn = aainput.value
+    var k = fn.lastIndexOf('/')
     console.info(aainput);
     console.info(aainput.files.length);
     console.info(aafile);
-    aafile.value = aainput.value;
+    aafile.value = aainput.files[0].name;
     console.info(aainput.value);
 }
 
