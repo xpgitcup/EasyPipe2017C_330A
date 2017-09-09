@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2017-09-03 17:01:32
+Date: 2017-09-09 10:54:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,7 +39,7 @@ CREATE TABLE `data_keya` (
   CONSTRAINT `FK9l4diqnlwnipgyqxai15oq3k6` FOREIGN KEY (`dictionary_id`) REFERENCES `data_dictionary` (`id`),
   CONSTRAINT `FKmbblarevjr5nlixcd5r982xnr` FOREIGN KEY (`ref_data_model_id`) REFERENCES `data_keya` (`id`),
   CONSTRAINT `FKokoa47yvmx079u6sq1lu4dq9y` FOREIGN KEY (`up_data_key_id`) REFERENCES `data_keya` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of data_keya
@@ -63,9 +63,10 @@ INSERT INTO `data_keya` VALUES ('16', '1', '\0', null, '\0', '1', '？单位', n
 INSERT INTO `data_keya` VALUES ('17', '1', '\0', '16', '\0', '1', '？单位', null, null, '类型名称', '\0', '1', '0');
 INSERT INTO `data_keya` VALUES ('18', '1', '\0', '16', '\0', '1', '？单位', null, null, '类型说明', '\0', '1', '0');
 INSERT INTO `data_keya` VALUES ('19', '1', '\0', null, '\0', '1', '？单位', null, null, '水力学元件', '', '1', '-10');
-INSERT INTO `data_keya` VALUES ('21', '1', '\0', '19', '\0', '1', '？单位', null, null, '名称', '', '1', '-10');
-INSERT INTO `data_keya` VALUES ('22', '1', '\0', '19', '\0', '1', '？单位', null, '17', '类型', '', '1', '-10');
-INSERT INTO `data_keya` VALUES ('23', '1', '\0', '19', '\0', '1', '？单位', null, null, '型号', '', '1', '-10');
+INSERT INTO `data_keya` VALUES ('20', '0', '\0', '19', '\0', '1', '？单位', null, '2', '所属管道', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('21', '0', '\0', '19', '\0', '1', '？单位', null, null, '名称', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('22', '0', '\0', '19', '\0', '1', '？单位', null, '17', '类型', '', '1', '0');
+INSERT INTO `data_keya` VALUES ('23', '0', '\0', '19', '\0', '1', '？单位', null, null, '型号', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('24', '0', '\0', '19', '\0', '1', '？单位', null, null, '离心泵', '', '1', '-10');
 INSERT INTO `data_keya` VALUES ('25', '1', '\0', '24', '\0', '1', 'm3/h', null, null, '额定流量', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('26', '2', '\0', '24', '\0', '1', 'm', null, null, '额定扬程', '', '1', '0');
@@ -83,19 +84,19 @@ INSERT INTO `data_keya` VALUES ('37', '0', '\0', '36', '\0', '1', '？单位', n
 INSERT INTO `data_keya` VALUES ('38', '1', '\0', '36', '\0', '1', 'MPa', null, null, '弹性模量', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('39', '0', '\0', '36', '\0', '1', 'MPa', null, null, '许用应力', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('40', '0', '\0', '36', '\0', '1', '无量纲', null, null, '泊松比', '', '1', '0');
-INSERT INTO `data_keya` VALUES ('41', '1', '\0', '19', '\0', '1', '？单位', null, null, '通用阀', '', '1', '-10');
-INSERT INTO `data_keya` VALUES ('42', '1', '\0', '41', '\0', '2', 'Cd', '开度（小数）,阀特性Cd值', null, '阀特性', '\0', '1', '-10');
+INSERT INTO `data_keya` VALUES ('41', '0', '\0', '19', '\0', '1', '？单位', null, null, '通用阀', '', '1', '-10');
+INSERT INTO `data_keya` VALUES ('42', '0', '\0', '41', '\0', '2', 'Cd', '开度（小数）,阀特性Cd值', null, '阀特性', '\0', '1', '0');
 INSERT INTO `data_keya` VALUES ('43', '1', '\0', '44', '\0', '1', '%', null, null, '机械限位', '', '1', '0');
-INSERT INTO `data_keya` VALUES ('44', '1', '\0', '41', '\0', '1', '？单位', null, null, '调节阀', '', '1', '-10');
+INSERT INTO `data_keya` VALUES ('44', '0', '\0', '41', '\0', '1', '？单位', null, null, '调节阀', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('45', '0', '\0', '44', '\0', '1', '%', null, null, '最小阀位', '', '1', '0');
-INSERT INTO `data_keya` VALUES ('46', '1', '\0', '41', '\0', '1', '？单位', null, null, '泄压阀', '', '1', '-10');
+INSERT INTO `data_keya` VALUES ('46', '0', '\0', '41', '\0', '1', '？单位', null, null, '泄压阀', '', '1', '-10');
 INSERT INTO `data_keya` VALUES ('47', '0', '\0', '46', '\0', '1', 'm3/h', null, null, '最大泄流量', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('48', '0', '\0', '46', '\0', '1', 'MPa', null, null, '设定压力', '', '1', '0');
-INSERT INTO `data_keya` VALUES ('49', '1', '\0', '19', '\0', '1', '？单位', null, null, '理想源', '', '1', '-10');
+INSERT INTO `data_keya` VALUES ('49', '0', '\0', '19', '\0', '1', '？单位', null, null, '理想源', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('50', '0', '\0', '49', '\0', '1', '输入流体名称', null, '29', '流体', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('51', '1', '\0', null, '\0', '1', '无量纲', null, null, '节点关系', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('53', '0', '\0', '51', '\0', '2', '？单位', '起点,终点', null, '关系列表', '\0', '1', '0');
-INSERT INTO `data_keya` VALUES ('54', '1', '\0', '19', '\0', '1', '？单位', null, null, '管段', '', '1', '-10');
+INSERT INTO `data_keya` VALUES ('54', '0', '\0', '19', '\0', '1', '？单位', null, null, '管段', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('55', '0', '\0', '54', '\0', '1', 'mm', null, null, '外径', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('56', '0', '\0', '54', '\0', '1', 'mm', null, null, '壁厚', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('57', '0', '\0', '54', '\0', '1', '？单位', null, null, '绝对粗糙度', '', '1', '0');
@@ -110,3 +111,8 @@ INSERT INTO `data_keya` VALUES ('65', '1', '\0', '64', '\0', '1', '无量纲', n
 INSERT INTO `data_keya` VALUES ('66', '0', '\0', '64', '\0', '1', '无量纲', null, '19', '包含元件列表', '\0', '1', '0');
 INSERT INTO `data_keya` VALUES ('67', '0', '\0', null, '\0', '1', '无量纲', null, null, '站内关系', '', '1', '0');
 INSERT INTO `data_keya` VALUES ('68', '0', '\0', '67', '\0', '2', '无量纲', '起点,终点', '19', '关系列表', '\0', '1', '0');
+INSERT INTO `data_keya` VALUES ('69', '0', '\0', null, '\0', '1', '无量纲', null, null, '测试性的模型', '', '3', '0');
+INSERT INTO `data_keya` VALUES ('70', '0', '\0', '69', '\0', '1', '无量纲', null, null, '数据项1', '', '3', '0');
+INSERT INTO `data_keya` VALUES ('71', '1', '', '69', '\0', '1', '无量纲', null, null, '上传文件1', '', '3', '0');
+INSERT INTO `data_keya` VALUES ('72', '0', '', '69', '\0', '1', '无量纲', null, null, '上传文件2', '', '3', '0');
+INSERT INTO `data_keya` VALUES ('73', '0', '', '69', '\0', '1', '无量纲', null, null, '上传文件3', '', '3', '0');

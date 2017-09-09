@@ -54,27 +54,36 @@
                     <tr>
                         <td>
                             ${dataItemA.subDataItems[i].dataKeyA}
-                            <g:hiddenField name="subDataItems[${i}].dataKeyA.id" value="${dataItemA.subDataItems[i].dataKeyA.id}"/>
-                            <g:hiddenField name="subDataItems[${i}].upDataItem.id" value="${dataItemA.id}"></g:hiddenField>
+                            <g:hiddenField name="subDataItems[${i}].dataKeyA.id"
+                                           value="${dataItemA.subDataItems[i].dataKeyA.id}"/>
+                            <g:hiddenField name="subDataItems[${i}].upDataItem.id"
+                                           value="${dataItemA.id}"></g:hiddenField>
                         </td>
-                        <td>
-                            <g:if test="${subItem.dataKeyA.isFile}">
-                                <g:textField name="subDataItems[${i}].dataValue"/>
+                        <g:if test="${subItem.dataKeyA.isFile}">
+                            <td>
+                                <g:textField name="subDataItems[${i}].dataValue" id="file_${i}"/>
+                            </td>
+                            <td>
+                                <input type="file" name="uploadFile" id="input_${i}" onchange="updateUploadFileName(${i})"/>
+                            </td>
+                        </g:if>
+                        <g:else>
+                            <g:if test="${subItem.dataKeyA.single == true}">
+                                <td>
+                                    <g:textField name="subDataItems[${i}].dataValue"/>
+                                </td>
                             </g:if>
                             <g:else>
-                                <g:if test="${subItem.dataKeyA.single==true}">
-                                    <g:textField name="subDataItems[${i}].dataValue"/>
-                                </g:if>
-                                <g:else>
+                                <td>
                                     <ul>
                                         <li>${subItem.dataKeyA.appendParameter}</li>
                                         <li>
                                             <g:textArea name="subDataItems[${i}].dataValue"/>
                                         </li>
                                     </ul>
-                                </g:else>
+                                </td>
                             </g:else>
-                        </td>
+                        </g:else>
                     </tr>
                 </g:each>
             </table>

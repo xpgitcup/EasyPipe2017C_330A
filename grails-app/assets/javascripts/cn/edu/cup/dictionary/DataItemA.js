@@ -32,6 +32,23 @@ function tabAndPage4DataItemA() {
 }
 
 /*
+* 处理文件上传
+* */
+function updateUploadFileName(id) {
+    console.info(id);
+    console.info("文件上传...");
+    var ainput = "input_" + id;
+    var afile = "file_" + id;
+    var aainput = document.getElementById(ainput);
+    var aafile = document.getElementById(afile);
+    console.info(aainput);
+    console.info(aainput.files.length);
+    console.info(aafile);
+    aafile.value = aainput.value;
+    console.info(aainput.value);
+}
+
+/*
 * 准备导入
 * */
 function prepareImportDataItemA(id) {
