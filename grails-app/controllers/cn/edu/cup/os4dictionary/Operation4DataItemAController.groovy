@@ -104,13 +104,18 @@ class Operation4DataItemAController {
 
         dataItemA.save(flush:true)
 
+        def destDir = servletContext.getRealPath("/") + "uploads"
         def uploadFileNames = params.uploadFile
-        def upIndex = 0
-        dataItemA.subDataItems.each{ DataItemA entry ->
-            if (entry.dataKeyA.isFile) {
-                entry.dataValue = uploadFileNames[upIndex].originalFilename
-                upIndex++
-            }
+        def uploadFileIndex = params.uploadFileIndex
+        def uploadFileDataKeyId = params.uploadFileDataKeyId
+        def uploadFilePath = params.uploadFilePath
+        uploadFileNames.eachWithIndex { e, i->
+            //def k = uploadFileIndex[i]
+            params.destDir = "${destDir}/${uploadFileDataKeyId[i]}/${uploadFilePath[i]}"
+            params.uploadedFile = e
+            println(destDir)
+            def sf = commonService.upload(params)
+            println("上传${sf}成功...")
         }
 
         request.withFormat {
