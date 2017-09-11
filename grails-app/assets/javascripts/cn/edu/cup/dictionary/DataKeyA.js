@@ -60,6 +60,13 @@ function tabAndPage4DataKeyA() {
 }
 
 /*
+* 响应函数
+* */
+function ondimension(it) {
+    console.info(it);
+}
+
+/*
  * 新建
  * */
 function updateAppendForm4DataKeyA() {
