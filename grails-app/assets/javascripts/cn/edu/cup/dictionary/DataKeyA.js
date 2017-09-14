@@ -59,12 +59,6 @@ function tabAndPage4DataKeyA() {
     paginationDataKeyADiv.pagination("select", currentPgaeDataKeyA);
 }
 
-/*
-* 响应函数
-* */
-function ondimension(it) {
-    console.info(it);
-}
 
 /*
  * 新建

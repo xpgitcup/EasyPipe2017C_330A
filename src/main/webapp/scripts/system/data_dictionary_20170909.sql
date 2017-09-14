@@ -31,4 +31,3 @@ CREATE TABLE `data_dictionary` (
 -- ----------------------------
 INSERT INTO `data_dictionary` VALUES ('1', '0', '液体管道模拟');
 INSERT INTO `data_dictionary` VALUES ('2', '0', '气体管道模拟');
-INSERT INTO `data_dictionary` VALUES ('3', '0', '测试字典');
