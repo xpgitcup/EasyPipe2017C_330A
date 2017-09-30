@@ -2,24 +2,20 @@ package cn.edu.cup.dictionary
 
 class DataKeyB {
 
-    String dataTag              //数据标签
-    String dataUnit = '无量纲'  //数据单位
-    String appendParameter      //附加参数
-    DataKeyType dataKeyType     //数据关键字类型
-    String colSeperator = ','   //列分割副
-    String rowSeperator = ';'   //行分隔符
-    int dimension = 1           //维度
-    DataKeyA refDataModel       //引用
+    String dataTag                  //数据标签
+    String dataUnit = '无量纲'      //数据单位
+    String appendParameter = ''     //附加参数
+    DataKeyType dataKeyType = DataKeyType.dataKeyNormal     //数据关键字类型
+    String columnSeperator = ","   //列分割副
+    String lineSeperator = ";"   //行分隔符
+
     int orderNumber = 0         //顺序
-    boolean isEnumeration = false       //是否枚举
-    boolean single = true              //单行？
-    boolean isFile = false             //是文件吗？
 
-    DataKeyA upDataKey
+    DataKeyB upDataKey
 
-    static belongsTo = [dictionary: DataDictionary]
+    static belongsTo = [dictionary: DataDictionaryB]
 
-    static hasMany = [subDataKeys: DataKeyA]
+    static hasMany = [subDataKeys: DataKeyB]
 
     static mapping = {
         subDataKeys sort: 'orderNumber', 'id'
@@ -29,17 +25,14 @@ class DataKeyB {
         dataTag()
         dataUnit(nullable: true)
         appendParameter(nullable: true)
-        dimension()
-        refDataModel(nullable: true)
-        isEnumeration()
-        single()
-        isFile()
+        dataKeyType()
+        columnSeperator()
+        lineSeperator()
         orderNumber()
         upDataKey(nullable: true)
     }
 
     String toString() {
-        //return "${dictionary}.${dataTag}.${subDataKeys?.size()}"
         if (subDataKeys) {
             return "${dictionary}.${dataTag}/(模型)"
         } else {

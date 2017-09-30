@@ -306,6 +306,34 @@ class InitService {
             m36.save(true)
             //----------------------------------------------------------------------------------------------------------
             //----------------------------------------------------------------------------------------------------------
+            def m5 = new SystemMenu(
+                    menuContext: "基础数据",
+                    menuAction: "#",
+                    menuDescription: "维护数据字典+物理单位",
+                    upMenuItem: null,
+                    roleAttribute: "系统维护",
+                    menuOrder: 0
+            )
+            m5.save(true)
+            //----------------------------------------------------------------------------------------------------------
+            def m51 = new SystemMenu(
+                    menuContext: "数据字典B维护",
+                    menuAction: "operation4DictionaryB/index",
+                    menuDescription: "维护数据字典（新）",
+                    upMenuItem: m5,
+                    menuOrder: 0
+            )
+            m51.save(true)
+            //----------------------------------------------------------------------------------------------------------
+            def m52 = new SystemMenu(
+                    menuContext: "数据B维护",
+                    menuAction: "operation4DataB/index",
+                    menuDescription: "维护数据字典（新）",
+                    upMenuItem: m5,
+                    menuOrder: 0
+            )
+            m52.save(true)
+            //----------------------------------------------------------------------------------------------------------
             def m4 = new SystemMenu(
                     menuContext: "管道模拟",
                     menuAction: "#",

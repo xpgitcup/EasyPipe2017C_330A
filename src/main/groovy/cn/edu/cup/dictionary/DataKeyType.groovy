@@ -2,7 +2,7 @@ package cn.edu.cup.dictionary
 
 enum DataKeyType {
     dataKeyNormal,
-    dataKeydateTime,
+    dataKeyDateTime,
     dataKeyEnum,
     dataKeyFile,
     dataKeyRef
