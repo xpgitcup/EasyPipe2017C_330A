@@ -55,7 +55,7 @@ class Operation4DataItemAController {
         def newDataItemA = new DataItemA(dataKeyA: dataKeyA)
         if (dataKeyA.subDataKeys) {
             def newSubItems = []
-            dataKeyA.subDataKeys.each { e->
+            dataKeyA.subDataKeys.each { e ->
                 def subItem = new DataItemA(dataKeyA: e, upDataItem: newDataItemA)
                 newSubItems.add(subItem)
             }
@@ -81,6 +81,7 @@ class Operation4DataItemAController {
     /*
     * 保存对象
     * */
+
     @Transactional
     def saveDataItemA(DataItemA dataItemA) {
 
@@ -102,17 +103,26 @@ class Operation4DataItemAController {
             return
         }
 
-        dataItemA.save(flush:true)
+        dataItemA.save(flush: true)
 
         def destDir = servletContext.getRealPath("/") + "uploads"
         def uploadFileNames = params.uploadFile
         def uploadFileIndex = params.uploadFileIndex
         def uploadFileDataKeyId = params.uploadFileDataKeyId
         def uploadFilePath = params.uploadFilePath
-        uploadFileNames.eachWithIndex { e, i->
-            //def k = uploadFileIndex[i]
-            params.destDir = "${destDir}/${uploadFileDataKeyId[i]}/${uploadFilePath[i]}"
-            params.uploadedFile = e
+        if (uploadFileNames.getClass().array) {
+            println("不止一个文件...")
+            uploadFileNames.eachWithIndex { e, i ->
+                //def k = uploadFileIndex[i]
+                params.destDir = "${destDir}/${uploadFileDataKeyId[i]}/${uploadFilePath[i]}"
+                params.uploadedFile = e
+                println(destDir)
+                def sf = commonService.upload(params)
+                println("上传${sf}成功...")
+            }
+        } else {
+            println("不是数组，只有一个文件...")
+            params.destDir = "${destDir}/${uploadFileDataKeyId}/${uploadFilePath}"
             println(destDir)
             def sf = commonService.upload(params)
             println("上传${sf}成功...")
@@ -147,5 +157,5 @@ class Operation4DataItemAController {
         }
     }
 
-    def index() { }
+    def index() {}
 }

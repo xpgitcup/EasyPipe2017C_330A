@@ -1,40 +1,12 @@
 <f:with bean="dataKeyA">
     <f:field property="dataTag" label="标签"/>
-    <f:field property="refDataModel" label="引用"/>
     <f:field property="dataUnit" label="单位"/>
-    <!--f:field property="dimension" id="dimension" label="维度"/-->
-    <span>
-        <label>纬度</label>
-        <input name="dimension" id="dimension" onchange="onDimension(it)"/>
-    </span>
-    <f:field property="appendParameter" label="附加"/>
+    <f:field property="appendParameter" label="附加信息"/>
+    <f:field property="dataKeyType" label="数据类型"/>
+    <f:field property="columnNumber" label="列数"/>
+    <f:field property="columnSeperator" label="列分隔符"/>
     <f:field property="upDataKey" label="超类"/>
-    <table>
-        <tr>
-            <td>
-                <!--f:field property="isFile" id="isFile" label="文件?"/-->
-                <span>
-                    <label>文件？</label>
-                    <input name="isFile" id="isFile" type="checkbox" onchange="onIsFile(this)"/>
-                </span>
-            </td>
-            <td>
-                <!--f:field property="isEnumeration" id="isEnumeration" label="枚举？" onchange="onIsEnumeration(this)"/-->
-                <span>
-                    <label>枚举？</label>
-                    <input name="isEnumeration" type="checkbox" onchange="onIsEnumeration(this)"/>
-                </span>
-            </td>
-            <td>
-                <!--f:field property="single" id="single" label="单行？"/-->
-                <span>
-                    <label>单行？</label>
-                    <input name="single" type="checkbox" onchange="onSingle(this)"/>
-                </span>
-            </td>
-        </tr>
-    </table>
-    <hr>
+     <hr>
     <f:field property="orderNumber" label="序号"/>
     <f:field property="dictionary"/>
 </f:with>
@@ -42,9 +14,6 @@
 <g:javascript>
 
     console.info('开始编辑...');
-
-    //var enumeration = document.getElementById('isEnumeration');
-    //enumeration.addEventListener('change', onIsEnumeration(enumeration));
 
     /*
     * 响应函数

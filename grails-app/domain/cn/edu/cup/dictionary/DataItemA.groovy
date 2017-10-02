@@ -20,6 +20,13 @@ class DataItemA {
     }
 
     String toString() {
-        return "${dataKeyA}=${dataValue}"
+        if (dataKeyA.dataUnit.equals("无量纲"))
+        {
+            return  "${dataKeyA}=${dataValue}"
+        }
+        else
+        {
+            return "${dataKeyA}=${dataValue}${dataKeyA.dataUnit}"
+        }
     }
 }

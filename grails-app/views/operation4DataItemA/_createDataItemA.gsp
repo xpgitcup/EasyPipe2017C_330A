@@ -59,7 +59,36 @@
                             <g:hiddenField name="subDataItems[${i}].upDataItem.id"
                                            value="${dataItemA.id}"></g:hiddenField>
                         </td>
-                        <g:if test="${subItem.dataKeyA.isFile}">
+                    <!--针对普通类型的-->
+                        <g:if test="${subItem.dataKeyA.dataKeyType == cn.edu.cup.dictionary.DataKeyType.dataKeyNormal}">
+                            <td>
+                                <g:textField name="subDataItems[${i}].dataValue" id="dataValue_${i}"/>
+                            </td>
+                            <td>
+                            </td>
+                        </g:if>
+                    <!--针对时间日期类型的-->
+                        <g:if test="${subItem.dataKeyA.dataKeyType == cn.edu.cup.dictionary.DataKeyType.dataKeyDateTime}">
+                            <td>
+                                <!--g:textField name="subDataItems[${i}].dataValue" id=""/-->
+                                <g:datePicker name="subDataItems[${i}].dataValue" id="dataValue_${i}"
+                                              value="${new Date()}"/>
+                            </td>
+                            <td>
+                            </td>
+                        </g:if>
+                    <!--针对枚举类型的-->
+                        <g:if test="${subItem.dataKeyA.dataKeyType == cn.edu.cup.dictionary.DataKeyType.dataKeyEnum}">
+                            <td>
+                                <!--g:textField name="" id="dataValue_${i}"/-->
+                                <g:select name="subDataItems[${i}].dataValue" from="${subItem.dataKeyA?.enumItems()}"
+                                          noSelection="['': '-Choose-']"/>
+                            </td>
+                            <td>
+                            </td>
+                        </g:if>
+                    <!--针对文件的-->
+                        <g:if test="${subItem.dataKeyA.dataKeyType == cn.edu.cup.dictionary.DataKeyType.dataKeyFile}">
                             <td>
                                 <g:textField name="subDataItems[${i}].dataValue" id="file_${i}"/>
                             </td>
@@ -67,26 +96,19 @@
                                 <g:hiddenField name="uploadFilePath" value="${subItem.dataKeyA.appendParameter}"/>
                                 <g:hiddenField name="uploadFileDataKeyId" value="${subItem.dataKeyA.id}"/>
                                 <g:hiddenField name="uploadFileIndex" value="${i}"/>
-                                <input type="file" name="uploadFile" id="input_${i}" onchange="updateUploadFileName(${i})"/>
+                                <input type="file" name="uploadFile" id="input_${i}"
+                                       onchange="updateUploadFileName(${i})"/>
                             </td>
                         </g:if>
-                        <g:else>
-                            <g:if test="${subItem.dataKeyA.single == true}">
-                                <td>
-                                    <g:textField name="subDataItems[${i}].dataValue"/>
-                                </td>
-                            </g:if>
-                            <g:else>
-                                <td>
-                                    <ul>
-                                        <li>${subItem.dataKeyA.appendParameter}</li>
-                                        <li>
-                                            <g:textArea name="subDataItems[${i}].dataValue"/>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </g:else>
-                        </g:else>
+                    <!--针对枚举类型的-->
+                        <g:if test="${subItem.dataKeyA.dataKeyType == cn.edu.cup.dictionary.DataKeyType.dataKeyRef}">
+                            <td>
+                                <g:textField name="subDataItems[${i}].dataValue" id="dataValue_${i}"/>
+                            </td>
+                            <td>
+                            </td>
+                        </g:if>
+
                     </tr>
                 </g:each>
             </table>

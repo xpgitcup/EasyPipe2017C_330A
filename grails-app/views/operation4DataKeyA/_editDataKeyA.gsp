@@ -34,16 +34,35 @@
     </g:hasErrors>
 <!--g:form resource="${this.dataKeyA}" method="PUT"-->
     <g:form controller="operation4DataKeyA" action="updateDataKeyA">
-        <g:hiddenField name="id" value="${this.dataKeyA?.id}"/>
-        <g:hiddenField name="version" value="${this.dataKeyA?.version}"/>
-        <fieldset class="form">
-            <!--f:all bean="dataKeyA"/-->
-            <g:render template="form4DataKeyA"/>
-        </fieldset>
-        <fieldset class="buttons">
-            <input class="save" type="submit"
-                   value="${message(code: 'default.button.update.label', default: 'Update')}"/>
-        </fieldset>
+        <div class="container">
+            <div class="col-md-6">
+                <fieldset class="form">
+
+                    <g:hiddenField name="id" value="${this.dataKeyA?.id}"/>
+                    <g:hiddenField name="version" value="${this.dataKeyA?.version}"/>
+                    <fieldset class="form">
+                        <!--f:all bean="dataKeyA"/-->
+                        <g:render template="form4DataKeyA"/>
+                    </fieldset>
+                    <fieldset class="buttons">
+                        <input class="save" type="submit"
+                               value="${message(code: 'default.button.update.label', default: 'Update')}"/>
+                    </fieldset>
+                </fieldset>
+            </div>
+
+            <div class="col-md-6">
+                <h2>辅助信息输入</h2>
+
+                <p>对于枚举类型，请在辅助信息中输入各个分量，然后点击输入按钮。</p>
+
+                <p>对数组，请在辅助信息中输入各列的标题，然后点击输入按钮。</p>
+                <hr>
+                <g:textArea name="appendText" id="appendText"></g:textArea>
+                <input type="button" value="输入" onclick="updateAppendForm4DataKeyA()">
+            </div>
+        </div>
+
     </g:form>
 </div>
 </body>

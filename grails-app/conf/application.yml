@@ -11,6 +11,14 @@ grails:
             # Whether to translate GORM events into Reactor events
             # Disabled by default for performance reasons
             events: false
+
+    #--------------------------------------------
+    #上传文件大侠的限制
+    controllers:
+            upload:
+                maxFileSize: 200000000
+                maxRequestSize: 200000000
+
 info:
     app:
         name: '@info.app.name@'

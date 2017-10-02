@@ -47,6 +47,8 @@ dependencies {
     compile "org.hibernate:hibernate-core:5.1.5.Final"
     compile "org.grails.plugins:gsp"
 
+    //compile "org.grails.plugins:fields:2.2.3"
+
     //------------------------------------------------------------------------------------------------------------------
     //增加对Cookie的支持
     compile 'org.grails.plugins:cookie:2.0.5'

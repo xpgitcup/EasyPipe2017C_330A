@@ -8,15 +8,14 @@ import jxl.write.WritableWorkbook
 
 class DataKeyA {
 
-    String dataTag              //数据标签
-    String dataUnit = '无量纲'  //数据单位
-    String appendParameter      //附加参数
-    int dimension = 1           //维度
-    DataKeyA refDataModel       //引用
+    String dataTag                  //数据标签
+    String dataUnit = '无量纲'      //数据单位
+    String appendParameter = ''     //附加参数
+    DataKeyType dataKeyType = DataKeyType.dataKeyNormal     //数据关键字类型
+    String columnSeperator = ","   //列分割副
+    int columnNumber = 1          //列数
+
     int orderNumber = 0         //顺序
-    boolean isEnumeration = false       //是否枚举
-    boolean single = true              //单行？
-    boolean isFile = false             //是文件吗？
 
     DataKeyA upDataKey
 
@@ -32,11 +31,9 @@ class DataKeyA {
         dataTag()
         dataUnit(nullable: true)
         appendParameter(nullable: true)
-        dimension()
-        refDataModel(nullable: true)
-        isEnumeration()
-        single()
-        isFile()
+        dataKeyType()
+        columnNumber()
+        columnSeperator()
         orderNumber()
         upDataKey(nullable: true)
     }
@@ -61,11 +58,21 @@ class DataKeyA {
 
     //------------------------------------------------------------------------------------------------------------------
     //返回数据列数
+    def enumItems() {
+        def enumItems
+        if (dataKeyType == DataKeyType.dataKeyEnum) {
+            enumItems = this.appendParameter.split(columnSeperator)
+        } else {
+            enumItems = []
+        }
+        return enumItems
+    }
+
     def columnCount() {
         def c = 0
         subDataKeys.each { e ->
             if (!e.isDataModel()) {
-                c += e.dimension
+                c += e.columnNumber
             }
         }
         return c
@@ -218,22 +225,6 @@ class DataKeyA {
     def importDataFromSheet(sheet, message) {
         def dataItem = new DataItemA(dataKeyA: this)
         dataItem.save(true)
-    }
-
-    /*
-    * 导出数据
-    * */
-
-    def exportToExcelFile(File rf) {
-
-    }
-
-    /*
-    * 生成视图--屏幕显示的视图
-    * */
-
-    def createGspTemplate(String path) {
-
     }
 
 }
