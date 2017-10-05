@@ -59,6 +59,32 @@ function tabAndPage4DataKeyA() {
     paginationDataKeyADiv.pagination("select", currentPgaeDataKeyA);
 }
 
+/*
+* 合理性检验
+* */
+function check4DataKeyA() {
+    console.info("数据合理性检验...");
+    var dataKeyType = $('#dataKeyType').val();
+    var messageDataKeyA = $("#messageDataKeyA")
+    var appendParameter = $("#appendParameter").val();
+    var createBtn = $("#createBtn")
+    console.info(dataKeyType);
+    switch (dataKeyType) {
+        case "dataKeyEnum":
+            console.info("枚举类型...");
+            console.info(appendParameter);
+            if (appendParameter == "") {
+                console.info("不能空着啊...");
+                createBtn.disabled = true;
+                messageDataKeyA.html("枚举类型的附加项不能空着啊...");
+                console.info("....");
+            } else {
+                createBtn.disabled = false;
+                messageDataKeyA.html("可以了...");
+            }
+            break;
+    }
+}
 
 /*
  * 新建

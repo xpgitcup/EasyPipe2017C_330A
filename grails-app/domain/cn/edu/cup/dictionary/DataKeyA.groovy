@@ -30,7 +30,28 @@ class DataKeyA {
     static constraints = {
         dataTag()
         dataUnit(nullable: true)
-        appendParameter(nullable: true)
+        appendParameter(nullable: true,
+                validator: { val, obj, errors ->
+                    println("check it ${val}")
+                    switch (obj.dataKeyType) {
+                        case DataKeyType.dataKeyEnum:
+                            if (!val) {
+                                //errors.reject("枚举类型，附加信息不能为空！")
+                                //return ["枚举类型，附加信息不能为空！"]
+                                errors.rejectValue(val, "枚举类型，附加信息不能为空！")
+                                println("不能为空...")
+                            } else {
+                                def es = val.split(obj.columnSeperator)
+                                if (es.length < 1) {
+                                    errors.reject("请输入枚举信息。")
+                                }
+                            }
+                            break
+                        default:
+                            return true
+                    }
+
+                })
         dataKeyType()
         columnNumber()
         columnSeperator()

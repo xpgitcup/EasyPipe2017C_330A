@@ -32,8 +32,18 @@
                     <g:render template="form4DataKeyA"/>
                 </fieldset>
                 <fieldset class="buttons">
-                    <g:submitButton name="create" class="save"
-                                    value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                    <ul class="nav">
+                        <li>
+                            <g:submitButton name="create" class="save" id="createBtn"
+                                            value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                        </li>
+                        <li>
+                            <input type="button" value="检查" onclick="check4DataKeyA()">
+                        </li>
+                        <li>
+                            <div class="save" id="messageDataKeyA"></div>
+                        </li>
+                    </ul>
                 </fieldset>
             </div>
 
