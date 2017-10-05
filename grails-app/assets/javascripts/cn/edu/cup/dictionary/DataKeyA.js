@@ -83,6 +83,9 @@ function check4DataKeyA() {
                 messageDataKeyA.html("可以了...");
             }
             break;
+        default:
+            messageDataKeyA.html("可以了...");
+            break;
     }
 }
 
