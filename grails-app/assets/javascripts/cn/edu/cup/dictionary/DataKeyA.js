@@ -60,37 +60,55 @@ function tabAndPage4DataKeyA() {
 }
 
 /*
-* 合理性检验
+* 有效性检验...
 * */
-function check4DataKeyA() {
-    console.info("数据合理性检验...");
-    var dataKeyType = $('#dataKeyType').val();
-    var messageDataKeyA = $("#messageDataKeyA")
-    var appendParameter = $("#appendParameter").val();
-    var createBtn = $("#createBtn")
-    console.info(dataKeyType);
-    switch (dataKeyType) {
+function formCheck(form) {
+    console.info("有效性检验...")
+    console.info(form.dataKeyType.value);
+    switch (form.dataKeyType.value) {
+        case "dataKeyNormal":
+            if ((parseInt(form.columnNumber.value)>1) && (form.appendParameter.value == '')) {
+                alert("请输入数据列标题：");
+                form.appendText.focus();
+                return false
+            } else {
+                return true
+            }
+            break;
         case "dataKeyEnum":
             console.info("枚举类型...");
-            console.info(appendParameter);
-            if (appendParameter == "") {
-                console.info("不能空着啊...");
-                createBtn.disabled = true;
-                messageDataKeyA.html("枚举类型的附加项不能空着啊...");
-                console.info("....");
+            if (form.appendParameter.value == '') {
+                alert("请输入枚举类型的具体值：");
+                form.appendText.focus();
+                return false
             } else {
-                createBtn.disabled = false;
-                messageDataKeyA.html("可以了...");
+                return true
+            }
+            break;
+        case "dataKeyRef":
+            if (form.appendParameter.value == '') {
+                alert("请选择关键字：");
+                form.dataKeyList.focus();
+                return false
+            } else {
+                return true
             }
             break;
         default:
-            messageDataKeyA.html("可以了...");
+            return true;
             break;
     }
 }
 
 /*
- * 新建
+* 更新引用关键字
+* */
+function onchangeDataKeyList(form) {
+    form.appendParameter.value = form.dataKeyList.value;
+}
+
+/*
+ * 新建--更新枚举类型的标题
  * */
 function updateAppendForm4DataKeyA() {
     console.info("hi....");
