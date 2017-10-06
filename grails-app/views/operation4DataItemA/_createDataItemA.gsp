@@ -1,3 +1,4 @@
+<%@ page import="jxl.write.DateTime" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,13 +75,27 @@
                             </td>
                         </g:if>
                     <!--针对时间日期类型的-->
+                        <g:if test="${subItem.dataKeyA.dataKeyType == cn.edu.cup.dictionary.DataKeyType.dataKeyDate}">
+                            <td>
+                                <!--g:textField name="subDataItems[${i}].dataValue" id=""/-->
+                                <!--g:formatDate format="yyyy-MM-dd" date="${date}"/-->
+                                <!--g:datePicker name="subDataItems[${i}].dataValue" id="dataValue_${i}"
+                                                  dateFmt="yyyy-MM-dd"
+                                                  value="${new Date()}"/-->
+                                <input type="date" name="subDataItems[${i}].dataValue" id="dataValue_${i}" value="${new java.util.Date()}"/>
+                            </td>
+                            <td>
+                            </td>
+                        </g:if>
+                    <!--针对时间日期类型的-->
                         <g:if test="${subItem.dataKeyA.dataKeyType == cn.edu.cup.dictionary.DataKeyType.dataKeyDateTime}">
                             <td>
                                 <!--g:textField name="subDataItems[${i}].dataValue" id=""/-->
                                 <!--g:formatDate format="yyyy-MM-dd" date="${date}"/-->
-                                <g:datePicker name="subDataItems[${i}].dataValue" id="dataValue_${i}"
-                                              dateFmt="yyyy-MM-dd"
-                                              value="${new Date()}"/>
+                                <!--g:datePicker name="subDataItems[${i}].dataValue" id="dataValue_${i}"
+                                                  dateFmt="yyyy-MM-dd"
+                                                  value="${new Date()}"/-->
+                                <input type="datetime-local" name="subDataItems[${i}].dataValue" id="dataValue_${i}" value="${new java.util.Date()}"/>
                             </td>
                             <td>
                             </td>

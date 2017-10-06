@@ -13,8 +13,8 @@ grails:
             events: false
 
     #--------------------------------------------
-    date:
-      formats=["yyyy-MM-dd HH:mm:ss"]
+    #date:
+    # formats=["yyyy-MM-dd HH:mm:ss"]
     #--------------------------------------------
     #上传文件大侠的限制
     controllers:
