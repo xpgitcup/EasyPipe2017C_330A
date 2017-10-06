@@ -13,6 +13,9 @@ grails:
             events: false
 
     #--------------------------------------------
+    date:
+      formats=["yyyy-MM-dd HH:mm:ss"]
+    #--------------------------------------------
     #上传文件大侠的限制
     controllers:
             upload:
@@ -33,7 +36,6 @@ spring:
 
 #设置会话超时时间
 server:
-
    session:
      timeout: 1800 #应该是分钟？
 

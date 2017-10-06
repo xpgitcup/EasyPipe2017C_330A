@@ -52,7 +52,7 @@
                 <g:each in="${dataItemA.subDataItems}" var="subItem" status="i">
                     <tr>
                         <td>
-                            ${dataItemA.subDataItems[i].dataKeyA.dataTag}
+                            ${dataItemA.subDataItems[i].dataKeyA}
                             <g:hiddenField name="subDataItems[${i}].dataKeyA.id"
                                            value="${dataItemA.subDataItems[i].dataKeyA.id}"/>
                             <g:hiddenField name="subDataItems[${i}].upDataItem.id"
@@ -61,14 +61,7 @@
                     <!--针对普通类型的-->
                         <g:if test="${subItem.dataKeyA.dataKeyType == cn.edu.cup.dictionary.DataKeyType.dataKeyNormal}">
                             <td>
-                                <ul>
-                                    <li>
-                                        ${subItem.dataKeyA.appendParameter}
-                                    </li>
-                                    <li>
-                                        <g:textField name="subDataItems[${i}].dataValue" id="dataValue_${i}"/>
-                                    </li>
-                                </ul>
+                                <g:textField name="subDataItems[${i}].dataValue" id="dataValue_${i}"/>
                             </td>
                             <td>
                             </td>
@@ -77,9 +70,7 @@
                         <g:if test="${subItem.dataKeyA.dataKeyType == cn.edu.cup.dictionary.DataKeyType.dataKeyDateTime}">
                             <td>
                                 <!--g:textField name="subDataItems[${i}].dataValue" id=""/-->
-                                <!--g:formatDate format="yyyy-MM-dd" date="${date}"/-->
                                 <g:datePicker name="subDataItems[${i}].dataValue" id="dataValue_${i}"
-                                              dateFmt="yyyy-MM-dd"
                                               value="${new Date()}"/>
                             </td>
                             <td>
@@ -111,11 +102,7 @@
                     <!--针对引用类型的-->
                         <g:if test="${subItem.dataKeyA.dataKeyType == cn.edu.cup.dictionary.DataKeyType.dataKeyRef}">
                             <td>
-                                <!--g:textField name="subDataItems[${i}].dataValue" id="dataValue_${i}"/-->
-                                <g:select name="subDataItems[${i}].dataValue"
-                                          from="${cn.edu.cup.dictionary.DataItemA.findAllByDataKeyA(cn.edu.cup.dictionary.DataKeyA.get(Integer.parseInt(subItem.dataKeyA.appendParameter)))}"
-                                          optionKey="id"
-                                          noSelection="${['null': 'Select One...']}"/>
+                                <g:textField name="subDataItems[${i}].dataValue" id="dataValue_${i}"/>
                             </td>
                             <td>
                             </td>

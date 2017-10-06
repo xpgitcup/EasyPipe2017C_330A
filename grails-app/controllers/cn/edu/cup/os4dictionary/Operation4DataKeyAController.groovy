@@ -164,10 +164,11 @@ class Operation4DataKeyAController extends DataKeyAController{
 
         if (dataKeyA.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            //respond dataKeyA.errors, view:'create'
-            println("有错误...")
-            flash.message = "有错了..."
-            render(template: 'createDataKeyA', model: [dataKeyA: dataKeyA])
+            respond dataKeyA.errors, view:'create'
+            //下面的都不能用，上面的也不对
+            //println("有错误...")
+            //flash.message = "有错了..."
+            //render(template: 'createDataKeyA', model: [dataKeyA: dataKeyA])
         }
 
         dataKeyA.save flush:true

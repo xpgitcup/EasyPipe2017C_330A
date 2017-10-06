@@ -52,14 +52,25 @@
             </div>
 
             <div class="col-md-6">
-                <h2>辅助信息输入</h2>
+                <ul>
+                    <li>
+                        <h2>辅助信息输入</h2>
 
-                <p>对于枚举类型，请在辅助信息中输入各个分量，然后点击输入按钮。</p>
+                        <p>对于枚举类型，请在辅助信息中输入各个分量，然后点击输入按钮。</p>
 
-                <p>对数组，请在辅助信息中输入各列的标题，然后点击输入按钮。</p>
-                <hr>
-                <g:textArea name="appendText" id="appendText"></g:textArea>
-                <input type="button" value="输入" onclick="updateAppendForm4DataKeyA()">
+                        <p>对数组，请在辅助信息中输入各列的标题，然后点击输入按钮。</p>
+                    </li>
+                    <li>
+                        <g:textArea name="appendText" id="appendText"></g:textArea>
+                        <input type="button" value="输入" onclick="updateAppendForm4DataKeyA()">
+                    </li>
+                    <li>
+                        <g:select name="dataKeyList" optionKey="id" noSelection="${['null':'Select One...']}"
+                                  from="${cn.edu.cup.dictionary.DataKeyA.findAllByDictionaryAndSubDataKeysIsNotEmpty(session.currentDataDictionary)}"
+                                  onchange="onchangeDataKeyList(this.form)"/>
+
+                    </li>
+                </ul>
             </div>
         </div>
 
