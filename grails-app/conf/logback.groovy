@@ -1,3 +1,4 @@
+import easypipe2017c_330a.Application
 import grails.util.BuildSettings
 import grails.util.Environment
 import org.springframework.boot.logging.logback.ColorConverter
@@ -22,8 +23,11 @@ appender('STDOUT', ConsoleAppender) {
     }
 }
 
+//李晓平 20171007修订
 appender("FILE", FileAppender) {
-    file = "/var/logs/@info.app.name@.log"
+    //file = "/var/logs/@info.app.name@.log"    //这个已经不灵了
+    file = "/var/logs/${Application.package.name}.log"
+
     append = true
     encoder(PatternLayoutEncoder) {
         pattern = "%level %logger - %msg%n"

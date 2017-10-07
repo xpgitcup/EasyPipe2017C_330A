@@ -1,6 +1,7 @@
 package cn.edu.cup.system
 
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
+
 
 @Transactional
 class SystemLogService {
