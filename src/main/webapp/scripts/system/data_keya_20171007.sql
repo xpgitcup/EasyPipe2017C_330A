@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2017-10-06 15:43:05
+Date: 2017-10-07 09:52:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,7 +35,7 @@ CREATE TABLE `data_keya` (
   KEY `FK9l4diqnlwnipgyqxai15oq3k6` (`dictionary_id`),
   CONSTRAINT `FK9l4diqnlwnipgyqxai15oq3k6` FOREIGN KEY (`dictionary_id`) REFERENCES `data_dictionary` (`id`),
   CONSTRAINT `FKokoa47yvmx079u6sq1lu4dq9y` FOREIGN KEY (`up_data_key_id`) REFERENCES `data_keya` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of data_keya
@@ -61,3 +61,4 @@ INSERT INTO `data_keya` VALUES ('18', '0', '16', 'dataKeyDateTime', '1', '无量
 INSERT INTO `data_keya` VALUES ('19', '0', '16', 'dataKeyEnum', '1', '无量纲', ',', '枚举1,枚举2', '每局数据', '1', '0');
 INSERT INTO `data_keya` VALUES ('20', '0', '16', 'dataKeyFile', '1', '无量纲', ',', null, '一个文件', '1', '0');
 INSERT INTO `data_keya` VALUES ('21', '0', '16', 'dataKeyRef', '1', '无量纲', ',', '4', '关键字引用', '1', '0');
+INSERT INTO `data_keya` VALUES ('22', '0', '16', 'dataKeyDate', '1', '无量纲', ',', null, '只有日期', '1', '0');

@@ -80,9 +80,11 @@
                                 <!--g:textField name="subDataItems[${i}].dataValue" id=""/-->
                                 <!--g:formatDate format="yyyy-MM-dd" date="${date}"/-->
                                 <!--g:datePicker name="subDataItems[${i}].dataValue" id="dataValue_${i}"
-                                                  dateFmt="yyyy-MM-dd"
                                                   value="${new Date()}"/-->
-                                <input type="date" name="subDataItems[${i}].dataValue" id="dataValue_${i}" value="${new java.util.Date()}"/>
+                                <!--input type="date" name="subDataItems[${i}].dataValue" id="dataValue_${i}"
+                                       value="${new java.util.Date()}"/-->
+                                <input type="text" name="subDataItems[${i}].dataValue" id="dataValue_${i}"
+                                       value="${new java.util.Date()}" class="datePicker"/>
                             </td>
                             <td>
                             </td>
@@ -95,7 +97,12 @@
                                 <!--g:datePicker name="subDataItems[${i}].dataValue" id="dataValue_${i}"
                                                   dateFmt="yyyy-MM-dd"
                                                   value="${new Date()}"/-->
-                                <input type="datetime-local" name="subDataItems[${i}].dataValue" id="dataValue_${i}" value="${new java.util.Date()}"/>
+                                <!--input type="datetime-local" name="subDataItems[${i}].dataValue" id="dataValue_${i}"
+                                       value="${new java.util.Date()}"/-->
+                                <!--input type="text" name="subDataItems[${i}].dataValue" id="dataValue_${i}"
+                                       value="${new java.util.Date()}" class="dateTimePicker"/-->
+                                <input type="text" name="subDataItems[${i}].dataValue" id="dataValue_${i}"
+                                       class="dateTimePicker"/>
                             </td>
                             <td>
                             </td>
@@ -147,5 +154,23 @@
     </g:uploadForm>
 <!--/g:form-->
 </div>
+<g:javascript>
+    $("input.datePicker").datepicker({
+        showButtonPanel: true,
+        dateFormat: "yy-mm-dd",
+        defaultDate: 0
+    });
+
+    $("input.dateTimePicker").datetimepicker({
+        format: 'Y-m-d H:i',
+        defaultDate: new Date()
+    });
+
+    //$("input.dateTimePicker").datetimepicker({
+    //    showButtonPanel: true,
+    //    todayBtn: true,
+    //    dateFormat: "yyyy-mm-dd hh-ii"
+    //});
+</g:javascript>
 </body>
 </html>
